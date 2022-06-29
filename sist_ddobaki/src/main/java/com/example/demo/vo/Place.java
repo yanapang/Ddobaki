@@ -70,12 +70,7 @@ public class Place {
 	@Column(nullable = true)
 	private String place_detail;	
 	
-	@Column(nullable = false, columnDefinition = "number default 500")
-	private int	place_hit;
-	
 
-	@Column(nullable = false)
-	private String place_long;	
 
 	
 	
