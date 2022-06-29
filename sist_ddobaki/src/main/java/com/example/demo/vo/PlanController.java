@@ -12,6 +12,7 @@ public class PlanController {
 	}
 	@GetMapping("updatePlan")
 	public int updatePlan() {
+		System.out.println("충돌테스트");
 		return 1;
 	}
 	//[다정]
