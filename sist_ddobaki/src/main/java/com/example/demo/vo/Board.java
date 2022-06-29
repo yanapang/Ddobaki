@@ -67,6 +67,4 @@ public class Board {
 	private List<Reply> reply;
 	
 	
-	
-	
 }
