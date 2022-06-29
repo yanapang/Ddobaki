@@ -11,6 +11,7 @@ public class BoardController {
 	}
 	
 	
+	
 	public String bang() {
 		return "충돌!";
 	}
