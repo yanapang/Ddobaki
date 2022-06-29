@@ -62,7 +62,7 @@ public class Place {
 	private int	place_meal_price;
 	
 	@Column(nullable = false, columnDefinition = "varchar2(500) default 'default.jpg'")
-	private String place_thumbnail;	
+	private String place_thumbnai;	
 	
 	@Column(nullable = true)
 	private String place_detail;	
