@@ -77,8 +77,7 @@ public class Place {
 	@Column(nullable = false)
 	private String place_long;	
 	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Board> board;
+	
 	
 	
 
