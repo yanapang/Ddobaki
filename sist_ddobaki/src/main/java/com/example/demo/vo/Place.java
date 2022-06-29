@@ -60,15 +60,13 @@ public class Place {
 	
 	@Column(nullable = true)
 	private int	place_watermelon_price;
+	@Column(nullable = true)
+	private int	place_melon_price;
 	
 	@Column(nullable = true)
-	private int	place_meal_price;
+	private int	place_meal__price;
 	
-	@Column(nullable = false, columnDefinition = "varchar2(500) default 'default.jpg'")
-	private String place_thumbnai;	
 	
-	@Column(nullable = true)
-	private String place_detail;	
 	
 
 
