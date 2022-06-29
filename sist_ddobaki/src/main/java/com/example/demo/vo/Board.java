@@ -66,4 +66,6 @@ public class Board {
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
 	
+	
+	private String jinjoo;
 }
