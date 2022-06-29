@@ -44,13 +44,13 @@ public class Place {
 	private String place_tel;
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
-	private int	place_park;	
+	private String	place_park;	
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
 	private int	place_spa;
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
-	private int	place_meal;	
+	private String place_meal;	
 	
 	@Column(nullable = true)
 	private int	place_park_price;
@@ -65,24 +65,20 @@ public class Place {
 	private int	place_meal_price;
 	
 	@Column(nullable = false, columnDefinition = "varchar2(500) default 'default.jpg'")
-	private String place_thumbnail;	
+	private String place_thumbnai;	
 	
 	@Column(nullable = true)
 	private String place_detail;	
 	
-	@Column(nullable = false, columnDefinition = "number default 0")
+	@Column(nullable = false, columnDefinition = "number default 500")
 	private int	place_hit;
 	
+
 	@Column(nullable = false)
-	private String place_lat;
-	
-	@Column(nullable = false)
-	private String place_lng;	
+	private String place_long;	
 	
 	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Board> board;
 	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Dibs> dibs;
 	
 
