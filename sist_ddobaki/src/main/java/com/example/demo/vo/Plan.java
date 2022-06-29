@@ -43,4 +43,6 @@ public class Plan {
 	@Column(nullable = false)
 	private int plan_group_num;	
 	
+	// 주석 추가 [김다정]
+	
 }
