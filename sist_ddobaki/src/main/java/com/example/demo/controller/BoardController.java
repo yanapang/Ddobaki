@@ -6,5 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
 	public int insert() {
 		return 1;
+		
 	}
 }
