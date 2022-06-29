@@ -10,6 +10,7 @@ public class BoardController {
 		return 1;	
 	}
 	
+	
 	public String bang() {
 		return "충돌!";
 	}
