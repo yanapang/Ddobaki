@@ -62,6 +62,7 @@ public class Board {
 	private List<BoardImage> boardimage;
 	
 	
+	
 	@Column(nullable = false)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
