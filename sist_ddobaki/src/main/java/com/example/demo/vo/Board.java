@@ -63,9 +63,11 @@ public class Board {
 	
 	
 	
-	@Column(nullable = false)
+
+
+	@Column(nullable = true)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
 	
-	
 }
+
