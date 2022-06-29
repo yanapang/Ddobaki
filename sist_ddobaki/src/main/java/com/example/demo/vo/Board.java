@@ -56,18 +56,18 @@ public class Board {
 	@JoinColumn(name="place_num",insertable = true,updatable = true, nullable = true)
 	private Place place;
 	
-	
+
 	@Column(nullable = true)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<BoardImage> boardimage;
 	
 	
 	
+
+
 	@Column(nullable = true)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
 	
-	
-	private String jinjoo;
-	private String juhee;
 }
+
