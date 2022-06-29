@@ -28,7 +28,7 @@ public class Reservation {
 	@Column(columnDefinition = "number default 0", nullable = false)
 	private int reservation_park;
 	
-	@Column(columnDefinition = "number default 0", nullable = false)
+	@Column(columnDefinition = "number default 200", nullable = false)
 	private int reservation_spa;
 	
 	@Column(columnDefinition = "number default 0", nullable = false)
