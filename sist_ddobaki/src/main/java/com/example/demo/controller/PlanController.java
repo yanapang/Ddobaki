@@ -11,7 +11,9 @@ public class PlanController {
 	}
 	@GetMapping("updatePlan")
 	public String update() {
+		System.out.println("다정테스트");
 		return "OK";
+		
 	}
 }
 
