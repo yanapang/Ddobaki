@@ -20,7 +20,7 @@ public class Place {
 	private int place_num;
 	
 	@Column(nullable = false)
-	private int	place_region_num;
+	private int	place_region_gggogoog_num;
 	
 	@Column(nullable = false)
 	private int	place_type_num;	
@@ -29,7 +29,7 @@ public class Place {
 	private String place_name;
 	
 	@Column(nullable = true)
-	private String place_explain;
+	private int place_explain;
 	
 	@Column(nullable = false)
 	private String place_addr;
@@ -59,6 +59,9 @@ public class Place {
 	private int	place_spa_price;
 	
 	@Column(nullable = true)
+	private int	place_watermelon_price;
+	
+	@Column(nullable = true)
 	private int	place_meal_price;
 	
 	@Column(nullable = false, columnDefinition = "varchar2(500) default 'default.jpg'")
@@ -73,23 +76,7 @@ public class Place {
 
 	@Column(nullable = false)
 	private String place_long;	
-	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Board> board;
+
 	
 	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE )
-	private List<Reservation> reservation;
 	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Room> room;
-	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<PlaceImage> placeImage;
-	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Plan> plan;
-	
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Plan> plan2;
-}
