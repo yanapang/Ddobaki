@@ -10,4 +10,5 @@ public class PlanController {
 	public String insert() {
 		return "OK";
 	}
+	//[다정]
 }
