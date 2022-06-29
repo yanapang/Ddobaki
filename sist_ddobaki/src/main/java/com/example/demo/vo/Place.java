@@ -65,17 +65,19 @@ public class Place {
 	private int	place_meal_price;
 	
 	@Column(nullable = false, columnDefinition = "varchar2(500) default 'default.jpg'")
-	private String place_thumbnai;	
+	private String p_thumbnai;	
 	
 	@Column(nullable = true)
-	private String place_detail;	
+	private String place_detall;	
 	
 	@Column(nullable = false, columnDefinition = "number default 500")
 	private int	place_hit;
 	
 
 	@Column(nullable = false)
-	private String place_long;	
+	private String place_long;
+	
+}
 	
 	
 	
