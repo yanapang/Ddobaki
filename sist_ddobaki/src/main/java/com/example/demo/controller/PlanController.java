@@ -9,5 +9,9 @@ public class PlanController {
 	public int insert() {
 		return 1;
 	}
+	@GetMapping("updatePlan")
+	public String update() {
+		return "OK";
+	}
 }
 
