@@ -1,17 +1,18 @@
 package com.example.demo.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class PlanController {
-	@GetMapping("/insertPlan")
-	public int insert() {
-		return 1;
-	}
-	@GetMapping("updatePlan")
-	public String update() {
+
+	@GetMapping("insertPlan")
+	public String insert() {
 		return "OK";
 	}
+	@GetMapping("updatePlan")
+	public int updatePlan() {
+		return 1;
+	}
+	//[다정]
 }
-
