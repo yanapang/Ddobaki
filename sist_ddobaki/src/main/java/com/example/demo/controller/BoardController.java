@@ -1,5 +1,10 @@
 package com.example.demo.controller;
 
-public class BoardController {
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+public class BoardController {
+	public int insert() {
+		return 1;
+	}
 }
