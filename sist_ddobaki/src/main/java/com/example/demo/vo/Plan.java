@@ -9,9 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 
@@ -35,6 +34,7 @@ public class Plan {
 	@Column(columnDefinition = "varchar2(3000)", nullable = false)
 	private String plan_name;
 	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date plan_date;
 	@Column(nullable = false)
 	private int plan_flow_num;	
@@ -42,7 +42,5 @@ public class Plan {
 	private String plan_flow_name;	
 	@Column(nullable = false)
 	private int plan_group_num;	
-	
-	// 주석 추가 [김다정]
 	
 }

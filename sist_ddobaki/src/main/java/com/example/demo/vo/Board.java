@@ -1,5 +1,6 @@
 package com.example.demo.vo;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
@@ -56,18 +55,14 @@ public class Board {
 	@JoinColumn(name="place_num",insertable = true,updatable = true, nullable = true)
 	private Place place;
 	
-
+	
 	@Column(nullable = true)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<BoardImage> boardimage;
 	
 	
-	
-
-
 	@Column(nullable = true)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
 	
 }
-
