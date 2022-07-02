@@ -1,22 +1,21 @@
 package com.example.demo.dao;
 
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.vo.Reply;
 
-
+@Repository
 public interface ReplyDAO extends JpaRepository<Reply, Integer> {
 	/*
 	//게시글 하나씩 클릭할 때마다 해당 게시글에 딸려있는 댓글들 모두 뿌리기
-	@Query("select * from Reply where post_num=:post_num")
+	@Query(value="select * from Reply where post_num=:post_num", nativeQuery=true)
 	public List<Reply> findByPostNum(int post_num);
 	
 	//user_num이 지금 로그인한 사용자면 자기가 쓴 댓글 개별로 삭제 가능하게 하기
@@ -31,10 +30,12 @@ public interface ReplyDAO extends JpaRepository<Reply, Integer> {
 	@Query("delete Reply where post_num=:post_num")
 	@Transactional
 	public void deleteReplyInMyPost(int post_num);
+	*/
 	
 	//댓글 등록버튼 하나씩 누를 때마다 db에 insert되기 전에 댓글 넘버 부여
-	@Query("select nvl(max(reply_num),0)+1 from Reply")
+	@Query(value="select nvl(max(reply_num),0)+1 from Reply", nativeQuery=true)
 	public int getNextReplyNum();
+	
 	
 	//insert댓글(매개변수는 지금 로그인한 사용자의 user_num이랑 지금 클릭한 게시글의 post_num)
 	@Modifying
@@ -43,7 +44,7 @@ public interface ReplyDAO extends JpaRepository<Reply, Integer> {
 	@Transactional
 	public void insertReply(@Param("rp") Reply rp);
 	
-	
+	/*
 	
 	//--------------------------------------------------insert대댓글-----------------------------------
 	//댓글 등록버튼 하나씩 누를 때마다 db에 insert되기 전에 댓글 넘버 부여

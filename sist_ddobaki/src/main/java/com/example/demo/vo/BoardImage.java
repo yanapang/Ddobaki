@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -16,6 +18,8 @@ public class BoardImage {
 	@Id
 	private int board_image_num;
 	
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="post_num", insertable=true, updatable=true, nullable = false)
 	private Board board;

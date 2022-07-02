@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -27,17 +27,19 @@ public class Payment {
 	@Column(nullable = false)
 	private Date payment_date;
 	
+	
 	//참조 받아야 하는 키
 	//reservation_num, user_num
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "user_num", insertable = true, updatable = true)
 	private UserInfo userinfo;
 	
 	@OneToOne
+	@JsonIgnore
 	@JoinColumn(name = "reservation_num", insertable = true, updatable = true)
 	private Reservation reservation;
-	
 	
 	
 	

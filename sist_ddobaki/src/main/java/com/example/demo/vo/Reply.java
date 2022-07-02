@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Data;
 
@@ -20,9 +24,10 @@ public class Reply {
 	@JoinColumn(name="post_num", insertable = true, updatable = true, nullable=false)
 	private Board board;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="user_num", insertable = true, updatable = true, nullable=false)
 	private UserInfo userinfo;	
+	
 	
 	@Column(nullable=false)
 	private int	reply_group;
