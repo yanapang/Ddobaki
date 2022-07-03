@@ -10,23 +10,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
+
 
 @Entity
 @Data
 @Table(name="place")
 public class Place {
 	@Id
-	private int place_num;
-	
-
-	@Column(nullable = false)
-	private int	place_region_num;
+	private Integer place_num;
 	
 	@Column(nullable = false)
-	private int	place_type_num;	
+	private Integer	place_region_num;
+	
+	@Column(nullable = false)
+	private Integer	place_type_num;	
 	
 	@Column(nullable = false)
 	private String place_name;
@@ -41,19 +39,19 @@ public class Place {
 	private String place_site;
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
-	private int	place_weight;
+	private Integer	place_weight;
 	
 	@Column(nullable = true)
 	private String place_tel;
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
-	private int	place_park;	
+	private Integer	place_park;	
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
-	private int	place_spa;
+	private Integer	place_spa;
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
-	private int	place_meal;	
+	private Integer	place_meal;	
 	
 	@Column(nullable = true)
 	private Integer	place_park_price;
@@ -71,7 +69,7 @@ public class Place {
 	private String place_detail;	
 	
 	@Column(nullable = false, columnDefinition = "number default 0")
-	private int	place_hit;
+	private Integer	place_hit;
 	
 	@Column(nullable = false)
 	private String place_lat;
@@ -79,28 +77,21 @@ public class Place {
 	@Column(nullable = false)
 	private String place_lng;	
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Board> board;
+//	@OneToMany(mappedBy="place", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
+//	private List<Board> board;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Dibs> dibs;
+//	@OneToMany(mappedBy="place", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
+//	private List<Dibs> dibs;
+//	
+//	@OneToMany(mappedBy="place", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE )
+//	private List<Reservation> reservation;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE )
-	private List<Reservation> reservation;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Room> room;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+//	@OneToMany(mappedBy="place", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
+//	private List<Room> room;
+//	
+	@OneToMany(mappedBy="place", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<PlaceImage> placeImage;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
-	private List<Plan> plan;
+//	
+//	@OneToMany(mappedBy="place", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
+//	private List<Plan> plan;
 }
-

@@ -13,7 +13,6 @@ import lombok.Data;
 @Data
 @Table(name = "placeimage")
 public class PlaceImage {
-
 	@Id
 	private int place_image_num;
 	
@@ -23,6 +22,4 @@ public class PlaceImage {
 	@ManyToOne
 	@JoinColumn(name="place_num", insertable=true, updatable=true)
 	private Place place;
-
 }
-

@@ -1,30 +1,37 @@
 package com.example.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.PlaceDAO;
+import com.example.demo.dao.PlaceRepository;
 import com.example.demo.vo.Place;
+import com.example.demo.vo.PlaceSearchCondition;
 
 import lombok.Setter;
+
 
 @Service
 @Setter
 public class PlaceService {
+	
+	
+	
+//	public void setDao(PlaceRepository dao) {
+//		this.dao = dao;
+//	}
+//	
 
 	@Autowired
-	private PlaceDAO place_dao;
+	private PlaceRepository dao;
+
+//	public List<Place> findAll(){
+//		return dao.findAll();
+//	}
 	
-	public List<Place> findAll(){
-		return place_dao.findAll();
+	public List<Place> findByCondition(PlaceSearchCondition condition){
+		return dao.searchTest(condition);
 	}
-	
-	public Place getPlace(int place_num) {
-		return place_dao.findById(place_num).get();
-	}
-	
 }
 
