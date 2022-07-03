@@ -14,17 +14,19 @@ import lombok.Setter;
 @Service
 @Setter
 public class PlaceService {
-
 	@Autowired
-	private PlaceDAO place_dao;
+	private PlaceDAO dao;
 	
-	public List<Place> findAll(){
-		return place_dao.findAll();
+//	public List<Place> findAll(){
+//		return dao.findAll();
+//	}
+	
+	public List<Place> p(int place_num) {
+		return dao.p(place_num);
 	}
 	
-	public Place getPlace(int place_num) {
-		return place_dao.findById(place_num).get();
+	//장소번호 받아오기
+	public Optional<Place> getPlace(int place_num) {
+		return dao.findById(place_num);
 	}
-	
 }
-

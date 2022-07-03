@@ -7,8 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Entity
@@ -18,8 +16,7 @@ public class Dog {
 	@Id //PK
 	private int dog_num;
 	
-
-	@JsonIgnore
+	//FK
 	@ManyToOne
 	@JoinColumn(name="user_num", insertable=true, updatable=true, nullable = false)
 	private UserInfo userinfo;
@@ -34,6 +31,4 @@ public class Dog {
 	private int dog_desexed;
 	@Column(nullable = false)
 	private int dog_weight;
-
 }
-
