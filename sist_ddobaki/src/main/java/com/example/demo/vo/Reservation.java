@@ -55,7 +55,6 @@ public class Reservation {
 	@Column(columnDefinition = "number default 0", nullable = false)
 	private int reservation_l_dog_cnt;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "user_num", insertable = true, updatable = true)
 	private UserInfo userinfo;
@@ -63,7 +62,6 @@ public class Reservation {
 	@ManyToOne
 	@JoinColumn(name = "place_num", insertable = true, updatable = true)
 	private Place place;
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "room_num", insertable = true, updatable = true)

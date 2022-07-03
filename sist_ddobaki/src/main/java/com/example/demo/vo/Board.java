@@ -19,6 +19,12 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.lang.Nullable;
+
+
 import lombok.Data;
 
 @Data
@@ -29,6 +35,7 @@ public class Board {
 	private int post_num;
 	//@Column(nullable = false) ==>not null
 	
+
 	@Column(nullable = false)
 	private int board_num;
 	
@@ -59,14 +66,18 @@ public class Board {
 	private Place place;
 	
 	
+
 	@JsonIgnore
 	@Column(nullable = true)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<BoardImage> boardimage;
 	
+
 	@JsonIgnore
 	@Column(nullable = true)
 	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
-	
+
 }
+
+

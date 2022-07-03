@@ -21,15 +21,18 @@ public class UserInfo {
 	@Id
 	private int user_num;
 	
-	
 	@Column(columnDefinition="varchar2(3000)", nullable = false)
 	private String user_id;
+
 	@Column(columnDefinition="varchar2(3000)", nullable = false)
 	private String user_pwd;
+
 	@Column(columnDefinition="varchar2(3000)", nullable = false)
 	private String user_nick;
+
 	@Column(columnDefinition="varchar2(3000)", nullable = false)
 	private String user_phone;	
+
 	@Column(columnDefinition="varchar2(3000)", nullable = false)
 	private String user_file;
 	
@@ -44,15 +47,19 @@ public class UserInfo {
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Reply> reply;
+
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Plan> plan;
+
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Dibs> dibs;
+
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Reservation> reservation;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Payment> payment;
@@ -61,6 +68,5 @@ public class UserInfo {
 	@OneToMany(mappedBy="userinfo", fetch=FetchType.EAGER)
 	private List<Service> service;
 	*/
-	
 	
 }

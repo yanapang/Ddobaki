@@ -8,7 +8,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Entity
@@ -17,7 +16,6 @@ import lombok.Data;
 public class Dibs {
 	@Id//PK
 	private int dib_num;
-	
 	
 	//FK
 	@JsonIgnore
@@ -31,3 +29,4 @@ public class Dibs {
 	@JoinColumn(name="place_num", insertable=true, updatable=true, nullable = false)
 	private Place place;
 }
+

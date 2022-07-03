@@ -26,4 +26,12 @@ public class BoardImage {
 	
 	@Column(length = 4000, nullable = false)
 	private String board_image_file;
+
+	@Column(length = 4000, nullable = false)
+	private String saved_name; //변형된 파일이름
+	
+	@Column(length = 4000, nullable = false)
+    private String filepath; // 저장된 파일경로
+
 }
+

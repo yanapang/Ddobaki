@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
+
 @Entity
 @Data
 @Table(name = "payment")
@@ -43,4 +44,6 @@ public class Payment {
 	
 	
 	
+
 }
+

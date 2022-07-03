@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
@@ -22,6 +21,7 @@ import lombok.Data;
 @Table(name = "room")
 public class Room {
 	
+
 	@Id
 	private int room_num;
 	
@@ -30,7 +30,6 @@ public class Room {
 	@Column(nullable = false)
 	private int room_price;
 
-	
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="place_num", insertable=true, updatable=true)
