@@ -20,7 +20,6 @@ public class Reply {
 	@Id
 	private int	reply_num;
 	
-	
 	@ManyToOne
 	@JoinColumn(name="post_num", insertable = true, updatable = true, nullable=false)
 	private Board board;
@@ -28,7 +27,6 @@ public class Reply {
 	@OneToOne
 	@JoinColumn(name="user_num", insertable = true, updatable = true, nullable=false)
 	private UserInfo userinfo;	
-	
 	
 	@Column(nullable=false)
 	private int	reply_group;

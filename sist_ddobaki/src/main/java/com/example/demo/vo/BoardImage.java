@@ -7,8 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 
 @Entity
@@ -18,20 +16,10 @@ public class BoardImage {
 	@Id
 	private int board_image_num;
 	
-	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="post_num", insertable=true, updatable=true, nullable = false)
 	private Board board;
 	
 	@Column(length = 4000, nullable = false)
 	private String board_image_file;
-
-	@Column(length = 4000, nullable = false)
-	private String saved_name; //변형된 파일이름
-	
-	@Column(length = 4000, nullable = false)
-    private String filepath; // 저장된 파일경로
-
 }
-
