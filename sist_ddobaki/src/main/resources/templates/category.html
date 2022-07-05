@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+////id 가져오는 함수/////
+
+
+
+
+</script>
+
+</head>
+<body>
+
+
+
+
+
+<span id="BoardC"></span>
+
+<!-- 
+<th:block th:if="{boardCategory.board_num ==1}">
+	<h2>Notice</h2>
+</th:block>
+<th:block th:if="{boardCategory.board_num =2}">
+	<h2>Community</h2>
+</th:block>
+<th:block th:if="{boardCategory.board_num =4}">
+	<h2>FAQ</h2>
+</th:block>
+ -->
+
+	  <table id="list">   
+      <caption th:text></caption>
+      <tr>
+        <thead>
+          <tr>
+            <th>글번호</th>
+             <th>글제목</th>
+             <th>조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="b:${boardCategory}">
+            <td th:text="${b.post_num}"></td>
+          	<td><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" 
+          		style="text-decoration: none"><span th:text="${b.post_title}"></span></a>
+            <td th:text="${b.post_hit}"></td>
+       
+       
+          </tr>
+        </tbody>
+     </table>
+
+</body>
+</html>

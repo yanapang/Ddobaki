@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>제목 해결하기</h2>
+
+<hr>
+<div>
+<!-- detailReview 는 지역/장소 구분하는 select 박스+ 옵션 값 가져오는 애들도 동작해야함 -->
+<p><span th:text="${detail.post_title}"></span></p>
+<p><span th:text="${detail.post_num}"></span></p>
+<p><span th:text="${detail.board_num}"></span></p>
+<p><span th:text="${detail.post_content}"></span></p>
+
+
+</div>
+
+</body>
+</html>
