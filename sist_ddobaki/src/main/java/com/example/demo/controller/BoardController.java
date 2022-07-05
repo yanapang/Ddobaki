@@ -30,6 +30,7 @@ public class BoardController {
 //		model.addAttribute("post_num", bs.getNextPostNum());
 //	}
 	
+	
 	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
 	@PostMapping("/insertBoard")
 	@ResponseBody
