@@ -64,14 +64,6 @@ public class Board {
 	@ManyToOne
 	@JoinColumn(name="place_num",insertable = true,updatable = true, nullable = true)
 	private Place place;
-	
-	
-//
-//	@JsonIgnore
-//	@Column(nullable = true)
-//	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
-//	private List<BoardImage> boardimage;
-//	
 
 	@JsonIgnore
 	@Column(nullable = true)

@@ -88,8 +88,6 @@
           	<td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" style="text-decoration: none">
           	<span th:text="${b.post_title}"></span></a>
             <td th:text="${b.post_hit}"></td>
-       
-       
           </tr>
         </tbody>
      </table>
@@ -101,7 +99,6 @@
       <span>></span>
      
   </div>
-   <button>글쓰기</buttton>
   </fieldset>
   
 </body>

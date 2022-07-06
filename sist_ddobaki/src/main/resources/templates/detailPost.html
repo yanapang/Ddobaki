@@ -13,17 +13,19 @@ $(function(){
 </script>
 </head>
 <body>
-<h2>제목 해결하기</h2>
+<h4>제목 해결하기</h4>
 
 <hr>
 <div>
 <!-- detailReview 는 지역/장소 구분하는 select 박스+ 옵션 값 가져오는 애들도 동작해야함 -->
-<p><span th:text="${b.post_title}"></span></p>
-<p><span th:text="${b.post_num}"></span></p>
-<p><span th:text="${b.board_num}"></span></p>
+<p>제목 <span th:text="${b.post_title}"></span></p>
+<p>글 번호 <span th:text="${b.post_num}"></span></p>
+<p>게시판 번호 <span th:text="${b.board_num}"></span></p>
+<p>사용자 닉네임 <span th:text="${b.userinfo.user_nick}"></span></p>
+<hr>
 <p id="love">
 
 </div>
-
+<button><a >수정</a></button>
 </body>
 </html>

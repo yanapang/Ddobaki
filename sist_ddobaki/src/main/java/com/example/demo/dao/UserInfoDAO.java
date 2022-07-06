@@ -9,6 +9,5 @@ import com.example.demo.vo.UserInfo;
 @Repository
 public interface UserInfoDAO extends JpaRepository<UserInfo, Integer> {
 
-
 }
 

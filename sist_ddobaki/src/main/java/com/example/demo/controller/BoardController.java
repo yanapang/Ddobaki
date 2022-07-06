@@ -27,18 +27,23 @@ public class BoardController {
 	private BoardService bs;
 
 	
-	@GetMapping("/listBoard")
+	@GetMapping("/firstListBoard")
 	public void listBoard(Model model) {
 		model.addAttribute("list", bs.findAll());
 	}
 	
 	//카테고리 하나 눌렀을때 그 페이지로
-	@GetMapping("/category/{board_num}")
-	public ModelAndView goCategory(@PathVariable int board_num,Model model) {
-		ModelAndView mav = new ModelAndView("category");
+	@GetMapping("/listBoard/{board_num}")
+	public ModelAndView goCategory(@PathVariable int board_num, Model model) {
+		
+		ModelAndView mav = new ModelAndView("listNamegy");
+		if(board_num==3) {
+			mav=new ModelAndView("listReview");
+			}
 		model.addAttribute("boardCategory", bs.goCategory(board_num));
 		return mav;
 	}
+	
 	
 //	@GetMapping("/insertBoard")
 //	public void insert(Model model) {
