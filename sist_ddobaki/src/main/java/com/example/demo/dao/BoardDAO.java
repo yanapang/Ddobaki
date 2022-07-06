@@ -40,14 +40,14 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	public Board findByPostNum(int post_num);
 	
 	//게시판 카테고리 딱 눌렀을떄 이동
-	@Query(value="select * from Board where board_num=:board_num",nativeQuery = true)
+	@Query(value="select * from Board where board_num=:board_num", nativeQuery = true)
 	public List<Board> goCategory(int board_num);
 			
 	//게시판+게시물 경로 //게시물 제목 눌러서 상세보기(상세보기할때는 view_BoardDAO에서 먼저)
-	@Query(value="select * from Board where board_num=:board_num and post_num=:post_num",nativeQuery = true)
+	@Query(value="select * from Board where board_num=:board_num and post_num=:post_num", nativeQuery = true)
 	public Board detailPost(int board_num, int post_num);
-		
-	//게시글 등록 //**********리뷰 게시판제외하고 save 쓸 것*****************
+	
+	//게시글 등록 //
 	@Modifying
 	@Query(value="insert into Board b(b.board_num,b.post_num, b.user_num, b.post_title, b.post_content, b.post_regdate,"+
 				"b.post_hit,b.place_num) values(:#{#b.board_num},:#{#b.post_num},:#{#b.userinfo.user_num},:#{#b.post_title},"+
@@ -62,14 +62,14 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 					":#{#b.post_content},sysdate,0,:#{#b.place.place_num})",nativeQuery = true)
 	@Transactional
 	public void insertReview(@Param("b") Board b);
+	
 	/*
-	//게시글 수정**********리뷰 게시판제외하고 save 쓸 것*****************
+	//게시글 수정
 	@Modifying
 	@Query("update Board b set b.post_title=:#{#post_title}, b.post_content=:{#post_content}"+
 			"where b.post_num=:post_num and b.userinfo.user_num=:user_num")
 	@Transactional
 	public void update(@Param("b") Board b);
-	
 	
 	//게시글 삭제 -이미지/댓글
 	@Modifying

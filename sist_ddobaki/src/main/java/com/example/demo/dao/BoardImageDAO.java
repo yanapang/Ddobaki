@@ -19,7 +19,7 @@ public interface BoardImageDAO extends JpaRepository<BoardImage, Integer> {
 	@Modifying
 	@Query(value="insert into BoardImage bi(bi.board_image_num, bi.board_image_file, bi.post_num) values(:#{#bi.board_image_num}, :#{#bi.board_image_file}, :#{#bi.board.post_num})", nativeQuery=true)
 	@Transactional
-	public void insert(@Param("bi") BoardImage bi);
+	public int insert(@Param("bi") BoardImage bi);
 	
 //	//게시글 하나 클릭했을 떄 그 게시글 안에 있는 이미지들 모두 딸려와서 뿌려주기
 //	//BoardImage와 Board 조인하여 post_num으로 이미지들 가져오기
@@ -45,3 +45,4 @@ public interface BoardImageDAO extends JpaRepository<BoardImage, Integer> {
 //	public void deleteByPostNum(@Param("bi") BoardImage bi);
 
 }
+

@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 public class UserInfoController {
 	@Autowired
-	private UserInfoService user;
+	private UserInfoService uis;
 	
 	@Autowired
 	private PlanService plan;
@@ -31,16 +31,16 @@ public class UserInfoController {
 	@GetMapping("/listUser")
 	@ResponseBody
 	public List<UserInfo> findAll(){
-		return user.findAll();
+		return uis.findAll();
 	}
 	
 	@ResponseBody
 	@GetMapping("/getUser/{user_num}")
 	public UserInfo getUser(@PathVariable int user_num) {
-		 UserInfo userInfo = user.getUser(user_num);
+		 UserInfo userInfo = uis.getUser(user_num);
 		 return userInfo;
 		 //return "redirect:/insertPlan";
 	}
-	
+
 }
 
