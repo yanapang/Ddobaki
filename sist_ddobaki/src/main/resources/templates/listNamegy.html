@@ -22,7 +22,13 @@
 	<h2>FAQ</h2>
 </th:block>
  -->
-
+ <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
+ 	
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice" style="text-decoration: none"></a></span>
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${2})}" th:text="Community" style="text-decoration: none"></a></span>
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${3})}" th:text="Review" style="text-decoration: none"></a></span>
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${4})}" th:text="FAQ" style="text-decoration: none"></a></span>
+  </nav>
 	  <table id="list">   
       <caption th:text></caption>
       <tr>
