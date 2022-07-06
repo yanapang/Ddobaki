@@ -66,11 +66,11 @@ public class Board {
 	private Place place;
 	
 	
-
-	@JsonIgnore
-	@Column(nullable = true)
-	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
-	private List<BoardImage> boardimage;
+//
+//	@JsonIgnore
+//	@Column(nullable = true)
+//	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
+//	private List<BoardImage> boardimage;
 	
 
 	@JsonIgnore
