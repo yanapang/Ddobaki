@@ -1,0 +1,131 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>글쓰기</title>
+</head>
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<body>
+
+ <!-- 장소 컨디션으로 검색 -->
+ <!-- 
+  <select name="place_type" id="ptype">
+    <option value="0">말머리</option>
+    <option value="1">식음료</option>
+    <option value="2">숙박지</option>
+    <option value="3">관광지</option>
+  </select>
+  
+  <select name="place_region" id="rtype">
+    <option value="0">지역</option>
+    <option value="1">서울</option>
+    <option value="2">경기</option>
+    <option value="3">인천</option>
+    <option value="4">강원</option>
+    <option value="5">충북</option>
+    <option value="6">충남</option>
+    <option value="7">전북</option>
+    <option value="8">전남</option>
+    <option value="9">경북</option>
+    <option value="10">경남</option>
+    <option value="11">제주</option> 
+  </select>
+   -->
+   <select th:field="place_type" th:text="말머리">
+   	<option th:value="1" th:text="식음료"></option>
+   	<option th:value="2" th:text="숙박지"></option>
+   	<option th:value="3" th:text="관광지"></option>
+   </select>
+   
+   
+  
+  <select th:field="place_region" th:text="지역">
+    <option th:value="1" th:text="서울"></option>
+    <option th:value="2" th:text="경기"></option>
+    <option th:value="3" th:text="인천"></option>
+    <option th:value="4" th:text="강원"></option>
+    <option th:value="5" th:text="충북"></option>
+    <option th:value="6" th:text="충남"></option>
+    <option th:value="7" th:text="전북"></option>
+    <option th:value="8" th:text="전남"></option>
+    <option th:value="9" th:text="경북"></option>
+    <option th:value="10" th:text="경남"></option>
+    <option th:value="11" th:text="제주"></option> 
+  </select>
+  
+  <select  name="place_name" id="pname">
+  <option 여기서 타임리프 써야겠지 ></option>
+  </select>
+<div id="wrap">
+
+    <form id="articleForm" role="form" action="/insertBoard" method="post">
+        <br style="clear: both">
+        <h3 style="margin-bottom: 25px;">게시글 등록</h3>
+        <input type="number" name="board_num" placeholder="게시판번호">
+        <input type="number" name="userinfo.user_num" placeholder="사용자번호">
+		<br><br>
+        <div class="form-group">
+            <input type="text" class="form-control" id="subject" name="post_title" placeholder="제목" required>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="summernote" name="post_content" placeholder="내용을 입력하세요" maxlength="140" rows="7"></textarea>
+            <div id="imageBoard"></div>
+        </div>
+        
+        <div id="imageBoard"></div>
+        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">등록</button>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            height: 300,
+            minHeight: null,
+            maxHeight: null,
+            focus: true,
+            callbacks: {
+                onImageUpload: function(files, editor, welEditable) {
+                    for (var i = files.length - 1; i >= 0; i--) {
+                    	console.log(this.toString());
+                        sendFile(files[i], this);
+                    }
+                }}
+            });
+        });
+
+    function sendFile(file, el) {
+        var form_data = new FormData();
+        form_data.append('file', file);
+        $.ajax({
+            data: form_data,
+            type: "POST",
+            url: '/image',
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function(url) {
+                $(el).summernote('editor.insertImage', url);
+                $('#imageBoard > ul').append('<li><img src="'+url+'" width="80" height="auto"/></li>');
+            }
+        });
+    }
+    
+    $("#submit").click(function(){
+    	//여기에 redirection주기 !!!
+    })
+</script>
+
+
+</body>
+</html>
