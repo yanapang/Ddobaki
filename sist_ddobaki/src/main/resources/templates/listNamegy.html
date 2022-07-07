@@ -11,17 +11,6 @@
 <body>
 <span id="BoardC"></span>
 
-<!-- 
-<th:block th:if="{boardCategory.board_num ==1}">
-	<h2>Notice</h2>
-</th:block>
-<th:block th:if="{boardCategory.board_num =2}">
-	<h2>Community</h2>
-</th:block>
-<th:block th:if="{boardCategory.board_num =4}">
-	<h2>FAQ</h2>
-</th:block>
- -->
  <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
  	
    <span><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice" style="text-decoration: none"></a></span>
@@ -56,10 +45,10 @@
       <span>></span>
      
   </div>
-  <!-- @{/hello(param1=${param1}, 
-    <a th:href="@{/insertBoard/${bn.board_num}" style="text-decoration: none"><span th:text="글쓰기"></span></a>-->
-  
-<!--<button><a th:href="@{/insertBoard/${b.board_num}}"><span th:text="글쓰기"></span></a></buttton>  -->
+
+<!-- <button><a th:href="@{/insertBoard/${b.board_num}}">글쓰기</a></buttton> -->
+<!-- <button><a th:onclick="'location.href=\''+ @{/insertBoard/${b.board_num}} + '\''">글쓰기</a></buttton> -->
 <!--  <button><a th:href="@{/insertBoard/{b.board_num}(b.board_num=${b.board_num})}"><span th:text="글쓰기"></span></a></buttton>-->
+<button th:onclick="'location.href = \'' + @{/insertBoard/${boardCategory[0].board_num}} + '\''">글쓰기</button>
 </body>
 </html>

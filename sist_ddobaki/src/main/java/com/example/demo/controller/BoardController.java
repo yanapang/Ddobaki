@@ -47,18 +47,16 @@ public class BoardController {
 //		model.addAttribute("post_num", bs.getNextPostNum());
 //	}
 	
-	@GetMapping("/insertBoardtest/{board_num}")
-	public ModelAndView insertForm(@PathVariable int board_num, Model model) {
-		ModelAndView mav=new ModelAndView("insertBoard");
-		model.addAttribute("bn",bs.goInsert(board_num));
-		return mav;
+
+	@GetMapping("/insertBoard")
+	public String insertForm(Model model) {
+		return "insertBoard";
 	}
 	
 	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
-	@PostMapping("/insertBoard/{board_num}")
+	@PostMapping("/insertBoard")
 	@ResponseBody
-	public String insertOK(@PathVariable int board_num, Board b) {
-		b.setBoard_num(board_num);
+	public String insertOK(Board b) {
 		b.setPost_num(bs.getNextPostNum());
 		bs.insert(b);
 		return "ok";
