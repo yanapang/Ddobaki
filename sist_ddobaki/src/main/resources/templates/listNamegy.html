@@ -40,13 +40,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="b:${boardCategory}">
+            <tr th:each="b:${boardCategory}">
             <td th:text="${b.post_num}"></td>
-          	<td><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" 
-          		style="text-decoration: none"><span th:text="${b.post_title}"></span></a>
+          	<td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" style="text-decoration: none">
+          	<span th:text="${b.post_title}"></span></a>
             <td th:text="${b.post_hit}"></td>
-       
-       
           </tr>
         </tbody>
      </table>
@@ -58,7 +56,10 @@
       <span>></span>
      
   </div>
-<button><a th:href="@{/insertBoard/${b.board_num}}"><span th:text="글쓰기"></span></a></buttton>
+  <!-- @{/hello(param1=${param1}, 
+    <a th:href="@{/insertBoard/${bn.board_num}" style="text-decoration: none"><span th:text="글쓰기"></span></a>-->
+  
+<!--<button><a th:href="@{/insertBoard/${b.board_num}}"><span th:text="글쓰기"></span></a></buttton>  -->
 <!--  <button><a th:href="@{/insertBoard/{b.board_num}(b.board_num=${b.board_num})}"><span th:text="글쓰기"></span></a></buttton>-->
 </body>
 </html>

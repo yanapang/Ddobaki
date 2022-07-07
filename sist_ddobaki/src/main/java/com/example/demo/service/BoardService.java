@@ -41,6 +41,9 @@ public class BoardService {
 		return dao.detailPost(board_num,post_num);
 	}
 	
+	public Board goInsert(int board_num) {
+		return dao.goInsert(board_num);
+	}
 	
 	
 	

@@ -47,10 +47,10 @@ public class BoardController {
 //		model.addAttribute("post_num", bs.getNextPostNum());
 //	}
 	
-	@GetMapping("/insertBoard/{board_num}")
-	public ModelAndView insertForm(@RequestParam(value = "board_num", defaultValue="1") int board_num, Model model) {
-		ModelAndView mav=new ModelAndView("insertBoard/{board_num}");
-		model.addAttribute("board_num", board_num);
+	@GetMapping("/insertBoardtest/{board_num}")
+	public ModelAndView insertForm(@PathVariable int board_num, Model model) {
+		ModelAndView mav=new ModelAndView("insertBoard");
+		model.addAttribute("bn",bs.goInsert(board_num));
 		return mav;
 	}
 	

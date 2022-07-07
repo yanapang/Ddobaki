@@ -18,7 +18,7 @@
 
 <div id="wrap">
 
-    <form id="articleForm" role="form" action="/insertBoard/${board_num}" method="post">
+    <form id="articleForm" role="form" action="/insertBoard/{bn.board_num}" method="post">
         <br style="clear: both">
         <h3 style="margin-bottom: 25px;">게시글 등록</h3>
         <input type="number" name="board_num" th:value="${board_num}" placeholder="게시판번호">
