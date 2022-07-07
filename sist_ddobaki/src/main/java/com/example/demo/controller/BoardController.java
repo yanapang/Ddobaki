@@ -1,17 +1,13 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.service.BoardService;
@@ -51,32 +47,21 @@ public class BoardController {
 //		model.addAttribute("post_num", bs.getNextPostNum());
 //	}
 	
-	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
-	@PostMapping("/insertBoard")
-	@ResponseBody
-	public String insertOK(Board b) {
-		b.setPost_num(bs.getNextPostNum());
-		bs.insert(b);
-		return "OK";
-	}
-	
-	//4개 하위 게시판 중 하나로 가면 이 컨트롤러 동작해서 post_num 부여해줌
-	@PostMapping("/goToWriteBoard/{board_num}")
-	public String writeBoardProcess(@PathVariable int board_num,Board b) {
-		b.setBoard_num(board_num);
-		b.setPost_num(bs.getNextPostNum());
-		return "redirect:/insertBoard/" + b.getBoard_num()+"/"+b.getPost_num();
+	@GetMapping("/insertBoard/{board_num}")
+	public ModelAndView insertForm(@RequestParam(value = "board_num", defaultValue="1") int board_num, Model model) {
+		ModelAndView mav=new ModelAndView("insertBoard/{board_num}");
+		model.addAttribute("board_num", board_num);
+		return mav;
 	}
 	
 	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
-	@PostMapping("/insertBoard/{board_num}/{post_num}")
+	@PostMapping("/insertBoard/{board_num}")
 	@ResponseBody
-	public String insertOK(@PathVariable int board_num,@PathVariable int post_num,Board b) {
+	public String insertOK(@PathVariable int board_num, Board b) {
 		b.setBoard_num(board_num);
-		b.setPost_num(post_num);
 		b.setPost_num(bs.getNextPostNum());
 		bs.insert(b);
-		return "OK";
+		return "ok";
 	}
 
 	//상세보기 눌렀을때 board_num도 함께 가도록

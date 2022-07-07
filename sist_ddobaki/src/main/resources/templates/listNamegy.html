@@ -52,6 +52,7 @@
       <span>></span>
      
   </div>
-<!--  <button><a th:href="@{/insertBoard/{b.board_num}(b.board_num=${b.board_num})}" style="text-decoration: none">글쓰기</a></buttton>-->
+<button><a th:href="@{/insertBoard/${b.board_num}}"><span th:text="글쓰기"></span></a></buttton>
+<!--  <button><a th:href="@{/insertBoard/{b.board_num}(b.board_num=${b.board_num})}"><span th:text="글쓰기"></span></a></buttton>-->
 </body>
 </html>

@@ -34,7 +34,6 @@ public class Board {
 	@Id
 	private int post_num;
 	//@Column(nullable = false) ==>not null
-	
 
 	@Column(nullable = false)
 	private int board_num;
@@ -57,7 +56,6 @@ public class Board {
 	@ManyToOne
 	@JoinColumn(name="user_num", insertable = true, updatable = true,nullable = false)
 	private UserInfo userinfo;
-	
 	
 	//place_num과 다대일/fk/null허용 
 	@JsonIgnore

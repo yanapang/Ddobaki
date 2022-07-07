@@ -1,6 +1,6 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th = "http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>글쓰기</title>
@@ -18,10 +18,10 @@
 
 <div id="wrap">
 
-    <form id="articleForm" role="form" action="/insertBoard" method="post">
+    <form id="articleForm" role="form" action="/insertBoard/${board_num}" method="post">
         <br style="clear: both">
         <h3 style="margin-bottom: 25px;">게시글 등록</h3>
-        <input type="number" name="board_num" placeholder="게시판번호">
+        <input type="number" name="board_num" th:value="${board_num}" placeholder="게시판번호">
         <input type="number" name="userinfo.user_num" placeholder="사용자번호">
 		<br><br>
         <div class="form-group">
