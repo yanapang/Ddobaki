@@ -15,6 +15,5 @@ public class SistDdobakiApplication {
 	public String uploadPath() {
 		return "c:/day0704/ddobaki_board_3/src/main/resources/static/image/";
 	}
-	
-	}
+}
 	

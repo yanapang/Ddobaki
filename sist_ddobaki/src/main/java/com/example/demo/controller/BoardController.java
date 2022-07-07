@@ -48,10 +48,9 @@ public class BoardController {
 //	}
 	
 	@GetMapping("/insertBoard/{board_num}")
-	public ModelAndView insertForm(@RequestParam(value = "board_num", defaultValue="1") int board_num, Model model) {
-		ModelAndView mav=new ModelAndView("insertBoard/{board_num}");
+	public String insertForm(@RequestParam(value = "board_num", defaultValue="1") int board_num, Model model) {
 		model.addAttribute("board_num", board_num);
-		return mav;
+		return "insertBoard/{board_num}";
 	}
 	
 	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
