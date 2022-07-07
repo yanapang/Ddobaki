@@ -45,8 +45,6 @@
           	<td><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" 
           		style="text-decoration: none"><span th:text="${b.post_title}"></span></a>
             <td th:text="${b.post_hit}"></td>
-       
-       
           </tr>
         </tbody>
      </table>
@@ -61,6 +59,6 @@
 <!-- <button><a th:href="@{/insertBoard/${b.board_num}}">글쓰기</a></buttton> -->
 <!-- <button><a th:onclick="'location.href=\''+ @{/insertBoard/${b.board_num}} + '\''">글쓰기</a></buttton> -->
 <!--  <button><a th:href="@{/insertBoard/{b.board_num}(b.board_num=${b.board_num})}"><span th:text="글쓰기"></span></a></buttton>-->
-<button th:onclick="'location.href = \'' + @{/insertBoard/${b.board_num}} + '\''">글쓰기</button>
+<button th:onclick="'location.href = \'' + @{/insertBoard/${boardCategory[0].board_num}} + '\''">글쓰기</button>
 </body>
 </html>
