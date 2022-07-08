@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<!-- css 초기화 -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+<!-- jquery -->
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- 전체 컨테이너 -->
+	<div id="detailContainer">
+
+		<header style="display: flex; height: 25vh">
+			<!-- 홈페이지 로고 -->
+			<div id="logoBox">
+				<img alt="logo이미지 " src="/logo.jpg">
+			</div>
+		</header>
+
+		<main
+			style="background-color: green; height: 75vh; display: flex; justify-content: center; align-items: center;">
+
+			<!-- 하얀배경 -->
+			<div id="detailBg"
+				style="background: white; width: 98%; height: 95%; overflow: scroll; padding: 5px ">
+
+				<!-- placeImage(이미지 슬라이더), 장소 정보(place(type, name, explain, service, addr, tel, detailEx), board(review)) -->
+				<!-- img랑 장소 간단 정보 -->
+				<div id="detailInfo" style = "display:flex" >
+
+						<!-- 이미지 슬라이드 -->
+						<div id="imgbox" style="background : orange; width: 500px; height: 500px;"></div>
+
+						<!-- 장소 간단 정보  -->
+						<div id="infoBox">
+							<!-- 장소 타입  -->
+							<div id="typeBox">
+								<h3 id="place_type" th:text="${place.place_type_num}"></h3>
+							</div>
+
+							<!-- 장소 이름  -->
+							<div id="nameBox">
+								<h3 id="place_name" th:text="${place.place_name}"></h3>
+							</div>
+
+							<!-- 장소 설명  -->
+							<div id="explainBox">
+								<span id="plan_explain" th:text = "${place.place_explain}"></span>
+							</div>
+
+							<!-- 장소 서비스 -->
+							<div id="serviceBox ">
+								<!-- 없으면 hidden 처리  -->
+								<!-- 강아지 무게  -->
+								<span th:text = "${place.place_weight}" ></span>
+								<!-- 주차 -->
+								<span th:text = "${place.place_park}" ></span>
+								<!-- 조식  -->
+								<span th:text = "${place.place_meal}" ></span>
+								<!-- 스파  -->
+								<span th:text = "${place.place_spa}" ></span>
+							</div>
+
+							<!-- 장소 주소  -->
+							<div id="addrBox">
+								<p>장소 주소 : <span th:text="${place.place_addr}"></span></p>
+							</div>
+
+							<!-- 장소 전화  -->
+							<div id="telBox">
+								<p>장소 연락처 : <span th:text="${place.place_tel}"></span></p> 
+							</div>
+
+							<!-- 장소 예약, 찜 버튼  -->
+							<div id="btnBox">
+								<button id="rsBtn">예약</button>
+								<a href="/" id="dibBtn"></a>
+							</div>
+
+						</div><!--  infoBox 끝  -->
+
+					</div><!-- detailInfo 끝  -->
+
+				<!-- 장소 상세설명, 리뷰 컨테이너  -->
+				<div id="dExAndRvBox">
+
+					<!-- 상세설명 -->
+					<div id="detailExBox"
+						style="background: green; padding: 5px; margin: 5px 0">
+						<h5 style="color: white">상세설명</h5>
+						<div id="dExMain"
+							style="background-color: white; padding: 5px; ">
+							<span th:text="${place.place_detail}"></span>
+						</div>
+					</div>
+
+
+					<div id="reviewBox"
+						style="background: green; padding: 5px;" >
+						<h5 style="color: white">Review</h5>
+						<div id="place_review"
+							style="background-color: white; padding: 5px; margin: 5px 0 ">
+							<table id="reviewTable"></table>
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</div>
+			<!--  detainBg 끝  -->
+			
+		</main>
+
+	</div>
+	<!-- 전체 컨테이너 끝  -->
+
+</body>
+</html>
+
