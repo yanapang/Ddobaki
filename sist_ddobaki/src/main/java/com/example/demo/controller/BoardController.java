@@ -98,6 +98,6 @@ public class BoardController {
     public String updateBoardOK(@PathVariable int post_num, Board b) {
     	System.out.println("수정ok컨트롤러옴");
     	bs.updateBoard(b);
-    	return "firstListBoard";
+    	return "redirect:/firstListBoard";
 	   }
 }

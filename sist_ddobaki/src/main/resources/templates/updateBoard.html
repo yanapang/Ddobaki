@@ -13,6 +13,15 @@
 <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<!-- 
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(function(){
+	$("#subject").html(/*[[${b.post_title}]]*/);
+})
+/*]]*/
+</script>
+ -->
 <body>
 
 <div id="wrap">
@@ -26,7 +35,7 @@
         <!-- 장소 번호 : <input type="number" name="place.place_num" th:value="${b.place.place_num}"> -->
 		<br><br>
         <div class="form-group">
-            <input th:value="${b.post_title}"type="text" class="form-control" id="subject" name="post_title" required>
+            <input type="text" th:value="${b.post_title}" class="form-control" id="subject" name="post_title">
         </div>
         <div class="form-group">
             <textarea th:field="${b.post_content}" class="form-control" id="summernote" name="post_content" maxlength="140" rows="7"></textarea>
