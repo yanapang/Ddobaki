@@ -52,5 +52,9 @@ public class BoardService {
 	public void plusPostHit(int post_num) {
 		dao.plusPostHit(post_num);
 	}
+	
+	public void updateBoard(Board b) {
+		dao.update(b.getPost_content(), b.getPost_title(), b.getPost_num());
+	}
 
 }

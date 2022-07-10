@@ -29,8 +29,8 @@ function getPNum(){
 	var p_num=(Number)($("#place_list option:selected").val());
 	console.log(p_num);
 }
-
 $(function(){
+	
 	var list="";
 	
 	$("#searchPlace").on("click",function(){
@@ -43,14 +43,16 @@ $(function(){
 			url:"/listReviewPlace",
 			data:{place_region_num:pr_num, place_type_num:pt_num},
 			success:function(arr){
+				
 				console.log("에이젝스 성공!")
 				placeAll=arr;
 				console.log(placeAll);
 				for(i=0; i<placeAll.length; i++){
 					var option=$("<option></option>");
-					//$("#place_list").append($(option).html(placeAll[i].place_name).attr({value:placeAll[i].place_num}));
 					$("#place_list").append($(option).html(placeAll[i].place_name).attr({value:placeAll[i].place_num}));
+				
 				}
+				
 			}
 		})
 	})
@@ -82,9 +84,12 @@ $(function(){
 			   	<option value="3">관광지</option>
 			</select>
 			<button id="searchPlace">찾아보기</button>
-			<select id="place_list" th:name="board.place.place_num" onchange="getPNum()"> 
+			<select id="place_list" name="place.place_num" onchange="getPNum()"> 
 			   	<option>선택</option>
-			</select>
+			   	<!-- <option th:each="p : ${place_list}"
+						th:value="${p?.place_num}"
+						th:utext="${p?.place_name}"></option> -->
+			   	</select>
 		<br><br>
         <div class="form-group">
             <input type="text" class="form-control" id="subject" name="post_title" placeholder="제목" required>

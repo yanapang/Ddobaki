@@ -71,6 +71,7 @@ public class BoardController {
 	public String insertBoardOK(@PathVariable int board_num, Board b) {
 		b.setBoard_num(board_num);
 		b.setPost_num(bs.getNextPostNum());
+		//System.out.println(b.getPlace());
 		bs.insert(b);
 		return "redirect:/firstListBoard";
 	}
@@ -93,9 +94,10 @@ public class BoardController {
     	return "updateBoard";
     }
 	    
-    @PostMapping("/updateBoard/{post_num}")
+    @PostMapping("/updateBoard/updateBoardOK/{post_num}")
     public String updateBoardOK(@PathVariable int post_num, Board b) {
-	   	bs.save(b);
+    	System.out.println("수정ok컨트롤러옴");
+    	bs.updateBoard(b);
     	return "firstListBoard";
 	   }
 }

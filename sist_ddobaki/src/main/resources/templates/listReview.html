@@ -5,23 +5,6 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/*
- $(function(){
-	 $("#btnDetail").click(function(){
-		 $.ajax({
-			 url : "/getPostByPostNum/{post_num}",
-			 success : function(){
-				 alert(detail);
-			 }
-			 
-		 });
-		 
-	 });
-	 
-	 
- });
-*/
-
 </script>
 </head>
 <body>
@@ -52,7 +35,7 @@
    <span><a th:href="@{/listBoard/{board_num}(board_num=${4})}" th:text="FAQ" style="text-decoration: none"></a></span>
   </nav>
 
-  <input type="search" placeholder="장소 이름을 검색하세요">
+  <input type="search" placeholder="게시글 제목을 검색하세요">
  
   <table id="list">   
       <caption>Review</caption>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,14 +32,11 @@ public class PlaceController {
 		//System.out.println("매개변수로 온 region_num"+place_region_num);
 		//System.out.println("매개변수로 온 type_num"+place_type_num);
 		List<Place> list=placeS.placeNameList(place_region_num, place_type_num);
+		//model.addAttribute("place_list", list);
 		//System.out.println("출력될 리스트 길이:"+list.size());
 		return list;
 	}
-//	
-//	@GetMapping("/getPlace/{place_num}")
-//	public Place getPlace(@PathVariable int place_num){
-//		return placeS.getPlace(place_num);
-//	}
+
 
 	}
 
