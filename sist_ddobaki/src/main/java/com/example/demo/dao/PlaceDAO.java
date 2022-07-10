@@ -15,6 +15,5 @@ public interface PlaceDAO extends JpaRepository<Place, Integer>, PlaceCustomDAO 
 	
 	@Modifying
     @Query("update Place p set p.place_hit = p.place_hit + 1 where p.place_num = :place_num")
-	
 	int updateHit(int place_num);
 }

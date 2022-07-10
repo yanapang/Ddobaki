@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.PlaceDAO;
+import com.example.demo.service.BoardService;
+import com.example.demo.service.PlaceImageService;
+//import com.example.demo.service.PlaceImageService;
 import com.example.demo.service.PlaceService;
 import com.example.demo.vo.Place;
+import com.example.demo.vo.PlaceImage;
 import com.example.demo.vo.PlaceSearchCondition;
 
 @RestController
@@ -27,7 +31,13 @@ public class PlaceController {
 
 	@Autowired
 	private PlaceService placeService;
-
+	
+	@Autowired
+	private BoardService bs;
+	
+	@Autowired
+	private PlaceImageService placeImgService;
+	
 //	@ResponseBody
 //	@GetMapping("/getCondition") 
 //	public String test(PlaceSearchCondition param){ 
@@ -83,7 +93,9 @@ public class PlaceController {
 	public ModelAndView detailPlace(@PathVariable int place_num, Model model) {
 		ModelAndView mav = new ModelAndView("detailPlace");
 		placeService.updateHit(place_num);
+		mav.addObject("review", bs.findByPlaceNum(place_num));
 		mav.addObject("place", placeService.getPlace(place_num));
+		mav.addObject("piList", placeImgService.getPlaceImage(place_num));
 		return mav;
 	}
 

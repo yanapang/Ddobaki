@@ -13,6 +13,7 @@ import lombok.Setter;
 @Service
 @Setter
 public class BoardService {
+
 	@Autowired
 	private BoardDAO dao;
 
@@ -23,8 +24,28 @@ public class BoardService {
 	public List<Board> findAll() {
 		return dao.findAll();
 	}
-	
+
 	public void insert(Board b) {
 		dao.insert(b);
 	}
+
+	public List<Board> findByPlaceNum(int place_num) {
+		return dao.findByPlaceNum(place_num);
+	}
+	public Board findByPostNum(int post_num) {
+		return dao.findByPostNum(post_num);
+	}
+
+	public List<Board> goCategory(int board_num) {
+		return dao.goCategory(board_num);
+	}
+
+	public Board detailPost(int board_num, int post_num) {
+		return dao.detailPost(board_num, post_num);
+	}
+
+	public Board goInsert(int board_num) {
+		return dao.goInsert(board_num);
+	}
+
 }

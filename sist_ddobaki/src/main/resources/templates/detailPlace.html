@@ -5,9 +5,18 @@
 <!-- css 초기화 -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
+
+
 <!-- jquery -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- jquery 이미지 슬라이드  -->
+<link rel="stylesheet" type="text/css"
+	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -27,64 +36,80 @@
 
 			<!-- 하얀배경 -->
 			<div id="detailBg"
-				style="background: white; width: 98%; height: 95%; overflow: scroll; padding: 5px ">
+				style="background: white; width: 98%; height: 95%; overflow: scroll; padding: 5px">
 
 				<!-- placeImage(이미지 슬라이더), 장소 정보(place(type, name, explain, service, addr, tel, detailEx), board(review)) -->
 				<!-- img랑 장소 간단 정보 -->
-				<div id="detailInfo" style = "display:flex" >
+				<div id="detailInfo" style="display: flex">
 
-						<!-- 이미지 슬라이드 -->
-						<div id="imgbox" style="background : orange; width: 500px; height: 500px;"></div>
-
-						<!-- 장소 간단 정보  -->
-						<div id="infoBox">
-							<!-- 장소 타입  -->
-							<div id="typeBox">
-								<h3 id="place_type" th:text="${place.place_type_num}"></h3>
+					<!-- 이미지 슬라이드 -->
+					<div id="imgbox"
+						style="background: orange; width: 500px; height: 500px;">
+						<div id="slider-div">
+							<div th:each="pi : ${piList}">
+								<img th:src="@{'/detailPlaceImage/'+${pi.place_image_file}}"
+									th:alt="${pi.place_image_file}" style="width:470px; height:470px; margin:0 auto">
 							</div>
 
-							<!-- 장소 이름  -->
-							<div id="nameBox">
-								<h3 id="place_name" th:text="${place.place_name}"></h3>
-							</div>
+						</div>
 
-							<!-- 장소 설명  -->
-							<div id="explainBox">
-								<span id="plan_explain" th:text = "${place.place_explain}"></span>
-							</div>
+					</div>
 
-							<!-- 장소 서비스 -->
-							<div id="serviceBox ">
-								<!-- 없으면 hidden 처리  -->
-								<!-- 강아지 무게  -->
-								<span th:text = "${place.place_weight}" ></span>
-								<!-- 주차 -->
-								<span th:text = "${place.place_park}" ></span>
-								<!-- 조식  -->
-								<span th:text = "${place.place_meal}" ></span>
-								<!-- 스파  -->
-								<span th:text = "${place.place_spa}" ></span>
-							</div>
+					<!-- 장소 간단 정보  -->
+					<div id="infoBox">
+						<!-- 장소 타입  -->
+						<div id="typeBox">
+							<h3 id="place_type" th:text="${place.place_type_num}"></h3>
+						</div>
 
-							<!-- 장소 주소  -->
-							<div id="addrBox">
-								<p>장소 주소 : <span th:text="${place.place_addr}"></span></p>
-							</div>
+						<!-- 장소 이름  -->
+						<div id="nameBox">
+							<h3 id="place_name" th:text="${place.place_name}"></h3>
+						</div>
 
-							<!-- 장소 전화  -->
-							<div id="telBox">
-								<p>장소 연락처 : <span th:text="${place.place_tel}"></span></p> 
-							</div>
+						<!-- 장소 설명  -->
+						<div id="explainBox">
+							<span id="plan_explain" th:text="${place.place_explain}"></span>
+						</div>
 
-							<!-- 장소 예약, 찜 버튼  -->
-							<div id="btnBox">
-								<button id="rsBtn">예약</button>
-								<a href="/" id="dibBtn"></a>
-							</div>
+						<!-- 장소 서비스 -->
+						<div id="serviceBox ">
+							<!-- 없으면 hidden 처리  -->
+							<!-- 강아지 무게  -->
+							<span th:text="${place.place_weight}"></span>
+							<!-- 주차 -->
+							<span th:text="${place.place_park}"></span>
+							<!-- 조식  -->
+							<span th:text="${place.place_meal}"></span>
+							<!-- 스파  -->
+							<span th:text="${place.place_spa}"></span>
+						</div>
 
-						</div><!--  infoBox 끝  -->
+						<!-- 장소 주소  -->
+						<div id="addrBox">
+							<p>
+								장소 주소 : <span th:text="${place.place_addr}"></span>
+							</p>
+						</div>
 
-					</div><!-- detailInfo 끝  -->
+						<!-- 장소 전화  -->
+						<div id="telBox">
+							<p>
+								장소 연락처 : <span th:text="${place.place_tel}"></span>
+							</p>
+						</div>
+
+						<!-- 장소 예약, 찜 버튼  -->
+						<div id="btnBox">
+							<button id="rsBtn">예약</button>
+							<a href="/" id="dibBtn"></a>
+						</div>
+
+					</div>
+					<!--  infoBox 끝  -->
+
+				</div>
+				<!-- detailInfo 끝  -->
 
 				<!-- 장소 상세설명, 리뷰 컨테이너  -->
 				<div id="dExAndRvBox">
@@ -93,19 +118,30 @@
 					<div id="detailExBox"
 						style="background: green; padding: 5px; margin: 5px 0">
 						<h5 style="color: white">상세설명</h5>
-						<div id="dExMain"
-							style="background-color: white; padding: 5px; ">
+						<div id="dExMain" style="background-color: white; padding: 5px;">
 							<span th:text="${place.place_detail}"></span>
 						</div>
 					</div>
 
 
-					<div id="reviewBox"
-						style="background: green; padding: 5px;" >
+					<div id="reviewBox" style="background: green; padding: 5px;">
 						<h5 style="color: white">Review</h5>
 						<div id="place_review"
-							style="background-color: white; padding: 5px; margin: 5px 0 ">
-							<table id="reviewTable"></table>
+							style="background-color: white; padding: 5px; margin: 5px 0">
+							<table id="reviewTable">
+								<tr>
+									<th>번호</th>
+									<th>게시물 이름</th>
+									<th>조회수</th>
+								</tr>
+
+								<tr th:each="b : ${review}">
+									<td th:text="${b.post_num}"></td>
+									<td th:text="${b.post_title}"></td>
+									<td th:text="${b.post_hit}"></td>
+								</tr>
+
+							</table>
 						</div>
 					</div>
 				</div>
@@ -115,12 +151,21 @@
 
 			</div>
 			<!--  detainBg 끝  -->
-			
+
 		</main>
 
 	</div>
 	<!-- 전체 컨테이너 끝  -->
+	<script type="text/javascript">
+		// 이미지 슬라이드 
+		$(document).ready(function() {
+			$('#slider-div').slick({
 
+				arrows : false,
+				dots : true,
+			});
+		})
+	</script>
 </body>
 </html>
 
