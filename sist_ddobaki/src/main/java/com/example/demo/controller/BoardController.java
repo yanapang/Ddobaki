@@ -45,7 +45,7 @@ public class BoardController {
 		//System.out.println("리스트보드에서 상태유지할 board_num"+board_num);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/insertBoard/{board_num}", method = RequestMethod.GET)
 	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model) {
 		ModelAndView mav=new ModelAndView("insertBoard");
@@ -59,6 +59,12 @@ public class BoardController {
 		model.addAttribute("user_list", uis.findAll());
 		return mav;
 	}
+	
+//	@GetMapping("/insertBoard")
+//	public void insert(Model model) {
+//		//겟방식으로 이게 오면 새로운 주문번호까지 상태유지함 !!! 우리가 이걸 써먹어야함~!!!!!!!!!!!!꼭 기억하고 있기
+//		model.addAttribute("post_num", bs.getNextPostNum());
+//	}
 	
 	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
 	@PostMapping("/insertBoard/insertBoardOK/{board_num}")

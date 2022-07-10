@@ -65,6 +65,10 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	@Transactional
 	public void insertReview(@Param("b") Board b);
 	
+	
+	//글쓰기로 이동 아니면 지울것
+	@Query(value="select * from Board where board_num=:board_num", nativeQuery = true)
+	public Board goInsert(int board_num);
 	/*
 	//게시글 수정
 	@Modifying

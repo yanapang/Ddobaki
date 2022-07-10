@@ -48,8 +48,9 @@ public class BoardService {
 	public Board findById(int post_num) {
 		return dao.findByPostNum(post_num);
 	}
-	
+
 	public void plusPostHit(int post_num) {
 		dao.plusPostHit(post_num);
 	}
+
 }
