@@ -76,7 +76,7 @@ public class PlaceController {
 		modelAndView.setViewName("place_main");
 
 		return modelAndView;
-	}
+	} 
 
 	// 검색 조건에 따른 place list 반환
 	@RequestMapping(value = "/placeMain", method = RequestMethod.GET)
@@ -97,6 +97,11 @@ public class PlaceController {
 		mav.addObject("place", placeService.getPlace(place_num));
 		mav.addObject("piList", placeImgService.getPlaceImage(place_num));
 		return mav;
+	}
+	
+	@GetMapping("/getPlace/{place_num}")
+	public Place getPlace(@PathVariable Integer place_num) {
+		return placeService.getPlace(place_num);
 	}
 
 }
