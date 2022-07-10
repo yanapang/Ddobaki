@@ -18,7 +18,6 @@ public class Dog {
 	@Id //PK
 	private int dog_num;
 	
-
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_num", insertable=true, updatable=true, nullable = false)

@@ -20,6 +20,10 @@ public class BoardService {
 	public int getNextPostNum() {
 		return dao.getNextPostNum();
 	}
+	
+	public void save(Board b) {
+		dao.save(b);
+	}
 
 	public List<Board> findAll() {
 		return dao.findAll();
@@ -40,8 +44,12 @@ public class BoardService {
 	public Board detailPost(int board_num,int post_num) {
 		return dao.detailPost(board_num,post_num);
 	}
+
+	public Board findById(int post_num) {
+		return dao.findByPostNum(post_num);
+	}
 	
-	
-	
-	
+	public void plusPostHit(int post_num) {
+		dao.plusPostHit(post_num);
+	}
 }

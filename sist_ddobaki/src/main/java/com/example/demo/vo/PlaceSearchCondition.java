@@ -86,7 +86,6 @@ private int	place_region_num;
 		this.place_array = place_array;
 	}
 	
-
 	@Override
 	public String toString() {
 		return "PlaceSearchCondition [place_region_num=" + place_region_num + ", place_type_num=" + place_type_num
@@ -94,8 +93,4 @@ private int	place_region_num;
 				+ ", place_meal=" + place_meal + ", place_weight=" + place_weight + ", place_array=" + place_array
 				+ "]";
 	}
-	
-	
-	
-	
 }

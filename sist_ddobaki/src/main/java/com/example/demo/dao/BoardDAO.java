@@ -20,11 +20,13 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	public int getNextPostNum();
 	
 	//조회수 추가하기
-	@Query("select nvl(max(post_hit),0)+1 from Board")
-	public int plusPostHit();
+	@Modifying
+	@Query(value="update Board b set b.post_hit=nvl(:#{#b.post_hit},0)+1 where post_num=:post_num", nativeQuery=true)
+	@Transactional
+	public int plusPostHit(int post_num);
 	
 	//제목으로 게시글 찾기		
-	@Query(value="select * from Board where post_title like '%'||:post_title||'%'",nativeQuery = true)
+	@Query(value="select * from Board where post_title like '%'||:post_title||'%'", nativeQuery = true)
 	public List<Board> findByPostTitle(String post_title);
 
 	//리뷰게시판출력 //말머리 컨디션 받았을떄(region_num, place_type_num 2개 placeDAO에서 먼저 받기)
@@ -66,7 +68,7 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	/*
 	//게시글 수정
 	@Modifying
-	@Query("update Board b set b.post_title=:#{#post_title}, b.post_content=:{#post_content}"+
+	@Query("update Board b set b.post_title=:#{#post_title}, b.post_content=:#{#post_content}"+
 			"where b.post_num=:post_num and b.userinfo.user_num=:user_num")
 	@Transactional
 	public void update(@Param("b") Board b);

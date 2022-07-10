@@ -28,7 +28,6 @@ public class Payment {
 	@Column(nullable = false)
 	private Date payment_date;
 	
-	
 	//참조 받아야 하는 키
 	//reservation_num, user_num
 	
@@ -41,9 +40,6 @@ public class Payment {
 	@JsonIgnore
 	@JoinColumn(name = "reservation_num", insertable = true, updatable = true)
 	private Reservation reservation;
-	
-	
-	
 
 }
 

@@ -50,8 +50,6 @@ public class BoardImageService {
 	            saveFile.setBoard_image_file(file.getOriginalFilename());
 	            saveFile.setSaved_name(saveFileName);
 	            saveFile.setContentType(file.getContentType());
-	            //saveFile.setSize(file.getResource().contentLength());
-	            //saveFile.setRegisterDt(LocalDateTime.now());
 	            saveFile.setFile_path(rootLocation.toString().replace(File.separatorChar, '/') +'/' + saveFileName);
 	            dao.save(saveFile);
 	            return saveFile;
@@ -59,8 +57,6 @@ public class BoardImageService {
 	        } catch(IOException e) {
 	            throw new Exception("Failed to store file " + file.getOriginalFilename(), e);
 	        }
-
-
 	    }
 
 	    public BoardImage load(int board_image_num) {

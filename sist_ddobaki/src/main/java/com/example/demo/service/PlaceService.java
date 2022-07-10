@@ -29,16 +29,12 @@ public class PlaceService {
 	public List<Place> placeNameList(int place_type_num, int place_region_num ){
 		return place_dao.placeNameList(place_type_num, place_region_num);
 	}
-	//지도카드 2차
-	public Place getPlace(int place_type_num, int place_region_num, String place_name) {
-		return place_dao.getPlace(place_type_num, place_region_num, place_name);
-	}
-	//리뷰-장소 이름으로 검색
-	public List<Place> findByPlaceName(String place_name){
-		return place_dao.findByPlaceName(place_name);
-				
-	}
-	
+//	//리뷰-장소 이름으로 검색
+//	public List<Place> findByPlaceName(String place_name){
+//		return place_dao.findByPlaceName(place_name);
+//				
+//	}
+//	
 	
 }
 

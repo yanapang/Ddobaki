@@ -27,7 +27,6 @@ public class UserInfoController {
 	@Autowired
 	private PlanService plan;
 
-	
 	@GetMapping("/listUser")
 	@ResponseBody
 	public List<UserInfo> findAll(){

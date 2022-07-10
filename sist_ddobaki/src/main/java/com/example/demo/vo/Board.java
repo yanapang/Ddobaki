@@ -48,7 +48,7 @@ public class Board {
 	@Temporal(TemporalType.DATE)
 	private Date post_regdate;
 	
-	@Column(columnDefinition = "integer default 0")
+	@Column(nullable = false, columnDefinition = "number default 0")
 	private int post_hit;
 		
 	//user_num과 다대일 fk

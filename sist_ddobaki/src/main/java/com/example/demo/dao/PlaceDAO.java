@@ -13,15 +13,15 @@ public interface PlaceDAO extends JpaRepository<Place, Integer> {
 
 	
 	//리뷰-지도카드 검색 1차(지역/말머리) ++ 리뷰 조건으로 검색할떄도 필요함!
-	@Query(value="select * from Place where place_type_num=:place_type_num and place_region_num =:place_region_num",nativeQuery = true)
-	public List<Place> placeNameList(int place_type_num, int place_region_num );
+	@Query(value="select * from Place where place_region_num =:place_region_num and place_type_num=:place_type_num",nativeQuery = true)
+	public List<Place> placeNameList(int place_region_num, int place_type_num);
 	
-	//리뷰-지도카드 검색 최종
-	@Query(value="select * from Place where place_type_num=:place_type_num and place_region_num =:place_region_num and place_name=:place_name",nativeQuery = true)
-	public Place getPlace(int place_type_num, int place_region_num, String place_name);
-
-	//리뷰-장소 이름으로 검색
-	@Query(value = "select * from Place where place_name=:place_name",nativeQuery = true)
-	public List<Place> findByPlaceName (String place_name);
+//	//리뷰-지도카드 검색 최종
+//	@Query(value="select * from Place where place_type_num=:place_type_num and place_region_num =:place_region_num and place_name=:place_name",nativeQuery = true)
+//	public Place getPlace(int place_type_num, int place_region_num, String place_name);
+//
+//	//리뷰-장소 이름으로 검색
+//	@Query(value = "select * from Place where place_name=:place_name",nativeQuery = true)
+//	public List<Place> findByPlaceName (String place_name);
 
 }

@@ -33,7 +33,7 @@ public class UserInfo {
 	@Column(columnDefinition="varchar2(3000)", nullable = false)
 	private String user_phone;	
 
-	@Column(columnDefinition="varchar2(3000)", nullable = false)
+	@Column(columnDefinition="varchar2(3000)", nullable = true)
 	private String user_file;
 	
 	@JsonIgnore
@@ -68,5 +68,4 @@ public class UserInfo {
 	@OneToMany(mappedBy="userinfo", fetch=FetchType.EAGER)
 	private List<Service> service;
 	*/
-	
 }

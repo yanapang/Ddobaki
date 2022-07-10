@@ -26,5 +26,4 @@ public class UserInfoService {
 	public UserInfo getUser(int user_num) {
 		return user_dao.findById(user_num).get();
 	}
-	
 }

@@ -1,6 +1,5 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>글쓰기</title>
@@ -18,21 +17,20 @@
 
 <div id="wrap">
 
-    <form id="articleForm" role="form" action="/insertBoard" method="post">
+    <form id="articleForm" role="form" th:action="@{updateBoard/{post_num}(post_num=${post_num})}" th:method="post">
         <br style="clear: both">
-        <h3 style="margin-bottom: 25px;">게시글 등록</h3>
-        <input type="number" name="board_num" placeholder="게시판번호">
-        <input type="number" name="userinfo.user_num" placeholder="사용자번호">
+        <h3 style="margin-bottom: 25px;">게시글 수정</h3>
+        게시판번호 : <input type="number" name="board_num" th:value="${b.board_num}">
+		글번호 : <input type="number" name="post_num" th:value="${b.post_num}">
+        작성자 : <input type="number" name="userinfo.user_num" th:value="${b.userinfo.user_num}">
 		<br><br>
         <div class="form-group">
-            <input type="text" class="form-control" id="subject" name="post_title" placeholder="제목" required>
+            <input th:value="${b.post_title}"type="text" class="form-control" id="subject" name="post_title" required>
         </div>
         <div class="form-group">
-            <textarea class="form-control" id="summernote" name="post_content" placeholder="내용을 입력하세요" maxlength="140" rows="7"></textarea>
-            <div id="imageBoard"></div>
+            <textarea th:field="${b.post_content}" class="form-control" id="summernote" name="post_content" maxlength="140" rows="7"></textarea>
         </div>
-        
-        <div id="imageBoard"></div>
+
         <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">등록</button>
     </form>
 </div>
@@ -48,13 +46,11 @@
                 onImageUpload: function(files, editor, welEditable) {
                     for (var i = files.length - 1; i >= 0; i--) {
                     	console.log(this.toString());
-                        sendFile(files[i], this);
+                        	sendFile(files[i], this);
                     }
                 }}
             });
-        });
-
-    function sendFile(file, el) {
+  	  function sendFile(file, el) {
         var form_data = new FormData();
         form_data.append('file', file);
         $.ajax({
@@ -71,12 +67,7 @@
             }
         });
     }
-    
-    $("#submit").click(function(){
-    	//여기에 redirection주기 !!!
     })
 </script>
-
-
 </body>
 </html>
