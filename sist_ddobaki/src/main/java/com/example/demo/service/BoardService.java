@@ -56,5 +56,9 @@ public class BoardService {
 	public void updateBoard(Board b) {
 		dao.update( b.getPost_title(), b.getPost_content(), b.getPost_num());
 	}
+	
+	public void deleteBoard(int post_num) {
+		dao.deleteById(post_num);
+	}
 
 }

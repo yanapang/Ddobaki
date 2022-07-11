@@ -51,13 +51,13 @@ public class Board {
 	//user_num과 다대일 fk
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="user_num", insertable = true, updatable = true,nullable = false)
+	@JoinColumn(name="user_num", insertable = true, updatable = true, nullable = false)
 	private UserInfo userinfo;
 	
 	//place_num과 다대일/fk/null허용 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="place_num",insertable = true,updatable = true, nullable = true)
+	@JoinColumn(name="place_num",insertable = true, updatable = true, nullable = true)
 	private Place place;
 
 	@JsonIgnore
