@@ -15,7 +15,8 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css"
+	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
 <title>Insert title here</title>
 </head>
@@ -27,7 +28,8 @@
 		<header style="display: flex; height: 25vh">
 			<!-- 홈페이지 로고 -->
 			<div id="logoBox">
-				<img alt="logo이미지 " src="/logo.jpg">
+				<img alt="logo이미지 " src="/logo.png"
+					style="width: 100px; height: 100px">
 			</div>
 		</header>
 
@@ -43,12 +45,12 @@
 				<div id="detailInfo" style="display: flex">
 
 					<!-- 이미지 슬라이드 -->
-					<div id="imgbox"
-						style="background: orange; width: 500px; height: 500px;">
+					<div id="imgbox" style="width: 500px; height: 500px;">
 						<div id="slider-div">
 							<div th:each="pi : ${piList}">
-								<img th:src="@{'/detailPlaceImage/'+${pi.place_image_file}}"
-									th:alt="${pi.place_image_file}" style="width:470px; height:470px; margin:0 auto">
+								<img th:src="@{'/detailImage/'+${pi.place_image_file}}"
+									th:alt="${pi.place_image_file}"
+									style="width: 470px; height: 470px; margin: 0 auto">
 							</div>
 
 						</div>
@@ -58,9 +60,12 @@
 					<!-- 장소 간단 정보  -->
 					<div id="infoBox">
 						<!-- 장소 타입  -->
-						<div id="typeBox">
-							<h3 id="place_type" th:text="${place.place_type_num}"></h3>
-						</div>
+						<th:block th:switch="${place.place_type_num}">
+							<div id="typeBox" th:case="1" th:text="숙소"></div>
+							<div id="typeBox" th:case="2" th:text="식음료"></div>
+							<div id="typeBox" th:case="3" th:text="관광"></div>
+						</th:block>
+
 
 						<!-- 장소 이름  -->
 						<div id="nameBox">
@@ -75,14 +80,20 @@
 						<!-- 장소 서비스 -->
 						<div id="serviceBox ">
 							<!-- 없으면 hidden 처리  -->
-							<!-- 강아지 무게  -->
-							<span th:text="${place.place_weight}"></span>
 							<!-- 주차 -->
-							<span th:text="${place.place_park}"></span>
+							<span th:if="${place.place_park}=='1'">주차가능</span>
 							<!-- 조식  -->
-							<span th:text="${place.place_meal}"></span>
+							<span th:if="${place.place_meal}=='1'">조식가능</span>
 							<!-- 스파  -->
-							<span th:text="${place.place_spa}"></span>
+							<span th:if="${place.place_spa}=='1'">스파가능</span>
+							<!-- 강아지 무게  -->
+							<th:block th:switch="${place.place_weight}">
+								<span th:case="1">소형견</span>
+								<span th:case="2">중형견</span>
+								<span th:case="3">대형견</span>
+								<span th:case="*"></span>
+								
+							</th:block>
 						</div>
 
 						<!-- 장소 주소  -->
@@ -135,8 +146,8 @@
 									<th>조회수</th>
 								</tr>
 
-								<tr th:each="b : ${review}">
-									<td th:text="${b.post_num}"></td>
+								<tr th:each="b, i: ${review}">
+									<td th:text="${i.count}"></td>
 									<td th:text="${b.post_title}"></td>
 									<td th:text="${b.post_hit}"></td>
 								</tr>
