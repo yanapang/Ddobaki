@@ -60,5 +60,9 @@ public class BoardService {
 	public int plusPostHit(int post_num) {
 		return dao.plusPostHit(post_num);
 	}
+	
+	public List<Board> findByPostTitle(String post_keyword){
+		return dao.findByPostTitle(post_keyword);
+	}
 
 }

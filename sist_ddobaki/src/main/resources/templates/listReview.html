@@ -5,6 +5,53 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+
+
+$(function(){
+
+	//검색하기 버튼 눌렀을때
+	$("#btnSearch").click(function(){
+		$("#boardList").empty();
+		var review;
+		var title = $("#searchTitle").val();
+		//console.log( $("#searchTitle").val()); 
+		$.ajax({
+			url:"/findByPostTitle",
+			data:{"post_keyword" : title},
+			//dataType:"html",데이터를 받아오는거니까 html로 받아오는게 아님!!
+			//async:true, //ajax를 비동기가 아닌 동기식으로 처리
+			success:function(reviewList){
+			$("#boardList").empty();
+				
+			$.each(reviewList,function(i){
+				
+				$("#boardList").append("<tr>");
+				$("#boardList").append("<td>"+reviewList[i].post_num+"</td>");
+				//$("#boardList").append("<td><a href='/detailPost/"+board_num+"/"+post_num+'>"+reviewList[i].post_title+"</a></td>");
+				//$("#boardList").append("<td>"+reviewList[i].post_title+"</td>").attr();
+				//$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");
+				//<a href="/detailPlace/'+results[i].place_num+'">' + results[i].place_name + '</a>
+				$("#boardList").append("<td><a href="/detailPost/'+reviewList[i].board_num+'/' + reviewList[i].post_num+'>"+'/a>"+reviewList[i].post_title+"</td>");
+				$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");
+				$("#boardList").append("</tr>");
+			
+				
+				
+			})
+		
+			}
+		});
+		
+		
+		
+	})
+	
+	
+});
+
+
+
+
 </script>
 </head>
 <body>

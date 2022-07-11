@@ -28,8 +28,8 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	public int plusPostHit(int post_num);
 	
 	//제목으로 게시글 찾기		
-	@Query(value="select * from Board where post_title like '%'||:post_title||'%'", nativeQuery = true)
-	public List<Board> findByPostTitle(String post_title);
+	@Query(value="select * from Board where board_num=:board_num and post_title like '%'||:post_keyword||'%'",nativeQuery = true)
+	public List<Board> findByPostTitle(String post_keyword);
 
 	//리뷰게시판출력 //말머리 컨디션 받았을떄(region_num, place_type_num 2개 placeDAO에서 먼저 받기)
 	@Query(value="select * from Board where place_num=:place_num",nativeQuery = true)
