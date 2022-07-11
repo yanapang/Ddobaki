@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,7 +59,19 @@ public class BoardController {
 		//System.out.println("리스트보드에서 상태유지할 board_num"+board_num);
 		return mav;
 	}
+	
+	//ajax
+		@RequestMapping("/findByPostTitle")
+		@ResponseBody
+		public List<Board> findByPostTitle(@RequestParam("post_keyword")String post_keyword, Model model) {	
+			//ModelAndView mav = new ModelAndView("listReviewByTitle");
+			List<Board> reviewList = bs.findByPostTitle(post_keyword);
+			model.addAttribute("findByPostTitle", bs.findByPostTitle(post_keyword));	
+			System.out.println("사용자가 검색한 제목:"+post_keyword);
+			return reviewList;
+		}
 
+	
 	@RequestMapping(value = "/insertBoard/{board_num}", method = RequestMethod.GET)
 	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model) {
 		ModelAndView mav=new ModelAndView("insertBoard");
