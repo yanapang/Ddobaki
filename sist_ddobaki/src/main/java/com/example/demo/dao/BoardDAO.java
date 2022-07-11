@@ -21,9 +21,9 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	@Query("select nvl(max(post_num),0)+1 from Board")
 	public int getNextPostNum();
 	
-	//조회수 추가하기
+	//조회수 증가 detail화면으로 넘어가면
 	@Modifying
-	@Query(value="update Board b set b.post_hit=nvl(:#{#b.post_hit},0)+1 where post_num=:post_num", nativeQuery=true)
+	@Query("update Board set post_hit=post_hit+1 where post_num=:post_num")
 	@Transactional
 	public int plusPostHit(int post_num);
 	
