@@ -55,7 +55,6 @@ public class BoardController {
 		if(board_num==3) {
 			//System.out.println("리뷰면 컨트롤러가 여기까지 오나요?");
 			mav.setViewName("insertReview");
-			//model.addAttribute("place_list", ps.)
 		}
 		//System.out.println("폼컨트롤러 왔다");
 		//System.out.println(board_num);
@@ -69,7 +68,7 @@ public class BoardController {
 	public String insertBoardOK(@PathVariable int board_num, Board b) {
 		b.setBoard_num(board_num);
 		b.setPost_num(bs.getNextPostNum());
-		//System.out.println(b.getPlace());
+		System.out.println(b.getPlace());
 		bs.insert(b);
 		return "redirect:/firstListBoard";
 	}

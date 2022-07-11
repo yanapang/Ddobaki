@@ -53,6 +53,7 @@ $(function(){
 				
 				}
 				
+				
 			}
 		})
 	})
@@ -86,10 +87,12 @@ $(function(){
 			<button id="searchPlace">찾아보기</button>
 			<select id="place_list" name="place.place_num" onchange="getPNum()"> 
 			   	<option>선택</option>
-			   	<!-- <option th:each="p : ${place_list}"
+			   	<!-- 
+			   	<option th:each="p : ${place_list}"
 						th:value="${p?.place_num}"
-						th:utext="${p?.place_name}"></option> -->
+						th:utext="${p?.place_name}"></option>
 			   	</select>
+			   	 -->
 		<br><br>
         <div class="form-group">
             <input type="text" class="form-control" id="subject" name="post_title" placeholder="제목" required>
