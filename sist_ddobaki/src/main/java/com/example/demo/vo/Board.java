@@ -56,13 +56,14 @@ public class Board {
 	
 	//place_num과 다대일/fk/null허용 
 	@JsonIgnore
+	//@SuppressWarnings(value={"all"})
 	@ManyToOne
 	@JoinColumn(name="place_num",insertable = true, updatable = true, nullable = true)
 	private Place place;
 
 	@JsonIgnore
 	@Column(nullable = true)
-	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy="board", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
 
 }

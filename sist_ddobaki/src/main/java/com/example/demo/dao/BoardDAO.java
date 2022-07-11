@@ -57,7 +57,7 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 				"b.post_hit,b.place_num) values(:#{#b.board_num},:#{#b.post_num},:#{#b.userinfo.user_num},:#{#b.post_title},"+
 				":#{#b.post_content},sysdate,0,null)",nativeQuery = true)
 	@Transactional
-	public void insert(@Param("b") Board b);
+	public void insertBoard(@Param("b") Board b);
 
 	//리뷰 게시글 등록 (region_num, place_type_num 2개 placeDAO에서 먼저)
 	@Modifying

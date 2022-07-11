@@ -1,12 +1,17 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.BoardDAO;
+import com.example.demo.dao.PlaceDAO;
 import com.example.demo.vo.Board;
+import com.example.demo.vo.Place;
+import com.example.demo.vo.Reply;
+import com.example.demo.vo.UserInfo;
 
 import lombok.Setter;
 
@@ -16,6 +21,9 @@ public class BoardService {
 	
 	@Autowired
 	private BoardDAO dao;
+	
+	@Autowired
+	private PlaceDAO pDAO;
 
 	public int getNextPostNum() {
 		return dao.getNextPostNum();
@@ -29,8 +37,14 @@ public class BoardService {
 		return dao.findAll();
 	}
 	
-	public void insert(Board b) {
-		dao.insert(b);
+	public void insertBoard(Board b) {
+		dao.insertBoard(b);
+	}
+	
+	public void insertReview(Board b, int place_num) {
+		Optional<Place> findPlace=pDAO.findById(place_num);
+		b.setPlace(findPlace.get());
+		dao.insertReview(b);
 	}
 	
 	public Board findByPostNum(int post_num) {

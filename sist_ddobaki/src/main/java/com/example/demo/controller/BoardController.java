@@ -1,19 +1,26 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.service.BoardService;
 import com.example.demo.service.PlaceService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Board;
+import com.example.demo.vo.Reply;
 
 import lombok.Setter;
 
@@ -29,6 +36,9 @@ public class BoardController {
 	
 	@Autowired
 	private PlaceService ps;
+	
+	@Autowired
+	private ReplyService rps;
 
 	@GetMapping("/firstListBoard")
 	public void listBoard(Model model) {
@@ -69,7 +79,13 @@ public class BoardController {
 		b.setBoard_num(board_num);
 		b.setPost_num(bs.getNextPostNum());
 		System.out.println(b.getPlace());
-		bs.insert(b);
+		if(board_num==3) {
+			System.out.println("장소번호:"+b.getPlace().getPlace_num());
+			bs.insertReview(b,b.getPlace().getPlace_num());
+			
+		}else {
+			bs.insertBoard(b);
+		}
 		return "redirect:/firstListBoard";
 	}
 
@@ -81,6 +97,9 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView("detailPost");
 		model.addAttribute("b",bs.detailPost(board_num, post_num));
 		model.addAttribute(bs.plusPostHit(post_num));
+		model.addAttribute("post_num", post_num);
+		model.addAttribute("user_list", uis.findAll());
+		model.addAttribute("reply_list", rps.findByPostNum(post_num));
 		return mav;
 	}
   
@@ -103,4 +122,5 @@ public class BoardController {
         bs.deleteBoard(post_num);
         return "redirect:/firstListBoard";
     }
+    
 }
