@@ -73,14 +73,14 @@ public class BoardController {
 		return "redirect:/firstListBoard";
 	}
 
-	//상세보기 눌렀을때 board_num도 함께 가도록
+	//상세보기 눌렀을때 board_num도 함께 가도록 + 조회수 증가
 	@GetMapping("/detailPost/{board_num}/{post_num}")
 	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model) {
 		//System.out.println("detailPost의 board_num:"+board_num);
 		//System.out.println("detailPost의 post_num:"+post_num);
 		ModelAndView mav = new ModelAndView("detailPost");
 		model.addAttribute("b",bs.detailPost(board_num, post_num));
-		//bs.plusPostHit(post_num);
+		model.addAttribute(bs.plusPostHit(post_num));
 		return mav;
 	}
   
