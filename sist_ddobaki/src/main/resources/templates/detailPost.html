@@ -23,7 +23,7 @@ $(function(){
 <p>글 번호 <span th:text="${b.post_num}"></span></p>
 <p>게시판 번호 <span th:text="${b.board_num}"></span></p>
 <p>사용자 닉네임 <span th:text="${b.userinfo.user_nick}"></span></p>
-<p>조회수 <span th:text="${b.post_hit}"></span></p>
+<p>조회수 <span th:text="${b.post_hit}+1"></span></p>
 <hr>
 <p id="content">
 </p>
