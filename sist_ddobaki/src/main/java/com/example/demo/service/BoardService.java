@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.BoardDAO;
@@ -33,8 +35,8 @@ public class BoardService {
 		dao.save(b);
 	}
 
-	public List<Board> findAll() {
-		return dao.findAll();
+	public Page<Board> findAll(Pageable pageable) {
+		return dao.findAll(pageable);
 	}
 	
 	public void insertBoard(Board b) {
