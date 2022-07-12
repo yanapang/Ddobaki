@@ -47,7 +47,7 @@
 		<!-- header(홈페이지 로고, 지역선택박스, 장소선택박스) -->
 		<header style="display: flex; height: 25vh">
 			<!-- 홈페이지 로고 -->
-			<img alt="logo" src="logo.jpg" />
+			<img alt="logo" src="logo.png" style="width:100px; height:100px "/>
 
 			<!-- 지역선택박스, 장소선택박스 컨테이너 -->
 			<div id="selectContainer"
@@ -174,8 +174,11 @@
 				data:temp,
 				success:function(data){
 					console.log(data);
+					data.sort(function(a,b){
+						return parseInt(a.place_num) - parseInt(b.place_num)
+					})
 		            var results = data;
-
+					
 		            var str = '<tr>';
 		            $.each(results , function(i){
 		            	str += '<td><img alt = "'+ results[i].place_thumbnail+'" src="/webapp/place_thumbnail/' + results[i].place_thumbnail + '" class = "thumbnail"></td><td><a href="/detailPlace/'+results[i].place_num+'">' + results[i].place_name + '</a></td>';
@@ -274,7 +277,9 @@
 					url:"/placeMain",
 					data:temp,
 					success:function(data){
-						
+						data.sort(function(a,b){
+							return parseInt(a.place_num) - parseInt(b.place_num)
+						})
 						console.log("옵션 검색 ");
 						console.log(data);
 			            var results = data;
@@ -313,7 +318,9 @@
 				success:function(data){
 					console.log("지역검색,장소 검색");
 					console.log(data);
-					
+					data.sort(function(a,b){
+						return parseInt(a.place_num) - parseInt(b.place_num)
+					})
 		            var results = data;
 		            var str = '<tr>';
 		            $.each(results , function(i){
@@ -342,7 +349,9 @@
 				success:function(data){
 					console.log("정렬");
 					console.log(compValue);
-					
+					data.sort(function(a,b){
+						return parseInt(a.place_num) - parseInt(b.place_num)
+					})
 					if(compValue == "place_num"){
 						//최신 순
 						data.sort(function(a,b){
@@ -355,7 +364,7 @@
 						})
 					} else {
 						data.sort(function(a,b){
-							return parseInt(a.place_hit) - parseInt(b.place_hit)
+							return parseInt(a.place_num) - parseInt(b.place_num)
 						})
 					}
 					console.log(data);
@@ -390,8 +399,12 @@
 				url: "/placeMain",
 				data: temp, 
 				success:function(data){
+					data.sort(function(a,b){
+						return parseInt(a.place_num) - parseInt(b.place_num)
+					})
 					console.log("장소이름 검색");
 					console.log(data);
+					
 		            var results = data;
 		            var str = '<tr>';
 		            $.each(results , function(i){

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,7 @@ import com.example.demo.service.BoardService;
 import com.example.demo.service.PlaceImageService;
 //import com.example.demo.service.PlaceImageService;
 import com.example.demo.service.PlaceService;
+import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Place;
 import com.example.demo.vo.PlaceImage;
 import com.example.demo.vo.PlaceSearchCondition;
@@ -37,6 +42,9 @@ public class PlaceController {
 	
 	@Autowired
 	private PlaceImageService placeImgService;
+	
+	@Autowired
+	private UserInfoService us;
 	
 //	@ResponseBody
 //	@GetMapping("/getCondition") 
@@ -76,7 +84,7 @@ public class PlaceController {
 		modelAndView.setViewName("place_main");
 
 		return modelAndView;
-	} 
+	}
 
 	// 검색 조건에 따른 place list 반환
 	@RequestMapping(value = "/placeMain", method = RequestMethod.GET)
@@ -90,7 +98,17 @@ public class PlaceController {
 	}
 
 	@GetMapping("/detailPlace/{place_num}")
-	public ModelAndView detailPlace(@PathVariable int place_num, Model model) {
+	public ModelAndView detailPlace(@PathVariable int place_num, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		
+		int user_num = 4;
+		
+		//세션 값 설정
+		session.setAttribute("user_num", user_num);
+		
+		// 세션 무한 유지
+		session.setMaxInactiveInterval(-1);
+		
+		
 		ModelAndView mav = new ModelAndView("detailPlace");
 		placeService.updateHit(place_num);
 		mav.addObject("review", bs.findByPlaceNum(place_num));
@@ -99,9 +117,5 @@ public class PlaceController {
 		return mav;
 	}
 	
-	@GetMapping("/getPlace/{place_num}")
-	public Place getPlace(@PathVariable Integer place_num) {
-		return placeService.getPlace(place_num);
-	}
 
 }

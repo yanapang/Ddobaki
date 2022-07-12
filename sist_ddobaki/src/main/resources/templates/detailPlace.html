@@ -109,10 +109,12 @@
 								장소 연락처 : <span th:text="${place.place_tel}"></span>
 							</p>
 						</div>
-
+						
+						
+						<!--  th:onclick="'location.href=\''+@{'/insertReservation/'+${session.user_num}+'/'+${place.place_num}}+'\''" -->
 						<!-- 장소 예약, 찜 버튼  -->
 						<div id="btnBox">
-							<button id="rsBtn">예약</button>
+							<button id="rsBtn" th:onclick="'location.href=\''+@{'/insertReservation/'+${session.user_num}+'/'+${place.place_num}}+'\''">예약</button>
 							<a href="/" id="dibBtn"></a>
 						</div>
 
@@ -145,10 +147,11 @@
 									<th>게시물 이름</th>
 									<th>조회수</th>
 								</tr>
-
+								
+								
 								<tr th:each="b, i: ${review}">
 									<td th:text="${i.count}"></td>
-									<td th:text="${b.post_title}"></td>
+									<td><a th:href="@{'/detailPost/'+${b.board_num}+'/'+${b.post_num}}" th:text="${b.post_title}"></a></td>
 									<td th:text="${b.post_hit}"></td>
 								</tr>
 

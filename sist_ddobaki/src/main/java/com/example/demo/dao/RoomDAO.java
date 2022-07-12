@@ -16,7 +16,7 @@ public interface RoomDAO extends JpaRepository<Room, Integer> {
 	
 	
 	@Query("select roomS from Room roomS where place_num=:place_num")
-	public List<Room> findByPlaceNum(@Param("place_num") Integer place_num);
+	public List<Room> findByPlaceNum(@Param("place_num") int place_num);
 	
 
 	

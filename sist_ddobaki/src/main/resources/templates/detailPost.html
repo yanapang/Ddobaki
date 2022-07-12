@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	$(function() {
+		$("#subject").html(/*[[${b.post_title}]]*/);
+		$("#content").html(/*[[${b.post_content}]]*/);
+
+	})
+	/*]]*/
+</script>
+<script type="text/javascript">
+	$("#btnInsertReReply").click(function() {
+		$("#replyFrom").attr("action", "/insertReReplyOK");
+	})
+</script>
+</head>
+<body>
+	<th:block th:switch="${b.board_num}">
+		<span th:case="1">notice</span>
+		<span th:case="2">community</span>
+		<span th:case="3">review</span>
+		<span th:case="4">faq</span>
+	</th:block>
+	<hr>
+	<div>
+
+		<p id="subject"></p>
+		<p>
+			글 번호 : <span th:text="${b.post_num}"></span>
+		</p>
+		<p>
+			게시판 번호 : <span th:text="${b.board_num}"></span>
+		</p>
+		<p>
+			사용자 닉네임 : <span th:text="${b.userinfo.user_nick}"></span>
+		</p>
+		<p>
+			조회수 : <span th:text="${b.post_hit}+1"></span>
+		</p>
+		<!-- <p>리뷰 장소 : <span th:if="${not #strings.isEmpty(b.place.place_num)}" th:text="${b.place.place_name}"></span></p> -->
+
+		<hr>
+		게시글 내용 :
+		<p id="content"></p>
+	</div>
+	<hr>
+	<legend>댓글 내역</legend>
+
+	<div id="detailReplyByPostNum">
+		<table>
+			<tr>
+			<thead>
+				<tr>
+					<th>작성자</th>
+					<th>댓글</th>
+					<th>action</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="rp:${reply_list}">
+					<td th:text="${rp.userinfo.user_nick}"></td>
+					<td th:text="${rp.reply_content}"></td>
+					<!-- <td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" style="text-decoration: none">
+          	<span th:text="${b.post_title}"></span></a> -->
+					<td></td>
+					<td id="btnInsertReReply"><a
+						th:href="@{/insertReReply/{rp.reply_num}(rp.reply_num=${rp.reply_num})}">답글쓰기</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<hr>
+	<form id="replyFrom" method="post" action="/insertReplyOK">
+		<input type="hidden" th:name="post_num" th:value="${b.post_num}">
+		사용자 : <select name="user_num">
+			<option>사용자선택</option>
+			<option th:each="u : ${user_list}" th:value="${u?.user_num}"
+				th:utext="${u?.user_nick}"></option>
+		</select> <br>
+		<textarea id="reply_content" name="reply_content" rows="2" cols="90"></textarea>
+		<button type="submit" id="submit" name="submit">등록</button>
+	</form>
+	<hr>
+	<button>
+		<a th:href="@{/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a>
+	</button>
+	<button>
+		<a th:href="@{/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</a>
+	</button>
+</body>
+</html>

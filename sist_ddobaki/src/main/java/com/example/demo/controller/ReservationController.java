@@ -67,7 +67,7 @@ public class ReservationController {
 	
 	//예약 insert할 때 user_num, place_num 받아오기
 	@GetMapping("insertReservation/{user_num}/{place_num}")
-	public String insert(Model model, @PathVariable int user_num, @PathVariable Integer place_num) {
+	public String insert(Model model, @PathVariable int user_num, @PathVariable int place_num) {
 		model.addAttribute("us", us.getUser(user_num));
 		model.addAttribute("ps", ps.getPlace(place_num));
 		model.addAttribute("roomS", roomS.findByPlaceNum(place_num));

@@ -30,8 +30,10 @@ public class UserInfoController {
 		return us.findAll();
 	}
 	
-	@GetMapping("/getUser/{user_num}")
-	public Optional<UserInfo> getUser(@PathVariable int user_num) {
-		return us.getUser(user_num);
-	}
+	@ResponseBody
+    @GetMapping("/getUser/{user_num}")
+    public UserInfo getUser(@PathVariable int user_num) {
+        UserInfo userInfo = us.getUser(user_num);
+        return userInfo;
+    }
 }
