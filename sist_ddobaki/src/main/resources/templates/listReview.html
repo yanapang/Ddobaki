@@ -4,46 +4,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
+<script th:inline="javascript">
+/*<![CDATA[*/
 $(function(){
-
 	//검색하기 버튼 눌렀을때
 	$("#btnSearch").click(function(){
 		$("#boardList").empty();
-		var review;
 		var title = $("#searchTitle").val();
-		//console.log( $("#searchTitle").val()); 
+		var BNum=/*[[${board_num}]]*/
 		$.ajax({
 			url:"/findByPostTitle",
-			data:{"post_keyword" : title},
+			data:{"board_num" : BNum, "post_keyword" : title},
 			//dataType:"html",데이터를 받아오는거니까 html로 받아오는게 아님!!
 			//async:true, //ajax를 비동기가 아닌 동기식으로 처리
 			success:function(reviewList){
 			$("#boardList").empty();
-				
 			$.each(reviewList,function(i){
-				
+				console.log(reviewList[i].board_num);
+				console.log(reviewList[i].post_num);
 				$("#boardList").append("<tr>");
 				$("#boardList").append("<td>"+reviewList[i].post_num+"</td>");
-				//$("#boardList").append("<td><a href='/detailPost/"+board_num+"/"+post_num+'>"+reviewList[i].post_title+"</a></td>");
-				//$("#boardList").append("<td>"+reviewList[i].post_title+"</td>").attr();
-				//$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");
-				//<a href="/detailPlace/'+results[i].place_num+'">' + results[i].place_name + '</a>
-				$("#boardList").append("<td><a href="/detailPost/'+reviewList[i].board_num+'/' + reviewList[i].post_num+'>"+'/a>"+reviewList[i].post_title+"</td>");
+				$("#boardList").append("<td><a href=detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");
 				$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");
 				$("#boardList").append("</tr>");
-
-			})
+				})
 			}
 		});
-		
 	})
 });
-
+/*]]>*/
 </script>
 </head>
 <body>
- 
 <div><img src="/또바기.png"></div>
 
 <nav id ="main_category">
@@ -60,29 +52,31 @@ $(function(){
   <span>My page</span>
 </div>
 
-<fieldset >
- 
- 	 <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
- 	
+<fieldset>
+  <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
    <span><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice" style="text-decoration: none"></a></span>
    <span><a th:href="@{/listBoard/{board_num}(board_num=${2})}" th:text="Community" style="text-decoration: none"></a></span>
    <span><a th:href="@{/listBoard/{board_num}(board_num=${3})}" th:text="Review" style="text-decoration: none"></a></span>
    <span><a th:href="@{/listBoard/{board_num}(board_num=${4})}" th:text="FAQ" style="text-decoration: none"></a></span>
   </nav>
 
-  <input type="search" placeholder="게시글 제목을 검색하세요">
- 
-  <table id="list">   
-      <caption>Review</caption>
-      <tr>
+  <input type="search" id="searchTitle" name="post_keyword" placeholder="제목을 검색하세요"/>
+  <button id="btnSearch">검색하기</button><br>
+    <th:block th:switch="${board_num}">
+    <span th:case="1">notice</span>
+    <span th:case="2">community</span>
+    <span th:case="3">review</span>
+    <span th:case="4">faq</span>
+	</th:block>
+    <table id="list">   
         <thead>
           <tr>
-            <th>글번호</th>
+             <th>글번호</th>
              <th>글제목</th>
              <th>조회수</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="boardList">
           <tr th:each="b:${boardCategory}">
             <td th:text="${b.post_num}"></td>
           	<td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" style="text-decoration: none">
@@ -96,10 +90,9 @@ $(function(){
     <span>1</span>
     <span>2</span>
     <span>3</span>
-      <span>></span>
-     
+    <span>></span>    
   </div>
-  </fieldset>
+</fieldset>
 <button><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
 </body>
 </html>

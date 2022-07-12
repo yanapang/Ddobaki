@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.service.BoardService;
@@ -46,14 +47,14 @@ public class ReplyController {
        return "redirect:/firstListBoard";
    }
 	
-//	@RequestMapping(value="/insertReReply/{reply_num}", method=RequestMethod.POST)
-//	public void insertReReply(@PathVariable int reply_num, Model model) {
-//		//ModelAndView mav=new ModelAndView("detailPost");
-//		System.out.println("대댓글 입력 컨트롤러 옴");
-//		model.addAttribute("reply_group", reply_num);
-//		System.out.println("대댓글의 그룹이 될 부모댓글의 넘버:"+reply_num);
-//		//return mav;
-//	}
+	@RequestMapping(value="/insertReReply", method=RequestMethod.GET)
+	public void insertReReply(@RequestParam int reply_num, Model model) {
+		//ModelAndView mav=new ModelAndView("detailPost");
+		System.out.println("대댓글 입력 컨트롤러 옴");
+		model.addAttribute("reply_num", reply_num);
+		System.out.println("대댓글의 그룹이 될 부모댓글의 넘버:"+reply_num);
+		//return mav;
+	}
 	
 	@RequestMapping(value="/insertReReplyOK",method=RequestMethod.POST)
     public String insertReReplyOK(int post_num, int user_num, int reply_num, Reply rp){

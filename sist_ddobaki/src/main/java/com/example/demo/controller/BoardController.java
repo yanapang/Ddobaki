@@ -61,17 +61,16 @@ public class BoardController {
 	}
 	
 	//ajax
-		@RequestMapping("/findByPostTitle")
-		@ResponseBody
-		public List<Board> findByPostTitle(@RequestParam("post_keyword")String post_keyword, Model model) {	
-			//ModelAndView mav = new ModelAndView("listReviewByTitle");
-			List<Board> reviewList = bs.findByPostTitle(post_keyword);
-			model.addAttribute("findByPostTitle", bs.findByPostTitle(post_keyword));	
-			System.out.println("사용자가 검색한 제목:"+post_keyword);
-			return reviewList;
-		}
+	@RequestMapping("/findByPostTitle")
+	@ResponseBody
+	public List<Board> findByPostTitle(@RequestParam("board_num")int board_num, @RequestParam("post_keyword")String post_keyword, Model model) {	
+		//ModelAndView mav = new ModelAndView("listReviewByTitle");
+		List<Board> reviewList = bs.findByPostTitle(board_num, post_keyword);
+		model.addAttribute("findByPostTitle", bs.findByPostTitle(board_num, post_keyword));	
+		System.out.println("사용자가 검색한 제목:"+post_keyword);
+		return reviewList;
+	}
 
-	
 	@RequestMapping(value = "/insertBoard/{board_num}", method = RequestMethod.GET)
 	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model) {
 		ModelAndView mav=new ModelAndView("insertBoard");
@@ -94,8 +93,7 @@ public class BoardController {
 		System.out.println(b.getPlace());
 		if(board_num==3) {
 			System.out.println("장소번호:"+b.getPlace().getPlace_num());
-			bs.insertReview(b,b.getPlace().getPlace_num());
-			
+			bs.insertReview(b,b.getPlace().getPlace_num());	
 		}else {
 			bs.insertBoard(b);
 		}
@@ -103,8 +101,22 @@ public class BoardController {
 	}
 
 	//상세보기 눌렀을때 board_num도 함께 가도록 + 조회수 증가
-	@GetMapping("/detailPost/{board_num}/{post_num}")
+	@GetMapping("listBoard/detailPost/{board_num}/{post_num}")
 	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model) {
+		//System.out.println("detailPost의 board_num:"+board_num);
+		//System.out.println("detailPost의 post_num:"+post_num);
+		ModelAndView mav = new ModelAndView("detailPost");
+		model.addAttribute("b",bs.detailPost(board_num, post_num));
+		model.addAttribute(bs.plusPostHit(post_num));
+		model.addAttribute("post_num", post_num);
+		model.addAttribute("user_list", uis.findAll());
+		model.addAttribute("reply_list", rps.findByPostNum(post_num));
+		return mav;
+	}
+	
+	//앞에 메소드랑 다른 거임!! 일단 지우면 안됨!!!!!!11
+	@GetMapping("detailPost/{board_num}/{post_num}")
+	public ModelAndView detailPost2(@PathVariable int board_num,@PathVariable int post_num, Model model) {
 		//System.out.println("detailPost의 board_num:"+board_num);
 		//System.out.println("detailPost의 post_num:"+post_num);
 		ModelAndView mav = new ModelAndView("detailPost");

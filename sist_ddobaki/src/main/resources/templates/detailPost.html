@@ -14,8 +14,18 @@ $(function(){
 /*]]*/
 </script>
 <script type="text/javascript">
-$("#btnInsertReReply").click(function(){
+
+$("#btnInsertReReply").on("click",function(){
+	
+	console.log("대댓글 쓰기 버튼 클릭됨!");
 	 $("#replyFrom").attr("action", "/insertReReplyOK");
+	 	var rp_num=$("#btnInsertReReply").val();
+		console.log(rp_num);
+		$.ajax({
+			url:"/insertReReply",
+			data:{reply_num:rp_num},
+			success:function(arr){
+}})
 })
 </script>
 </head>
@@ -59,8 +69,9 @@ $("#btnInsertReReply").click(function(){
             <td th:text="${rp.reply_content}"></td>
           	<!-- <td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" style="text-decoration: none">
           	<span th:text="${b.post_title}"></span></a> -->
-          	<td></td>
-          	<td id="btnInsertReReply"><a th:href="@{/insertReReply/{rp.reply_num}(rp.reply_num=${rp.reply_num})}">답글쓰기</a></td>
+          	<td><button>삭제</button></td>
+          	<!-- <td id="btnInsertReReply"><a th:href="@{/insertReReply/{rp.reply_num}(rp.reply_num=${rp.reply_num})}">답글쓰기</a></td> -->
+          	<td id="btnInsertReReply" th:value="${rp.reply_num}"><button>답글쓰기</button></td>
           </tr>
         </tbody>
 </table>
