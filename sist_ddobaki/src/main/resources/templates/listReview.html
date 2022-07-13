@@ -20,12 +20,12 @@ $(function(){
 			success:function(reviewList){
 			$("#boardList").empty();
 			$.each(reviewList,function(i){
-				console.log(reviewList[i].board_num);
-				console.log(reviewList[i].post_num);
+				console.log(reviewList[i].place_num);
 				$("#boardList").append("<tr>");
 				$("#boardList").append("<td>"+reviewList[i].post_num+"</td>");
-				$("#boardList").append("<td><a href=detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");
+				$("#boardList").append("<td><a href=/detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");
 				$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");
+				//$("#boardList").append("<td>"+reviewList[i].place.place_num+"</td>");
 				$("#boardList").append("</tr>");
 				})
 			}

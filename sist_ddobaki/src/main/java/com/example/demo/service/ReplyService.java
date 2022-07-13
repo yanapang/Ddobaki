@@ -50,15 +50,12 @@ public class ReplyService {
 		dao.insertReply(rp);
 	}
 	
-	public void insertReReply(Reply rp, int user_num, int post_num, int reply_num) {
+	public void insertReReply(Reply rp, int user_num, int post_num, int reply_group) {
 		Optional<UserInfo> findUser=uDAO.findById(user_num);
 		Optional<Board> findBoard=bDAO.findById(post_num);
-		Optional<Reply> findReply=dao.findById(reply_num);
 		rp.setBoard(findBoard.get());
 		rp.setUserinfo(findUser.get());
-		rp.setReply_group(reply_num);
+		rp.setReply_group(reply_group);
 		dao.insertReReply(rp);
 	}
-	
-	
 }

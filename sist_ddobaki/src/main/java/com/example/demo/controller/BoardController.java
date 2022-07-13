@@ -50,10 +50,7 @@ public class BoardController {
 	@GetMapping("/listBoard/{board_num}")
 	public ModelAndView goCategory(@PathVariable int board_num, Model model) {
 		
-		ModelAndView mav = new ModelAndView("listNamegy");
-		if(board_num==3) {
-			mav=new ModelAndView("listReview");
-			}
+		ModelAndView mav = new ModelAndView("listBoard");
 		model.addAttribute("boardCategory", bs.goCategory(board_num));
 		model.addAttribute("board_num", (Integer)board_num);
 		//System.out.println("리스트보드에서 상태유지할 board_num"+board_num);
@@ -86,7 +83,7 @@ public class BoardController {
 	}
 	
 	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
-	@PostMapping("/insertBoard/insertBoardOK/{board_num}")
+	@PostMapping("/insertBoardOK/{board_num}")
 	public String insertBoardOK(@PathVariable int board_num, Board b) {
 		b.setBoard_num(board_num);
 		b.setPost_num(bs.getNextPostNum());
@@ -97,26 +94,12 @@ public class BoardController {
 		}else {
 			bs.insertBoard(b);
 		}
-		return "redirect:/firstListBoard";
-	}
-
-	//상세보기 눌렀을때 board_num도 함께 가도록 + 조회수 증가
-	@GetMapping("listBoard/detailPost/{board_num}/{post_num}")
-	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model) {
-		//System.out.println("detailPost의 board_num:"+board_num);
-		//System.out.println("detailPost의 post_num:"+post_num);
-		ModelAndView mav = new ModelAndView("detailPost");
-		model.addAttribute("b",bs.detailPost(board_num, post_num));
-		model.addAttribute(bs.plusPostHit(post_num));
-		model.addAttribute("post_num", post_num);
-		model.addAttribute("user_list", uis.findAll());
-		model.addAttribute("reply_list", rps.findByPostNum(post_num));
-		return mav;
+		return "redirect:/listBoard/"+board_num;
 	}
 	
-	//앞에 메소드랑 다른 거임!! 일단 지우면 안됨!!!!!!11
+	//상세보기 눌렀을때 board_num도 함께 가도록 + 조회수 증가
 	@GetMapping("detailPost/{board_num}/{post_num}")
-	public ModelAndView detailPost2(@PathVariable int board_num,@PathVariable int post_num, Model model) {
+	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model) {
 		//System.out.println("detailPost의 board_num:"+board_num);
 		//System.out.println("detailPost의 post_num:"+post_num);
 		ModelAndView mav = new ModelAndView("detailPost");
@@ -135,16 +118,18 @@ public class BoardController {
     	return "updateBoard";
     }
 	    
-    @PostMapping("/updateBoard/updateBoardOK/{post_num}")
+    @PostMapping("/updateBoardOK/{post_num}")
     public String updateBoardOK(@PathVariable int post_num, Board b) {
     	System.out.println("수정ok컨트롤러옴");
     	bs.updateBoard(b);
+    	//협의 후 수정
     	return "redirect:/firstListBoard";
-	   }
+	}
     
     @GetMapping(value="/deleteBoard/{post_num}")
     public String delete(@PathVariable("post_num") int post_num, Model model) {
         bs.deleteBoard(post_num);
+        //협의 후 수정
         return "redirect:/firstListBoard";
     }
     
