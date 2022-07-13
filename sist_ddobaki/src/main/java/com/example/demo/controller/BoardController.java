@@ -3,6 +3,9 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,10 +44,22 @@ public class BoardController {
 	@Autowired
 	private ReplyService rps;
 
-	@GetMapping("/firstListBoard")
-	public void listBoard(Model model) {
-		model.addAttribute("list", bs.findAll());
-	}
+	//리스트 + 페이징
+		@GetMapping("/firstListBoard")						//sort 와 direction 넣으면 오류남!
+		public void listBoard(Model model, @PageableDefault(page = 0,size = 15) Pageable pageable) {
+			
+			Page<Board> list = bs.findAll(pageable);
+			
+			//pageable은 0부터 시작하기 때문에 우리가 보는 것보다 1이 적음		
+			int pageNum =list.getPageable().getPageNumber()+1; 						//현재 페이지
+			int startPage = Math.max(pageNum -4, 1);								//시작페이지
+			int endPage = Math.min(pageNum+5,list.getTotalPages());					//마지막페이지
+			
+			model.addAttribute("list", list);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+		}
 	
 	//카테고리 하나 눌렀을때 그 페이지로
 	@GetMapping("/listBoard/{board_num}")

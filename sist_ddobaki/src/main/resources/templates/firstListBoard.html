@@ -53,14 +53,12 @@
           </tr>
         </tbody>
      </table>
-  <div class="page">
-    <span><</span>
-    <span>1</span>
-    <span>2</span>
-    <span>3</span>
-    <span>></span>
-     
-  </div>
+     <!-- 시작부터 끝까지 반복 -->
+	<th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">
+	<!--page가 현재 page와 다를때///여기가 원본버전-->
+	<a th:if="${page != pageNum}" th:href ="@{/firstListBoard(page = ${page-1})}" th:text="${page}"></a>
+	<strong th:if="${page == pageNum}" th:text="${page}" style="color : green"></strong>
+  </fieldset>
   </fieldset>
   
 </body>
