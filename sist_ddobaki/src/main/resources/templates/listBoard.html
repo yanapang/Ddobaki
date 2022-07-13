@@ -3,10 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	span{
+		display: inline-block;
+		margin: 5px;
+		cursor: pointer;
+	}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
+	//전체 레코드수
+	var listLength=/*[[${listLength}]]*/
+		console.log(listLength);
+  
+	//카테고리별 반환 리스트	
+	var listByCategory=/*[[${boardCategory}]]*/	
+		
+	//console.log(listByCategory[2].post_num);
+
+
 $(function(){
+		
+	//console.log(listLength);
+	
+	//페이징처리
+	var totalRecords=listLength;	//전체레코드수 
+	var pageSize=7;	
+	var pageGroup=2;	 
+	var totalPage=Math.ceil(totalRecords/pageSize);	//전체페이지수
+	
+	//console.log(totalPage)
+
+	//1쪽1번
+	printPage(1);
+	printPageNumber(1);
+
+	
+	//페이지 번호 출력하기
+	function printPage(pageNUM){
+		
+		//console.log("printPage동작함");
+
+		
+		$("#list").empty();
+		
+		//처음& 마지막
+		var start = (pageNUM-1) * pageSize +1;
+		var end = start + pageSize-1;	
+		//console.log(listByCategory[2].post_num);
+		
+		for(var i=start; i<=end; i++){
+
+			$("#list").append("<tr>");
+			$("#list").append("<td>"+listByCategory[i].post_num+"</td>");
+			$("#list").append("<td><a href=/detailPost"+"/"+listByCategory[i].board_num+"/"+listByCategory[i].post_num+">"+listByCategory[i].post_title+"</a></td>");
+			$("#list").append("<td>"+listByCategory[i].post_hit+"</td>");
+			$("#list").append("</tr>");										
+	}
+		
+	}
+	
+	
+	function printPageNumber(pageNUM){
+		
+		//console.log("printPageNumber함수 동작");
+	
+		$("#paging").empty();
+
+		//start=${T(Math).floor(boardList.number/10)*10 + 1} ://버림
+		var startPage = Math.floor((pageNUM-1)/pageGroup)*pageGroup +1;
+		var endPage = startPage + pageGroup-1;
+		
+		//console.log("시작페이지번호: "+startPage);
+		//console.log("마지막페이지번호: "+endPage);
+		
+	
+		if(endPage > totalPage){
+			endPage = totalPage;
+		}
+		
+	
+		if(startPage > 1){
+			var span = $("<span></span>").html("[<<]");
+			$(span).attr("page",startPage-1);
+			$("#paging").append(span);
+		}
+
+		
+		for(i=startPage; i<=endPage; i++){
+			var span = $("<span></span>").html(i);
+			//이벤트
+			$(span).attr("page",i);
+			$("#paging").append(span);
+		}
+		
+		//다음
+		if(endPage< totalPage){
+			var span = $("<span></span>").html("[>>]");
+			$(span).attr("page",endPage+1);
+			$("#paging").append(span);
+		}
+		
+	}
+		//새로 만들어지는 span
+		$(document).on("click","span",function(){
+			var page = $(this).attr("page");
+			printPage(page);	
+			printPageNumber(page);
+			
+		});
+	
+
+	
 	//검색하기 버튼 눌렀을때
 	$("#btnSearch").click(function(){
 		$("#boardList").empty();

@@ -35,8 +35,8 @@ public class BoardService {
 		dao.save(b);
 	}
 
-	public Page<Board> findAll(Pageable pageable) {
-		return dao.findAll(pageable);
+	public List<Board> findAll() {
+		return dao.findAll();
 	}
 	
 	public void insertBoard(Board b) {
