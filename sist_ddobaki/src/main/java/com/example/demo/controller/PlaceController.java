@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.PlaceDAO;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.DibsService;
 import com.example.demo.service.PlaceImageService;
 //import com.example.demo.service.PlaceImageService;
 import com.example.demo.service.PlaceService;
@@ -45,6 +46,10 @@ public class PlaceController {
 	
 	@Autowired
 	private UserInfoService us;
+	
+	@Autowired
+	private DibsService dibsService;
+	
 	
 //	@ResponseBody
 //	@GetMapping("/getCondition") 
