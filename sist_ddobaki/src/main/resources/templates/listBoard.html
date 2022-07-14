@@ -3,14 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- CSS only -->
+
+
+ 
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/styles/common.css}">
 <style type="text/css">
 	span{
 		display: inline-block;
-		margin: 5px;
+		margin: 10px;
 		cursor: pointer;
 	}
+fieldset{
+  margin: auto;
+  width: 80%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+}
+#posting{
+  position: absolute;
+  
+  right: 150px;
+  width: 100px;
+  height: 50px;
+}
+
+th {
+  height: 70px;
+}
+table {
+  width: 100%;
+}
+
+	
 </style>
-<link rel="stylesheet" th:href="@{/styles/common.css}">
+
+
+  
+  
+<!-- JavaScript Bundle with Popper -->
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
@@ -139,8 +181,8 @@ $(function(){
 				console.log(reviewList[i].post_num);
 				$("#boardList").append("<tr>");
 				$("#boardList").append("<td>"+reviewList[i].post_num+"</td>");
-				$("#boardList").append("<td><a href=/detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");
-				$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");
+				$("#boardList").append("<td><a href=/detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");				
+				$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");	
 				$("#boardList").append("</tr>");
 				})
 			}
@@ -186,7 +228,7 @@ $(function(){
     <span th:case="3">review</span>
     <span th:case="4">faq</span>
 	</th:block>
-    <table id="list">   
+    <table>   
         <thead>
           <tr>
              <th>글번호</th>
@@ -208,6 +250,6 @@ $(function(){
      </table>
 <div id="paging"></div>
 </fieldset>
-<button><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+<button id="posting"><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
 </body>
 </html>

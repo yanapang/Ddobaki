@@ -49,7 +49,6 @@ public class BoardController {
 	public void listBoard(Model model) {		
 		List<Board> list = bs.findAll();
 		model.addAttribute("list", list);
-		System.out.println("컨트롤러 동작 first");
 	}
 	
 	
@@ -58,8 +57,6 @@ public class BoardController {
 	public List<Board> listBoardAjax(Model model) {
 		List<Board> list = bs.findAll();
 		model.addAttribute("list", bs.findAll());
-		
-		System.out.println("컨트롤러 동작 get");
 		return list;
 	}
 	
