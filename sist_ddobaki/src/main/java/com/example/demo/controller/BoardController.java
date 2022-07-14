@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +24,7 @@ import com.example.demo.service.ReplyService;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Reply;
+import com.example.demo.vo.ReplyAndParent;
 
 import lombok.Setter;
 
@@ -44,22 +44,22 @@ public class BoardController {
 	@Autowired
 	private ReplyService rps;
 
-	//리스트 + 페이징
-		@GetMapping("/firstListBoard")						//sort 와 direction 넣으면 오류남!
-		public void listBoard(Model model, @PageableDefault(page = 0,size = 15) Pageable pageable) {
-			
-			Page<Board> list = bs.findAll(pageable);
-			
-			//pageable은 0부터 시작하기 때문에 우리가 보는 것보다 1이 적음		
-			int pageNum =list.getPageable().getPageNumber()+1; 						//현재 페이지
-			int startPage = Math.max(pageNum -4, 1);								//시작페이지
-			int endPage = Math.min(pageNum+5,list.getTotalPages());					//마지막페이지
-			
-			model.addAttribute("list", list);
-			model.addAttribute("pageNum", pageNum);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-		}
+	// 리스트 + 페이징
+	@GetMapping("/firstListBoard") // sort 와 direction 넣으면 오류남!
+	public void listBoard(Model model, @PageableDefault(page = 0, size = 15) Pageable pageable) {
+
+		Page<Board> list = bs.findAll(pageable);
+
+		// pageable은 0부터 시작하기 때문에 우리가 보는 것보다 1이 적음
+		int pageNum = list.getPageable().getPageNumber() + 1; // 현재 페이지
+		int startPage = Math.max(pageNum - 4, 1); // 시작페이지
+		int endPage = Math.min(pageNum + 5, list.getTotalPages()); // 마지막페이지
+
+		model.addAttribute("list", list);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+	}
 	
 	//카테고리 하나 눌렀을때 그 페이지로
 	@GetMapping("/listBoard/{board_num}")
@@ -123,6 +123,33 @@ public class BoardController {
 		model.addAttribute("post_num", post_num);
 		model.addAttribute("user_list", uis.findAll());
 		model.addAttribute("reply_list", rps.findByPostNum(post_num));
+		List<Reply> list=rps.findByPostNum(post_num);
+		List<ReplyAndParent> list2= new ArrayList<ReplyAndParent>();
+		
+		String name="";
+		
+		for(int i=0;i<list.size();i++) {
+			Reply r=list.get(i);
+			if(list.get(i).getRef_reply_num()!=0) {
+					name=uis.getUser(rps.getUserNumByReplyNum(list.get(i).getRef_reply_num())).getUser_nick();
+				}else {
+					name=" ";
+				}
+				ReplyAndParent rp=new ReplyAndParent();
+				rp.setReply_num(r.getReply_num());
+				rp.setBoard(r.getBoard());
+				rp.setIsDeleted(r.getIsDeleted());
+				rp.setParent_nick(name);
+				rp.setRef_reply_num(r.getRef_reply_num());
+				rp.setReply_content(r.getReply_content());
+				rp.setReply_group(r.getReply_group());
+				rp.setReply_level(r.getReply_level());
+				rp.setReply_step(r.getReply_step());
+				rp.setUserinfo(r.getUserinfo());
+				list2.add(rp);
+
+	}
+		model.addAttribute("reply_and_parent_list", list2);
 		return mav;
 	}
   
@@ -145,6 +172,7 @@ public class BoardController {
     public String delete(@PathVariable("post_num") int post_num, Model model) {
         bs.deleteBoard(post_num);
         //협의 후 수정
+        rps.deleteByPostNum(post_num);
         return "redirect:/firstListBoard";
     }
     

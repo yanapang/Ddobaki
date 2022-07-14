@@ -13,6 +13,5 @@ public interface PlanDAO extends JpaRepository<Plan, Integer> {
 	@Query("select nvl(max(plan_num),0)+1 from Plan")
 	public int getNextPlanNum();
 	
-	
 }
 
