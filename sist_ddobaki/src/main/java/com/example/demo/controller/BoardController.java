@@ -49,13 +49,17 @@ public class BoardController {
 	public void listBoard(Model model) {		
 		List<Board> list = bs.findAll();
 		model.addAttribute("list", list);
+		System.out.println("컨트롤러 동작 first");
 	}
 	
-	@RequestMapping("/getAllList")
+	
+	@RequestMapping(value="/getAllList",method = RequestMethod.GET)
 	@ResponseBody
 	public List<Board> listBoardAjax(Model model) {
 		List<Board> list = bs.findAll();
 		model.addAttribute("list", bs.findAll());
+		
+		System.out.println("컨트롤러 동작 get");
 		return list;
 	}
 	
@@ -63,9 +67,9 @@ public class BoardController {
 	@GetMapping("/listBoard/{board_num}")
 	public ModelAndView goCategory(@PathVariable int board_num, Model model) {
 		
-		ModelAndView mav = new ModelAndView("listNamegy");
+		ModelAndView mav = new ModelAndView("listBoard");
 		if(board_num==3) {
-			mav=new ModelAndView("listReview");
+			mav=new ModelAndView("listBoard");
 			}
 		List<Board> boardCategory = bs.goCategory(board_num);
 		model.addAttribute("boardCategory", boardCategory);

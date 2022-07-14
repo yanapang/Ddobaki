@@ -10,11 +10,12 @@
 		cursor: pointer;
 	}
 </style>
+<link rel="stylesheet" th:href="@{/styles/common.css}">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 /*<![CDATA[*/
 $(function(){
-	
+	console.log("동작");
 var arr; //페이징할때 쓸 list 담을 애
 
 	//페이징처리
@@ -47,10 +48,17 @@ var arr; //페이징할때 쓸 list 담을 애
 		$("#list").empty();
 		
 		//현재페이지에서 보여줄 시작/마지막 레코드
-		var start = (pageNUM-1)*pageSize +1;
+		//인덱스 0부터 시작
+		var start = (pageNUM-1)*pageSize;
 		var end = start+pageSize-1;	
-						
-		//console.log("함수 동작함")
+		
+		
+		if(end>arr.length-1){
+			end=arr.length-1;			
+		}
+		
+		console.log(start)
+		console.log(end)
 		
 		for(var i=start; i<=end; i++){
 				//console.log(arr[i].board_num);
@@ -112,27 +120,15 @@ var arr; //페이징할때 쓸 list 담을 애
 		printPage(page);				
 		printPageNumber(page);			
 	});
-})
+});
 /*]]*/
 </script>
 </head>
 <body>
  
-<div><img src="/또바기.png"></div>
-
-<nav id ="main_category">
-  <a href="home">home</a> |
-  <a href="travel">travel</a> |
-  <a href="plan">plan</a> |
-  <a href="board">board</a> |
-  <a href="our team">our team</a>
-</nav>
-
-<div class="entry">
- <span>Register</span>
-  <span>Login</span>
-  <span>My page</span>
-</div>
+  
+<!-- header fragment 사용 -->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
 
 <fieldset >
  <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
@@ -142,7 +138,7 @@ var arr; //페이징할때 쓸 list 담을 애
    <span><a th:href="@{/listBoard/{board_num}(board_num=${3})}" th:text="Review" style="text-decoration: none"></a></span>
    <span><a th:href="@{/listBoard/{board_num}(board_num=${4})}" th:text="FAQ" style="text-decoration: none"></a></span>
   </nav>
-  <table id="list">   
+  <table>   
       <caption></caption>
       <tr>
         <thead>
@@ -163,6 +159,9 @@ var arr; //페이징할때 쓸 list 담을 애
       -->
         </tbody>
      </table>
+     
+     <div id="paging"></div>
+     
      <!-- 시작부터 끝까지 반복 -->
      <!-- 타임리프로 페이징처리
 	<th:block th:each="page : ${#numbers.sequence(startPage,endPage)}">

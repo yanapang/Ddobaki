@@ -10,6 +10,7 @@
 		cursor: pointer;
 	}
 </style>
+<link rel="stylesheet" th:href="@{/styles/common.css}">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
@@ -46,7 +47,7 @@ $(function(){
 		//console.log("printPage동작함");
 
 		
-		$("#list").empty();
+		$("#boardList").empty();
 		
 		//처음& 마지막
 		var start = (pageNUM-1) * pageSize +1;
@@ -55,11 +56,11 @@ $(function(){
 		
 		for(var i=start; i<=end; i++){
 
-			$("#list").append("<tr>");
-			$("#list").append("<td>"+listByCategory[i].post_num+"</td>");
-			$("#list").append("<td><a href=/detailPost"+"/"+listByCategory[i].board_num+"/"+listByCategory[i].post_num+">"+listByCategory[i].post_title+"</a></td>");
-			$("#list").append("<td>"+listByCategory[i].post_hit+"</td>");
-			$("#list").append("</tr>");										
+			$("#boardList").append("<tr>");
+			$("#boardList").append("<td>"+listByCategory[i].post_num+"</td>");
+			$("#boardList").append("<td><a href=/detailPost"+"/"+listByCategory[i].board_num+"/"+listByCategory[i].post_num+">"+listByCategory[i].post_title+"</a></td>");
+			$("#boardList").append("<td>"+listByCategory[i].post_hit+"</td>");
+			$("#boardList").append("</tr>");										
 	}
 		
 	}
@@ -145,8 +146,11 @@ $(function(){
 </script>
 </head>
 <body>
-<div><img src="/또바기.png"></div>
 
+
+<!-- header fragment 사용 -->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!--  
 <nav id ="main_category">
   <a href="home">home</a> |
   <a href="travel">travel</a> |
@@ -160,7 +164,7 @@ $(function(){
   <span>Login</span>
   <span>My page</span>
 </div>
-
+-->
 <fieldset>
   <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
    <span><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice" style="text-decoration: none"></a></span>
@@ -186,21 +190,18 @@ $(function(){
           </tr>
         </thead>
         <tbody id="boardList">
-          <tr th:each="b:${boardCategory}">
+        <!-- 
+            <tr th:each="b:${boardCategory}">
             <td th:text="${b.post_num}"></td>
           	<td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" style="text-decoration: none">
           	<span th:text="${b.post_title}"></span></a>
             <td th:text="${b.post_hit}"></td>
+          
           </tr>
+           -->
         </tbody>
      </table>
-  <div class="page">
-    <span><</span>
-    <span>1</span>
-    <span>2</span>
-    <span>3</span>
-    <span>></span>    
-  </div>
+<div id="paging"></div>
 </fieldset>
 <button><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
 </body>
