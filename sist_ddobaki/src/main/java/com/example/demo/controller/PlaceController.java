@@ -37,4 +37,4 @@ public class PlaceController {
 		//System.out.println("출력될 리스트 길이:"+list.size());
 		return list;
 	}
-	}
+}

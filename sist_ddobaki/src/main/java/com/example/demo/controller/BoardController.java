@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +24,7 @@ import com.example.demo.service.ReplyService;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Reply;
+import com.example.demo.vo.ReplyAndParent;
 
 import lombok.Setter;
 
@@ -50,7 +50,6 @@ public class BoardController {
 		List<Board> list = bs.findAll();
 		model.addAttribute("list", list);
 	}
-	
 	
 	@RequestMapping(value="/getAllList",method = RequestMethod.GET)
 	@ResponseBody
@@ -126,6 +125,33 @@ public class BoardController {
 		model.addAttribute("post_num", post_num);
 		model.addAttribute("user_list", uis.findAll());
 		model.addAttribute("reply_list", rps.findByPostNum(post_num));
+		List<Reply> list=rps.findByPostNum(post_num);
+		List<ReplyAndParent> list2= new ArrayList<ReplyAndParent>();
+		
+		String name="";
+		
+		for(int i=0;i<list.size();i++) {
+			Reply r=list.get(i);
+			if(list.get(i).getRef_reply_num()!=0) {
+					name=uis.getUser(rps.getUserNumByReplyNum(list.get(i).getRef_reply_num())).getUser_nick();
+				}else {
+					name=" ";
+				}
+				ReplyAndParent rp=new ReplyAndParent();
+				rp.setReply_num(r.getReply_num());
+				rp.setBoard(r.getBoard());
+				rp.setIsDeleted(r.getIsDeleted());
+				rp.setParent_nick(name);
+				rp.setRef_reply_num(r.getRef_reply_num());
+				rp.setReply_content(r.getReply_content());
+				rp.setReply_group(r.getReply_group());
+				rp.setReply_level(r.getReply_level());
+				rp.setReply_step(r.getReply_step());
+				rp.setUserinfo(r.getUserinfo());
+				list2.add(rp);
+
+	}
+		model.addAttribute("reply_and_parent_list", list2);
 		return mav;
 	}
   
@@ -148,6 +174,7 @@ public class BoardController {
     public String delete(@PathVariable("post_num") int post_num, Model model) {
         bs.deleteBoard(post_num);
         //협의 후 수정
+        rps.deleteByPostNum(post_num);
         return "redirect:/firstListBoard";
     }
     

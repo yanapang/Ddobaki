@@ -30,6 +30,5 @@ public class PlaceService {
 		return place_dao.placeNameList(place_type_num, place_region_num);
 	}
 
-	
 }
 
