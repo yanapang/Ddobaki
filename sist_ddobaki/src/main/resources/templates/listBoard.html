@@ -50,9 +50,13 @@ $(function(){
 		$("#boardList").empty();
 		
 		//처음& 마지막
-		var start = (pageNUM-1) * pageSize +1;
+		var start = (pageNUM-1) * pageSize;
 		var end = start + pageSize-1;	
 		//console.log(listByCategory[2].post_num);
+		
+		if(end>arr.length-1){
+			end=arr.length-1;			
+		}
 		
 		for(var i=start; i<=end; i++){
 
