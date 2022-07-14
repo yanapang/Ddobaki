@@ -213,21 +213,22 @@ $(function(){
 </div>
 -->
 <fieldset>
-  <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
+<!-- 
+  <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 
    <span><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice" style="text-decoration: none"></a></span>
    <span><a th:href="@{/listBoard/{board_num}(board_num=${2})}" th:text="Community" style="text-decoration: none"></a></span>
    <span><a th:href="@{/listBoard/{board_num}(board_num=${3})}" th:text="Review" style="text-decoration: none"></a></span>
    <span><a th:href="@{/listBoard/{board_num}(board_num=${4})}" th:text="FAQ" style="text-decoration: none"></a></span>
-  </nav>
-
+  </nav>-->
+  <th:block th:switch="${board_num}">
+    <span th:case="1">NOTICE</span>
+    <span th:case="2">COMMUNITY</span>
+    <span th:case="3">REVIEW</span>
+    <span th:case="4">FAQ</span>
+	</th:block>
   <input type="search" id="searchTitle" name="post_keyword" placeholder="제목을 검색하세요"/>
   <button id="btnSearch">검색하기</button><br>
-    <th:block th:switch="${board_num}">
-    <span th:case="1">notice</span>
-    <span th:case="2">community</span>
-    <span th:case="3">review</span>
-    <span th:case="4">faq</span>
-	</th:block>
+   
     <table>   
         <thead>
           <tr>
