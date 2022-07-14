@@ -3,10 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	span{
+		display: inline-block;
+		margin: 5px;
+		cursor: pointer;
+	}
+</style>
+<link rel="stylesheet" th:href="@{/styles/common.css}">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
+	//전체 레코드수
+	var listLength=/*[[${listLength}]]*/
+		console.log(listLength);
+  
+	//카테고리별 반환 리스트	
+	var listByCategory=/*[[${boardCategory}]]*/	
+		
+	//console.log(listByCategory[2].post_num);
+
+
 $(function(){
+		
+	//console.log(listLength);
+	
+	//페이징처리
+	var totalRecords=listLength;	//전체레코드수 
+	var pageSize=7;	
+	var pageGroup=2;	 
+	var totalPage=Math.ceil(totalRecords/pageSize);	//전체페이지수
+	
+	//console.log(totalPage)
+
+	//1쪽1번
+	printPage(1);
+	printPageNumber(1);
+
+	
+	//페이지 번호 출력하기
+	function printPage(pageNUM){
+		
+		//console.log("printPage동작함");
+
+		
+		$("#boardList").empty();
+		
+		//처음& 마지막
+		var start = (pageNUM-1) * pageSize;
+		var end = start + pageSize-1;	
+		//console.log(listByCategory[2].post_num);
+		
+		//전체 레코드보다 크지않도록 함
+		if(end>listByCategory.length-1){
+			end=listByCategory.length-1;			
+		}
+		
+		for(var i=start; i<=end; i++){
+
+			$("#boardList").append("<tr>");
+			$("#boardList").append("<td>"+listByCategory[i].post_num+"</td>");
+			$("#boardList").append("<td><a href=/detailPost"+"/"+listByCategory[i].board_num+"/"+listByCategory[i].post_num+">"+listByCategory[i].post_title+"</a></td>");
+			$("#boardList").append("<td>"+listByCategory[i].post_hit+"</td>");
+			$("#boardList").append("</tr>");										
+	}
+		
+	}
+	
+	
+	function printPageNumber(pageNUM){
+		
+		//console.log("printPageNumber함수 동작");
+	
+		$("#paging").empty();
+
+		//start=${T(Math).floor(boardList.number/10)*10 + 1} ://버림
+		var startPage = Math.floor((pageNUM-1)/pageGroup)*pageGroup +1;
+		var endPage = startPage + pageGroup-1;
+		
+		//console.log("시작페이지번호: "+startPage);
+		//console.log("마지막페이지번호: "+endPage);
+		
+	
+		if(endPage > totalPage){
+			endPage = totalPage;
+		}
+		
+	
+		if(startPage > 1){
+			var span = $("<span></span>").html("[<<]");
+			$(span).attr("page",startPage-1);
+			$("#paging").append(span);
+		}
+
+		
+		for(i=startPage; i<=endPage; i++){
+			var span = $("<span></span>").html(i);
+			//이벤트
+			$(span).attr("page",i);
+			$("#paging").append(span);
+		}
+		
+		//다음
+		if(endPage< totalPage){
+			var span = $("<span></span>").html("[>>]");
+			$(span).attr("page",endPage+1);
+			$("#paging").append(span);
+		}
+		
+	}
+		//새로 만들어지는 span
+		$(document).on("click","span",function(){
+			var page = $(this).attr("page");
+			printPage(page);	
+			printPageNumber(page);
+			
+		});
+	
+
+	
 	//검색하기 버튼 눌렀을때
 	$("#btnSearch").click(function(){
 		$("#boardList").empty();
@@ -36,8 +151,11 @@ $(function(){
 </script>
 </head>
 <body>
-<div><img src="/또바기.png"></div>
 
+
+<!-- header fragment 사용 -->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<!--  
 <nav id ="main_category">
   <a href="home">home</a> |
   <a href="travel">travel</a> |
@@ -51,7 +169,7 @@ $(function(){
   <span>Login</span>
   <span>My page</span>
 </div>
-
+-->
 <fieldset>
   <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
    <span><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice" style="text-decoration: none"></a></span>
@@ -77,21 +195,18 @@ $(function(){
           </tr>
         </thead>
         <tbody id="boardList">
-          <tr th:each="b:${boardCategory}">
+        <!-- 
+            <tr th:each="b:${boardCategory}">
             <td th:text="${b.post_num}"></td>
           	<td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" style="text-decoration: none">
           	<span th:text="${b.post_title}"></span></a>
             <td th:text="${b.post_hit}"></td>
+          
           </tr>
+           -->
         </tbody>
      </table>
-  <div class="page">
-    <span><</span>
-    <span>1</span>
-    <span>2</span>
-    <span>3</span>
-    <span>></span>    
-  </div>
+<div id="paging"></div>
 </fieldset>
 <button><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
 </body>

@@ -44,31 +44,36 @@ public class BoardController {
 	@Autowired
 	private ReplyService rps;
 
-	// 리스트 + 페이징
-	@GetMapping("/firstListBoard") // sort 와 direction 넣으면 오류남!
-	public void listBoard(Model model, @PageableDefault(page = 0, size = 15) Pageable pageable) {
-
-		Page<Board> list = bs.findAll(pageable);
-
-		// pageable은 0부터 시작하기 때문에 우리가 보는 것보다 1이 적음
-		int pageNum = list.getPageable().getPageNumber() + 1; // 현재 페이지
-		int startPage = Math.max(pageNum - 4, 1); // 시작페이지
-		int endPage = Math.min(pageNum + 5, list.getTotalPages()); // 마지막페이지
-
+	//리스트
+	@GetMapping("/firstListBoard")						//sort 와 direction 넣으면 오류남!
+	public void listBoard(Model model) {		
+		List<Board> list = bs.findAll();
 		model.addAttribute("list", list);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
+		System.out.println("컨트롤러 동작 first");
 	}
 	
-	//카테고리 하나 눌렀을때 그 페이지로
+	@RequestMapping(value="/getAllList",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Board> listBoardAjax(Model model) {
+		List<Board> list = bs.findAll();
+		model.addAttribute("list", bs.findAll());
+		
+		System.out.println("컨트롤러 동작 get");
+		return list;
+	}
+	
+	//카테고리 하나 눌렀을때 그 페이지로 //여기서 상태유지한것 /*<![CDATA[*/ 이걸로 스트립트 단에서 그냥 쓰기
 	@GetMapping("/listBoard/{board_num}")
 	public ModelAndView goCategory(@PathVariable int board_num, Model model) {
 		
 		ModelAndView mav = new ModelAndView("listBoard");
-		model.addAttribute("boardCategory", bs.goCategory(board_num));
-		model.addAttribute("board_num", (Integer)board_num);
-		//System.out.println("리스트보드에서 상태유지할 board_num"+board_num);
+		if(board_num==3) {
+			mav=new ModelAndView("listBoard");
+			}
+		List<Board> boardCategory = bs.goCategory(board_num);
+		model.addAttribute("boardCategory", boardCategory);
+		model.addAttribute("listLength", boardCategory.size());	//totalrecord될것임		
+		model.addAttribute("board_num", (Integer)board_num);	
 		return mav;
 	}
 	
