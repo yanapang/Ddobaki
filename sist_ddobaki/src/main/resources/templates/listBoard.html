@@ -54,8 +54,9 @@ $(function(){
 		var end = start + pageSize-1;	
 		//console.log(listByCategory[2].post_num);
 		
-		if(end>arr.length-1){
-			end=arr.length-1;			
+		//전체 레코드보다 크지않도록 함
+		if(end>listByCategory.length-1){
+			end=listByCategory.length-1;			
 		}
 		
 		for(var i=start; i<=end; i++){
