@@ -5,10 +5,11 @@
 <title>Insert title here</title>
 <!-- CSS only -->
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 
  
-
-
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" th:href="@{/styles/common.css}">
@@ -63,9 +64,11 @@ table {
 	//카테고리별 반환 리스트	
 	var listByCategory=/*[[${boardCategory}]]*/	
 		
-	//console.log(listByCategory[2].post_num);
+	console.log(listByCategory);
+	console.log(listByCategory[0].userinfo.user_nick);
 
 
+	
 $(function(){
 		
 	//console.log(listLength);
@@ -106,8 +109,11 @@ $(function(){
 			$("#boardList").append("<tr>");
 			$("#boardList").append("<td>"+listByCategory[i].post_num+"</td>");
 			$("#boardList").append("<td><a href=/detailPost"+"/"+listByCategory[i].board_num+"/"+listByCategory[i].post_num+">"+listByCategory[i].post_title+"</a></td>");
+			$("#boardList").append("<td>"+listByCategory[i].userinfo.user_nick+"</td>");
 			$("#boardList").append("<td>"+listByCategory[i].post_hit+"</td>");
-			$("#boardList").append("</tr>");										
+			$("#boardList").append("<td>"+listByCategory[i].post_regdate+"</td>");
+			$("#boardList").append("</tr>");
+			
 	}
 		
 	}
@@ -177,16 +183,26 @@ $(function(){
 			success:function(reviewList){
 			$("#boardList").empty();
 			$.each(reviewList,function(i){
-				console.log(reviewList[i].board_num);
-				console.log(reviewList[i].post_num);
+				//console.log(reviewList[i].board_num);
+			//	console.log(reviewList[i].userinfo.user_nick);
 				$("#boardList").append("<tr>");
+				
 				$("#boardList").append("<td>"+reviewList[i].post_num+"</td>");
 				$("#boardList").append("<td><a href=/detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");				
+				$("#boardList").append("<td>"+reviewList[i].userinfo.user_nick+"</td>");	
 				$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");	
+				$("#boardList").append("<td>"+reviewList[i].post_regdate+"</td>");	
+				
 				$("#boardList").append("</tr>");
 				})
+				
+				//검색결과가 pageSize보다 작으면 페이지 x
+				if(reviewList.length < pageSize){
+					$("#paging").empty();
+				}
+				
 			}
-		});
+		});//ajax 끝
 	})
 });
 /*]]>*/
@@ -226,6 +242,7 @@ $(function(){
     <span th:case="3">REVIEW</span>
     <span th:case="4">FAQ</span>
 	</th:block>
+	<br>
   <input type="search" id="searchTitle" name="post_keyword" placeholder="제목을 검색하세요"/>
   <button id="btnSearch">검색하기</button><br>
    
@@ -234,7 +251,9 @@ $(function(){
           <tr>
              <th>글번호</th>
              <th>글제목</th>
+             <th>작성자</th>
              <th>조회수</th>
+             <th>작성일자</th>
           </tr>
         </thead>
         <tbody id="boardList">
@@ -251,6 +270,7 @@ $(function(){
      </table>
 <div id="paging"></div>
 </fieldset>
-<button id="posting"><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+
+<button id="posting" type="button" class="btn btn-success"><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
 </body>
 </html>
