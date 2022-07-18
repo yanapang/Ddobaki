@@ -43,33 +43,24 @@ public class MyPageController {
 	
 	@RequestMapping(value="/myPageBlist", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Board> myPost(Model model) {	
-		int user_num=2;	
+	public List<Board> myPost(Model model,HttpSession session,
+			HttpServletResponse response,HttpServletRequest request) {	
+		int user_num=3;	
+		session.setAttribute("user_num", user_num);
+		session.setMaxInactiveInterval(-1);
 		List<Board> blist = bs.findByUserNum(user_num);	
 		model.addAttribute("blist", blist);
 		System.out.println("컨트롤러 동작");
 		return blist;
 	}
-/*
-	//만들긴 했지만 잘 모르겄슈.. mav가 맞는건지도,,
-	@GetMapping("/myPage")
-	public ModelAndView myPage(Model model, HttpSession session,
-			HttpServletResponse response,HttpServletRequest request){
-		int user_num = 2;
-		session.setAttribute("user_num", user_num);
-		session.setMaxInactiveInterval(-1);//무한유지
 
-		ModelAndView mav = new ModelAndView("myPage");
-		mav.addObject("blist",bs.findByUserNum(user_num));
-		mav.addObject("plist",ps.findByUserNum(user_num));	
-		return mav;
-	}
-	*/
-	
 	@RequestMapping(value="/myPagePlist", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Plan> myPlan(Model model){
-		int user_num=3;
+	public List<Plan> myPlan(Model model,HttpSession session,
+			HttpServletResponse response,HttpServletRequest request){
+		int user_num=3;	
+		session.setAttribute("user_num", user_num);
+		session.setMaxInactiveInterval(-1);
 		List<Plan> plist = ps.findByUserNum(user_num);
 		model.addAttribute("plist", plist);
 		System.out.println("plan도 동작");

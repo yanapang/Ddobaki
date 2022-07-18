@@ -46,7 +46,7 @@ public class UserInfo{
 	private String user_file;
 	
 	
-	private MultipartFile uploadFile;
+	//private MultipartFile uploadFile;
 	
 	@Column
 	private String user_role;
