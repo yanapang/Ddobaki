@@ -27,7 +27,9 @@ public class UserInfoService {
 		return user_dao.findById(user_num).get();
 	}
 	
-	
+	public void deleteUser(int user_num) {
+		user_dao.deleteByUserNum(user_num);
+	}
 	
 	
 }

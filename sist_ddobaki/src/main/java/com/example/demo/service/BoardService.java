@@ -80,5 +80,9 @@ public class BoardService {
 	public List<Board> findByPostTitle(int board_num, String post_keyword){
 		return dao.findByPostTitle(board_num, post_keyword);
 	}
-
+	
+	public List<Board> findByUserNum(int user_num){
+		return dao.findByUserNum(user_num);
+	}
+	
 }

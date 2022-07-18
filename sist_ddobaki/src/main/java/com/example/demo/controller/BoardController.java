@@ -50,19 +50,19 @@ public class BoardController {
 	public void listBoard(Model model) {		
 	
 		List<Board> list = bs.findAll();
-		List<UserInfo> userList = uis.findAll();				
+					
 		model.addAttribute("list", list);		
 	}
-	
+
 	@RequestMapping(value="/getAllList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Board> listBoardAjax(Model model) {
 		
 		List<Board> list = bs.findAll();
-		model.addAttribute("list", bs.findAll());
+		model.addAttribute("list",list);
 		return list;
 	}
-	
+	//listBoard + paging
 	//카테고리 하나 눌렀을때 그 페이지로 //여기서 상태유지한것 /*<![CDATA[*/ 이걸로 스트립트 단에서 그냥 쓰기
 	@GetMapping("/listBoard/{board_num}")
 	public ModelAndView goCategory(@PathVariable int board_num, Model model) {

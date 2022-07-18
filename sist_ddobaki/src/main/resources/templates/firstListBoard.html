@@ -2,35 +2,82 @@
 <html xmlns:th = "http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 <!-- CSS only -->
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" th:href="@{/styles/common.css}">
 <style type="text/css">
+
 span{
 		display: inline-block;
 		margin: 5px;
 		cursor: pointer;
+   	font-size: 1.2em;		
 	}
+	
+#paging{
+display: flex;
+  justify-content: center;
+}
 fieldset{
 	  margin: auto;
 	  width: 80%;
 	  border: 3px solid #73AD21;
-	  padding: 10px;
+	  
 }
 
 
 th {
   height: 70px;
+  padding: 15px;
+ font-size: 1.2em;
+  border-bottom: 3px solid #ddd;
+
 }
+
+td{
+  border-bottom: 1px solid #ddd;
+	 padding: 10px;	
+}
+
 table {
   width: 100%;
+  text-align: justify;
+  table-layout : fixed;
+}
+
+a:hover {
+   color: #73AD21;
+  text-decoration-line: underline;
+  text-decoration-color: #73AD21;
+ font-size: 1.2em;
+ 
+
+}
+span:hover {
+  color: #73AD21;
+  text-decoration:underline;
+  border-style: solid;
+	border-radius: 5px;
+  border-color: #73AD21;
+  padding: 5px;
+
+
+background-color: #73AD21;
+  color: white;
 }
 
 	
-	
 </style>
 <!-- JavaScript Bundle with Popper -->
+
+
+ 
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
@@ -108,8 +155,8 @@ var nick=[];
 				$("#list").append("<tr>");
 				
 				$("#list").append("<td>"+arr[i].post_num+"</td>");
-				$("#list").append("<td><a href=detailPost"+"/"+arr[i].board_num+"/"+arr[i].post_num+">"+arr[i].post_title+"</a></td>");
 				$("#list").append("<td>"+arr[i].userinfo.user_nick+"</td>");
+				$("#list").append("<td><a href=detailPost"+"/"+arr[i].board_num+"/"+arr[i].post_num+">"+arr[i].post_title+"</a></td>");				
 				$("#list").append("<td>"+arr[i].post_hit+"</td>");
 				$("#list").append("<td>"+arr[i].post_regdate+"</td>");
 				
@@ -193,8 +240,8 @@ var nick=[];
         <thead>
           <tr>
              <th>글번호</th>
-             <th>글제목</th>
              <th>작성자</th>
+             <th>글제목</th>           
              <th>조회수</th>
              <th>작성일자</th>
           </tr>

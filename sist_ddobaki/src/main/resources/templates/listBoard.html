@@ -4,43 +4,102 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- CSS only -->
+<!-- 나중에 아이콘 추가할것 검색/ 글쓰기 -->
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
- 
-
+<!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" th:href="@{/styles/common.css}">
 <style type="text/css">
-	span{
+span{
 		display: inline-block;
-		margin: 10px;
+		margin: 5px;
 		cursor: pointer;
+   	font-size: 1.2em;		
 	}
-fieldset{
-  margin: auto;
-  width: 80%;
-  border: 3px solid #73AD21;
-  padding: 10px;
+	
+#paging{
+display: flex;
+  justify-content: center;
+  
 }
 #posting{
-  position: absolute;
-  
-  right: 150px;
-  width: 100px;
-  height: 50px;
+display: flex;
+  justify-content: right;
+
+  padding-top: 0px;
+  padding-right: 130px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+
 }
+#search{
+display: flex;
+  justify-content: right;
+
+  padding-top: 0px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+
+}
+
+
+
+fieldset{
+	  margin: auto;
+	  width: 80%;
+	  border: 3px solid #6bba62;	  
+}
+
 
 th {
   height: 70px;
-}
-table {
-  width: 100%;
+  padding: 15px;
+ font-size: 1.2em;
+  border-bottom: 3px solid #ddd;
+
 }
 
+td{
+  border-bottom: 1px solid #ddd;
+	 padding: 10px;	
+}
+
+table {
+  width: 100%;
+  text-align: justify;
+  table-layout : fixed;
+
+}
+
+a:hover {
+   color: #73AD21;
+  text-decoration-line: underline;
+  text-decoration-color: #6bba62;
+ font-size: 1.2em;
+ 
+
+}
+span:hover {
+  color: #73AD21;
+  text-decoration:underline;
+  border-style: solid;
+	border-radius: 5px;
+  border-color: #6bba62;
+  padding: 5px;
+background-color: #6bba62;
+  color: white;
+}
 	
+#btnPost{
+border-radius: 10px;
+border-style: solid;
+border-color: #6bba62;
+padding: 5px;
+background-color: #6bba62;
+color: white;
+opacity: 0.8;
+}	
 </style>
 
 
@@ -108,8 +167,8 @@ $(function(){
 
 			$("#boardList").append("<tr>");
 			$("#boardList").append("<td>"+listByCategory[i].post_num+"</td>");
-			$("#boardList").append("<td><a href=/detailPost"+"/"+listByCategory[i].board_num+"/"+listByCategory[i].post_num+">"+listByCategory[i].post_title+"</a></td>");
 			$("#boardList").append("<td>"+listByCategory[i].userinfo.user_nick+"</td>");
+			$("#boardList").append("<td><a href=/detailPost"+"/"+listByCategory[i].board_num+"/"+listByCategory[i].post_num+">"+listByCategory[i].post_title+"</a></td>");			
 			$("#boardList").append("<td>"+listByCategory[i].post_hit+"</td>");
 			$("#boardList").append("<td>"+listByCategory[i].post_regdate+"</td>");
 			$("#boardList").append("</tr>");
@@ -118,7 +177,7 @@ $(function(){
 		
 	}
 	
-	
+	//페이지 번호
 	function printPageNumber(pageNUM){
 		
 		//console.log("printPageNumber함수 동작");
@@ -188,8 +247,8 @@ $(function(){
 				$("#boardList").append("<tr>");
 				
 				$("#boardList").append("<td>"+reviewList[i].post_num+"</td>");
-				$("#boardList").append("<td><a href=/detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");				
-				$("#boardList").append("<td>"+reviewList[i].userinfo.user_nick+"</td>");	
+				$("#boardList").append("<td>"+reviewList[i].userinfo.user_nick+"</td>");
+				$("#boardList").append("<td><a href=/detailPost"+"/"+reviewList[i].board_num+"/"+reviewList[i].post_num+">"+reviewList[i].post_title+"</a></td>");									
 				$("#boardList").append("<td>"+reviewList[i].post_hit+"</td>");	
 				$("#boardList").append("<td>"+reviewList[i].post_regdate+"</td>");	
 				
@@ -213,21 +272,7 @@ $(function(){
 
 <!-- header fragment 사용 -->
 <th:block th:replace="fragments/header :: headerFragment"></th:block>
-<!--  
-<nav id ="main_category">
-  <a href="home">home</a> |
-  <a href="travel">travel</a> |
-  <a href="plan">plan</a> |
-  <a href="board">board</a> |
-  <a href="our team">our team</a>
-</nav>
 
-<div class="entry">
- <span>Register</span>
-  <span>Login</span>
-  <span>My page</span>
-</div>
--->
 <fieldset>
 <!-- 
   <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 
@@ -243,15 +288,17 @@ $(function(){
     <span th:case="4">FAQ</span>
 	</th:block>
 	<br>
+	<div id="search">
   <input type="search" id="searchTitle" name="post_keyword" placeholder="제목을 검색하세요"/>
-  <button id="btnSearch">검색하기</button><br>
-   
+  <button id="btnSearch"><i class="bi bi-search"></i></button>
+  <br>
+   </div>
     <table>   
         <thead>
           <tr>
-             <th>글번호</th>
-             <th>글제목</th>
-             <th>작성자</th>
+             <th>글번호</th>                        
+             <th>작성자</th>  
+             <th>글제목</th>        
              <th>조회수</th>
              <th>작성일자</th>
           </tr>
@@ -269,8 +316,11 @@ $(function(){
         </tbody>
      </table>
 <div id="paging"></div>
+
+<div id="posting">
+<button id="btnPost"><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+</div>
 </fieldset>
 
-<button id="posting" type="button" class="btn btn-success"><a th:href="@{/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
 </body>
 </html>
