@@ -5,12 +5,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,7 +18,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Builder
 @Entity
@@ -45,10 +44,9 @@ public class UserInfo{
 	@Column(columnDefinition="varchar2(3000)", nullable = true)
 	private String user_file;
 	
-	//private MultipartFile uploadFile;
-	
-	@Column
+	@Column(nullable = false)
 	private String user_role;
+	
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)

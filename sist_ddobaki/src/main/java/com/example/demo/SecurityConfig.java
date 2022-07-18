@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.example.demo.auth.LoginAuthHandler;
 import com.example.demo.auth.PrincipalDetailsService;
 import com.example.demo.service.AuthService;
 
@@ -51,22 +51,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.authorizeRequests()
                 // 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/myinfo","/reservation/**","/payment/**","/board/**","/plan/**").hasRole("USER")
+                .antMatchers("/user/myinfo","/reservation/**","/payment/**","/board/**","/plan/**","/myPage/**").authenticated()
                 .antMatchers("/**").permitAll()
             .and() // 로그인 설정
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/main")
+                .successHandler(new LoginAuthHandler())
                 .permitAll()
             .and() // 로그아웃 설정
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/main")
-                .invalidateHttpSession(true)
-            .and()
-                // 403 예외처리 핸들링
-            .exceptionHandling().accessDeniedPage("/user/denied");
+                .invalidateHttpSession(true);
     }
     
 //    @Override

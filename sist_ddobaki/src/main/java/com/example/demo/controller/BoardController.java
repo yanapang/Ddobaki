@@ -91,14 +91,14 @@ public class BoardController {
 		return reviewList;
 	}
 
-	@RequestMapping(value = "/insertBoard/{board_num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/board/insertBoard/{board_num}", method = RequestMethod.GET)
 	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model) {
 		ModelAndView mav=new ModelAndView("insertBoard");
 		if(board_num==3) {
 			//System.out.println("리뷰면 컨트롤러가 여기까지 오나요?");
 			mav.setViewName("insertReview");
 		}
-		//System.out.println("폼컨트롤러 왔다");
+		System.out.println("게시판글쓰기폼컨트롤러 왔다");
 		//System.out.println(board_num);
 		model.addAttribute("board_num", board_num);
 		model.addAttribute("user_list", uis.findAll());
@@ -106,7 +106,7 @@ public class BoardController {
 	}
 	
 	//insertBoard.html에서 다 쓰면 여기로 와서 insert가 되는 것임 (폼태그 방식이 post니까)
-	@PostMapping("/insertBoardOK/{board_num}")
+	@PostMapping("/board/insertBoardOK/{board_num}")
 	public String insertBoardOK(@PathVariable int board_num, Board b) {
 		b.setBoard_num(board_num);
 		b.setPost_num(bs.getNextPostNum());
@@ -121,7 +121,7 @@ public class BoardController {
 	}
 	
 	//상세보기 눌렀을때 board_num도 함께 가도록 + 조회수 증가
-	@GetMapping("detailPost/{board_num}/{post_num}")
+	@GetMapping("/detailPost/{board_num}/{post_num}")
 	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model) {
 		//System.out.println("detailPost의 board_num:"+board_num);
 		//System.out.println("detailPost의 post_num:"+post_num);
@@ -161,14 +161,14 @@ public class BoardController {
 		return mav;
 	}
   
-    @GetMapping("/updateBoard/{post_num}")
+    @GetMapping("/board/updateBoard/{post_num}")
     public String updateBoardForm(Model model, @PathVariable int post_num) {
     	Board b = bs.findById(post_num);
     	model.addAttribute("b", b);
-    	return "updateBoard";
+    	return "board/updateBoard";
     }
 	    
-    @PostMapping("/updateBoardOK/{post_num}")
+    @PostMapping("/board/updateBoardOK/{post_num}")
     public String updateBoardOK(@PathVariable int post_num, Board b) {
     	System.out.println("수정ok컨트롤러옴");
     	bs.updateBoard(b);
@@ -176,7 +176,7 @@ public class BoardController {
     	return "redirect:/firstListBoard";
 	}
     
-    @GetMapping(value="/deleteBoard/{post_num}")
+    @GetMapping(value="/board/deleteBoard/{post_num}")
     public String delete(@PathVariable("post_num") int post_num, Model model) {
         bs.deleteBoard(post_num);
         //협의 후 수정

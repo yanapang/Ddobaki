@@ -22,7 +22,7 @@ public interface UserInfoDAO extends JpaRepository<UserInfo, Integer> {
 	
 
 	@Query(value="select * from UserInfo where user_id=:user_id", nativeQuery=true)
-	public UserInfo findByUser_id(String user_id);
+	public <Optional>UserInfo findByUser_id(String user_id);
 	
 	@Query(value="select nvl(max(user_num),0)+1 from UserInfo", nativeQuery=true)
 	public int getNextUserNum();

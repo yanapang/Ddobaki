@@ -19,7 +19,7 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <body>
 <div id="wrap">
-    <form id="articleForm" th:method="post" th:action="@{/insertBoardOK/{board_num}(board_num=${board_num})}">
+    <form id="articleForm" th:method="post" th:action="@{/board/insertBoardOK/{board_num}(board_num=${board_num})}">
 		<input type="hidden" th:value="${board_num}">
         <!-- <input type="number" name="userinfo.user_num" placeholder="사용자번호"> -->
 		사용자 : <select th:name="userinfo.user_num">

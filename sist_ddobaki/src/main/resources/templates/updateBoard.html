@@ -17,7 +17,7 @@
 
 <div id="wrap">
 
-    <form id="articleForm" th:action="@{/updateBoardOK/{post_num}(post_num=${post_num})}" th:method="post">
+    <form id="articleForm" th:action="@{/board/updateBoardOK/{post_num}(post_num=${post_num})}" th:method="post">
         <br style="clear: both">
         <h3 style="margin-bottom: 25px;">게시글 수정</h3>
         <input type="hidden" name="board_num" th:value="${b.board_num}">

@@ -31,7 +31,7 @@ public class ReplyController {
 	@Autowired
 	private UserInfoDAO uDAO;
 	
-	@RequestMapping(value="/insertReplyOK",method=RequestMethod.POST)
+	@RequestMapping(value="/board/insertReplyOK",method=RequestMethod.POST)
     public String insertReplyOK(int board_num, int post_num, int user_num, Reply rp){
        System.out.println("댓글ok컨트롤러 옴");
        System.out.println("해당 댓글의 게시글 넘버 :"+post_num);
@@ -44,14 +44,14 @@ public class ReplyController {
        return "redirect:/detailPost/"+board_num+"/"+post_num;
    }
 	
-	@RequestMapping(value="/insertReReply/{reply_num}", method=RequestMethod.GET)
+	@RequestMapping(value="/board/insertReReply/{reply_num}", method=RequestMethod.GET)
 	public void insertReReply(@PathVariable int reply_num, Model model) {
 		System.out.println("대댓글 입력 컨트롤러 옴!!!");
 		model.addAttribute("reply_num", reply_num);
 		System.out.println("부모댓글의 넘버:"+reply_num);
 	}
 	
-	@RequestMapping(value="/insertReReplyOK/{reply_num}",method=RequestMethod.POST)
+	@RequestMapping(value="/board/insertReReplyOK/{reply_num}",method=RequestMethod.POST)
     public String insertReReplyOK(Reply rp, int user_num, int post_num, @PathVariable int reply_num, int board_num, Model model){
        System.out.println("대댓글ok컨트롤러 옴");
        System.out.println("대댓글ok컨트롤러로 온 부모댓글의 넘버:"+reply_num);
@@ -66,7 +66,7 @@ public class ReplyController {
        return "redirect:/detailPost/"+board_num+"/"+post_num;
    }
 	
-	@RequestMapping(value="/deleteReply/{reply_num}", method=RequestMethod.GET)
+	@RequestMapping(value="/board/deleteReply/{reply_num}", method=RequestMethod.GET)
 	public String deleteReply(@PathVariable int reply_num) {
 		rps.deleteReplyOneByOne(reply_num);
 		return "redirect:/firstListBoard";
