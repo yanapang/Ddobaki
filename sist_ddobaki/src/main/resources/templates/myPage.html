@@ -43,127 +43,126 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
 	<script type="text/javascript">
 	
-		$(function(){
+	/*
+	$(function(){
 
-			//var listByBoardNum; //왜 html일때만 켜지지?? 그리고 웹앱에 있어야 켜짐
-			console.log("화면 켜짐");
-			$.ajax({
-				url : "/myPageBlist",
-				
-				success:function(blist){						
-					//위에 user추가하고 출력하면 ssuccess 나옴 띠용때용
-					//console.log(user);
-					//console.log(blist);
-					
-					for(var i=0; i<blist.length;i++){	
-													//확인 && blist[i].userinfo.user_num == 2 
-							if(blist[i].board_num != 3){
-								$("#myBoard").append("<tbody>");
-								$("#myBoard").append("<tr>");
-									
-								$("#myBoard").append("<td>"+blist[i].post_num+"</td>");
-								$("#myBoard").append("<td><a href=/detailPost"+"/"+blist[i].board_num+"/"+blist[i].post_num+">"+blist[i].post_title+"</a></td>");
-								$("#myBoard").append("<td>"+blist[i].post_hit+"</td>");					
-	
-								$("#myBoard").append("</tr>");
-								$("#myBoard").append("</tbody>");
-							}						
-							
-							else if(blist[i].board_num == 3){
-								$("#myReview").append("<tbody>");
-								$("#myReview").append("<tr>");
-										
-								$("#myReview").append("<td>"+blist[i].post_num+"</td>");
-								$("#myReview").append("<td><a href=/detailPost"+"/"+blist[i].board_num+"/"+blist[i].post_num+">"+blist[i].post_title+"</a></td>");
-								$("#myReview").append("<td>"+blist[i].post_hit+"</td>");					
-	
-								$("#myReview").append("</tr>");
-								$("#myReview").append("</tbody>");					
-							}
-					}					
-				}	
-			
-		});
-			
-			
-			
-			
-			 //plan 링크 걸기
-			$.ajax({
-				
-				url : "/myPagePlist",
-				success : function(plist){
-					console.log(plist);
-					for(var i=0; i<plist.length;i++){							
-						if(plist[i].plan_flow_num ==1){
-													
-							$("#myPlan").append("<tbody>");
-							$("#myPlan").append("<tr>");
-									
-
-							$("#myPlan").append("<td>"+plist[i].plan_name+"</td>");					
-							$("#myPlan").append("<td>"+plist[i].plan_flow_name+"</td>");					
-							$("#myPlan").append("<td>"+plist[i].plan_date+"</td>");					
-
-							$("#myPlan").append("</tr>");
-							$("#myPlan").append("</tbody>");			
-																								
-					}
-				}	
-					
-			}			
-		});
-			
 		
-		//뭘 기준으로 잡아야하는지 모르겠어용
-			/*$.ajax({
+		console.log("화면 켜짐");
+		$.ajax({
+			url : "/myPageBlist",
+			
+			success:function(blist){						
 				
-				url : "/myPlanList",
-				success : function(plist){
-					console.log(plist);
-					console.log(plist.length);
-					for(var i=0; i<plist.length;i++){
-						for(var j=0;j<plist.length;j++){
-							if(plist[i].plan_group_num == plist[j].plan_group_num){
-								var pplan = (plist[i].plan_group_num);
-								console.log(pplan);
-								if(plist[i].plan_flow_num ==1 ){
-									//var plan = plist[i].plan_name;
-									//console.log(plan); 
+				//console.log(blist);
+				
+				for(var i=0; i<blist.length;i++){	
+												//확인 && blist[i].userinfo.user_num == 2 
+						if(blist[i].board_num != 3){
+							$("#myBoard").append("<tbody>");
+							$("#myBoard").append("<tr>");
+								
+							$("#myBoard").append("<td>"+blist[i].post_num+"</td>");
+							$("#myBoard").append("<td><a href=/detailPost"+"/"+blist[i].board_num+"/"+blist[i].post_num+">"+blist[i].post_title+"</a></td>");
+							$("#myBoard").append("<td>"+blist[i].post_hit+"</td>");					
+
+							$("#myBoard").append("</tr>");
+							$("#myBoard").append("</tbody>");
+						}						
 						
+						else if(blist[i].board_num == 3){
+							$("#myReview").append("<tbody>");
+							$("#myReview").append("<tr>");
 									
-								}
+							$("#myReview").append("<td>"+blist[i].post_num+"</td>");
+							$("#myReview").append("<td><a href=/detailPost"+"/"+blist[i].board_num+"/"+blist[i].post_num+">"+blist[i].post_title+"</a></td>");
+							$("#myReview").append("<td>"+blist[i].post_hit+"</td>");					
+
+							$("#myReview").append("</tr>");
+							$("#myReview").append("</tbody>");					
+						}
+				}					
+			}	
+		
+	});
+		
+		
+		
+		
+		 //plan 링크 걸기
+		$.ajax({
+			
+			url : "/myPagePlist",
+			success : function(plist){
+				console.log(plist);
+				for(var i=0; i<plist.length;i++){							
+					if(plist[i].plan_flow_num ==1){
+												
+						$("#myPlan").append("<tbody>");
+						$("#myPlan").append("<tr>");
+								
+
+						$("#myPlan").append("<td>"+plist[i].plan_name+"</td>");					
+						$("#myPlan").append("<td>"+plist[i].plan_flow_name+"</td>");					
+						$("#myPlan").append("<td>"+plist[i].plan_date+"</td>");					
+
+						$("#myPlan").append("</tr>");
+						$("#myPlan").append("</tbody>");			
+																							
+				}
+			}	
+				
+		}			
+	});
+		
+	
+	//뭘 기준으로 잡아야하는지 모르겠어용
+		/*$.ajax({
+			
+			url : "/myPlanList",
+			success : function(plist){
+				console.log(plist);
+				console.log(plist.length);
+				for(var i=0; i<plist.length;i++){
+					for(var j=0;j<plist.length;j++){
+						if(plist[i].plan_group_num == plist[j].plan_group_num){
+							var pplan = (plist[i].plan_group_num);
+							console.log(pplan);
+							if(plist[i].plan_flow_num ==1 ){
+								//var plan = plist[i].plan_name;
+								//console.log(plan); 
+					
+								
 							}
 						}
-						}
+					}
+					}
 */
-		
-		$("#myRetireBtn").click(function(){
-			
-			$.ajax({
-				url:"/retireUser",
-				success:function(user_num){													
-					alert("탈퇴하였습니다.")
-				
-					}								
-			})							
-		})
-		
-			
-			
-			
-			
-			
-			
+
+
+
 	
-	});
+	$("#myRetireBtn").click(function(){
+		
+		$.ajax({
+			url:"/retireUser",
+			success:function(user_num){													
+				alert("탈퇴하였습니다.")
+			
+				}								
+		})							
+	})
+	
+		
+		
+		
+		
+		
+		
+
+//});
+	
 	
 	</script>
-
-
-
-
-
 
     <body>
         <main style="position:relative;">
@@ -255,9 +254,16 @@
                                             <td>글제목</td>
                                             <td>조회수</td>
                                         </tr>
-                                    </thead>                   
+                                    </thead>   
+                                    <tbody>
+                                    	<tr th:each="bp:${myPost}">
+                                    	<td th:text="${bp.post_num}"></td>
+                                    	<td><a th:href="@{/detailPost/{bp.board_num}/{bp.post_num}(bp.board_num=${bp.board_num}, bp.post_num=${bp.post_num})}"
+                                    	 th:text="${bp.post_title}"></a></td>
+                                    	<td th:text="${bp.post_hit}"></td>                                   		
+                                    	</tr>                                    	
+                                    </tbody>                
                                 </table>
-                                <div id="paging"></div>
                             </div>
                         </div>
 
@@ -276,6 +282,14 @@
                                             <td>조회수</td>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                    	<tr th:each="br:${myReview}">
+                                    	<td th:text="${br.post_num}"></td>
+                                    	<td><a th:href="@{/detailPost/{br.board_num}/{br.post_num}(br.board_num=${br.board_num},br.post_num=${br.post_num})}"
+                                    	 th:text="${br.post_title}"></a></td>
+                                    	<td th:text="${br.post_hit}"></td>                                   		
+                                    	</tr>                                    	
+                                    </tbody>    
                                 </table>
                             </div>
                         </div>
@@ -295,6 +309,13 @@
                                             <td>여행일자</td>
                                         </tr>
                                     </thead>
+                                     <tbody>
+                                    	<tr th:each="p:${myPlan}">
+                                    	<td th:text="${p.plan_name}"></td>
+                                    	<td th:text="${p.plan_flow_name}"></td>
+                                    	<td th:text="${p.plan_date}"></td>                                   		
+                                    	</tr>                                    	
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

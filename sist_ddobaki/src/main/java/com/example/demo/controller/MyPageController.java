@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,17 +36,36 @@ public class MyPageController {
 	
 	@Autowired
 	private PlanService ps;
+	/*
+	@GetMapping("/myPage")
+	public void myPage() {		
+	}
+	*/
 	
 	@GetMapping("/myPage")
-	public void myPage() {
-		
+	public ModelAndView myPage(Model model,HttpSession session,
+			HttpServletResponse response,HttpServletRequest request)  throws IOException{
+		ModelAndView mav = new ModelAndView("myPage");
+		int user_num = 2;
+		session.setAttribute("user_num", user_num);
+		session.setMaxInactiveInterval(-1);//무한유지
+		mav.addObject("myPost", bs.findByUserNum(user_num));
+		mav.addObject("myReview", bs.findByUserNumReview(user_num));
+		mav.addObject("myPlan", ps.findByUserNum(user_num));
+	
+		return mav;
 	}
 	
+	
+	
+	
+	
+	/*
 	@RequestMapping(value="/myPageBlist", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Board> myPost(Model model,HttpSession session,
 			HttpServletResponse response,HttpServletRequest request) {	
-		int user_num=3;	
+		int user_num=2;	
 		session.setAttribute("user_num", user_num);
 		session.setMaxInactiveInterval(-1);
 		List<Board> blist = bs.findByUserNum(user_num);	
@@ -66,7 +86,7 @@ public class MyPageController {
 		System.out.println("plan도 동작");
 		return plist;
 	}
-	
+	*/
 	
 	@RequestMapping(value="/retireUser", method=RequestMethod.GET)
 	@ResponseBody

@@ -85,4 +85,7 @@ public class BoardService {
 		return dao.findByUserNum(user_num);
 	}
 	
+	public List<Board> findByUserNumReview(int user_num){
+		return dao.findByUserNumReview(user_num);
+	}
 }
