@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/styles/common.css}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>글쓰기</title>
+    <!-- header fragment 사용 -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
 </head>
 
 <!-- include libraries(jQuery, bootstrap) -->
@@ -16,8 +20,6 @@
 <body>
 <div id="wrap">
     <form id="articleForm" th:method="post" th:action="@{/insertBoardOK/{board_num}(board_num=${board_num})}">
-        <br style="clear: both">
-        <!-- <input type="number" name="board_num" placeholder="게시판번호"> -->
 		<input type="hidden" th:value="${board_num}">
         <!-- <input type="number" name="userinfo.user_num" placeholder="사용자번호"> -->
 		사용자 : <select th:name="userinfo.user_num">
@@ -74,7 +76,8 @@
             }
         });
     }
-
 </script>
+<!-- footer fragment 사용 -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </body>
 </html>

@@ -10,18 +10,26 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Builder
 @Entity
 @Data
 @Table(name="userinfo")
-public class UserInfo {
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserInfo{
 	@Id
 	private int user_num;
 	
-	@Column(columnDefinition="varchar2(3000)", nullable = false)
+	@Column(columnDefinition="varchar2(3000)", nullable = false, unique=true)
 	private String user_id;
 
 	@Column(columnDefinition="varchar2(3000)", nullable = false)
@@ -35,6 +43,11 @@ public class UserInfo {
 
 	@Column(columnDefinition="varchar2(3000)", nullable = true)
 	private String user_file;
+	
+	private MultipartFile uploadFile;
+	
+	@Column
+	private String user_role;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)

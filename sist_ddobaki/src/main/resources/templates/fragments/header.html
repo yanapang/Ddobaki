@@ -5,16 +5,17 @@
 		<nav class="navbar">
 			<ul class="navbar_user">
 				<li><a href="">My Page</a></li>
-				<li><a href="">Log In</a></li>
-				<li><a href="">Register</a></li>
+				<li><a href="/login">Log In</a></li>
+				<li><a href="/logout">Log Out</a></li>
+				<li><a href="/signUp">Register</a></li>
 			</ul>
 			<div class="navbar_logo">
-				<a href="">
+				<a href="/main">
 					<img src="/images/logo.png" alt="Main Logo Image" class="logo"/>
 				</a>
 			</div>
 			<ul class="navbar_menu">
-				<li><a href="">Home</a></li>
+				<li><a href="/main">Home</a></li>
 				<li><a href="">Place</a></li>
 				<li><a href="">Travel</a></li>
 				<li><a th:href="@{/insertPlan}+${'/'+user_num}">Plan</a></li>
