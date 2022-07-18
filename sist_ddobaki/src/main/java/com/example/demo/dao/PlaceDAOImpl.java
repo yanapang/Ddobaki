@@ -52,7 +52,7 @@ public class PlaceDAOImpl implements PlaceCustomDAO {
 	}
 
 	private BooleanExpression placeNameLike(String place_name) {
-		return StringUtils.isEmpty(place_name) ? null : p.place_name.like(place_name);
+		return StringUtils.isEmpty(place_name) ? null : p.place_name.contains(place_name);
 	}
 
 	private BooleanExpression placeParkEquals(Integer place_park) {

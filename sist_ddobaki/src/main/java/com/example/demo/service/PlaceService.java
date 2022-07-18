@@ -44,4 +44,8 @@ public class PlaceService {
 	public int updateHit(int place_num) {
 		return dao.updateHit(place_num);
 	}
+	
+	public List<Place> findByRegionNum(int place_region_num){
+		return dao.findByRegionNum(place_region_num);
+	}
 }

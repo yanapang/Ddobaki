@@ -10,8 +10,6 @@ import com.example.demo.dao.BoardDAO;
 import com.example.demo.dao.PlaceDAO;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Place;
-import com.example.demo.vo.Reply;
-import com.example.demo.vo.UserInfo;
 
 import lombok.Setter;
 
@@ -32,6 +30,7 @@ public class BoardService {
 	public void save(Board b) {
 		dao.save(b);
 	}
+	
 
 	public List<Board> findAll() {
 		return dao.findAll();
