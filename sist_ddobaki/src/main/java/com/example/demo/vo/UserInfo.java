@@ -45,6 +45,7 @@ public class UserInfo{
 	@Column(columnDefinition="varchar2(3000)", nullable = true)
 	private String user_file;
 	
+	
 	private MultipartFile uploadFile;
 	
 	@Column
