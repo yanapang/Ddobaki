@@ -36,8 +36,12 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	public List<Board> findByPlaceNum(int place_num);
 
 	//유저 번호로 쓴 글 출력(내가 쓴 글 출력)
-	@Query(value="select * from Board where user_num =:user_num order by post_regdate desc",nativeQuery = true)
+	@Query(value="select * from Board where user_num =:user_num and board_num !=3 order by post_regdate desc",nativeQuery = true)
 	public List<Board> findByUserNum(int user_num);
+	
+	//내가 쓴 리뷰
+	@Query(value="select * from Board where user_num =:user_num and board_num=3 order by post_regdate desc",nativeQuery = true)
+	public List<Board> findByUserNumReview(int user_num);
 	
 	//오늘의 추천게시물 + 
 	@Query(value="select * from Board where post_num=:post_num",nativeQuery = true)

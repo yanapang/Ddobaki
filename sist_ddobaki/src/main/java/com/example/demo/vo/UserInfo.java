@@ -46,8 +46,7 @@ public class UserInfo{
 	
 	@Column(nullable = false)
 	private String user_role;
-	
-	
+		
 	@JsonIgnore
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Dog> dog;

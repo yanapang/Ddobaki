@@ -27,6 +27,14 @@
 }
 </style>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+	<script type="text/javascript">
+	
+	/*
+	$(function(){
+>>>>>>> refs/remotes/origin/Board
+
+<<<<<<< HEAD
 <body>
 	<main style="position: relative;">
 		<div id="imgBox" class="rounded-circle"
@@ -279,7 +287,10 @@
 	
 	<script type="text/javascript">
 	$(".deleteDogBtn").click(function(){ 
+=======
+>>>>>>> refs/remotes/origin/Board
 		
+<<<<<<< HEAD
 		var str = ""
 		var tdArr = new Array();	// 배열 선언
 		var deleteBtn = $(this);
@@ -305,7 +316,391 @@
 		})
 	});
 
+=======
+		console.log("화면 켜짐");
+		$.ajax({
+			url : "/myPageBlist",
+			
+			success:function(blist){						
+				
+				//console.log(blist);
+				
+				for(var i=0; i<blist.length;i++){	
+												//확인 && blist[i].userinfo.user_num == 2 
+						if(blist[i].board_num != 3){
+							$("#myBoard").append("<tbody>");
+							$("#myBoard").append("<tr>");
+								
+							$("#myBoard").append("<td>"+blist[i].post_num+"</td>");
+							$("#myBoard").append("<td><a href=/detailPost"+"/"+blist[i].board_num+"/"+blist[i].post_num+">"+blist[i].post_title+"</a></td>");
+							$("#myBoard").append("<td>"+blist[i].post_hit+"</td>");					
+
+							$("#myBoard").append("</tr>");
+							$("#myBoard").append("</tbody>");
+						}						
+						
+						else if(blist[i].board_num == 3){
+							$("#myReview").append("<tbody>");
+							$("#myReview").append("<tr>");
+									
+							$("#myReview").append("<td>"+blist[i].post_num+"</td>");
+							$("#myReview").append("<td><a href=/detailPost"+"/"+blist[i].board_num+"/"+blist[i].post_num+">"+blist[i].post_title+"</a></td>");
+							$("#myReview").append("<td>"+blist[i].post_hit+"</td>");					
+
+							$("#myReview").append("</tr>");
+							$("#myReview").append("</tbody>");					
+						}
+				}					
+			}	
+		
+	});
+		
+		
+		
+		
+		 //plan 링크 걸기
+		$.ajax({
+			
+			url : "/myPagePlist",
+			success : function(plist){
+				console.log(plist);
+				for(var i=0; i<plist.length;i++){							
+					if(plist[i].plan_flow_num ==1){
+												
+						$("#myPlan").append("<tbody>");
+						$("#myPlan").append("<tr>");
+								
+
+						$("#myPlan").append("<td>"+plist[i].plan_name+"</td>");					
+						$("#myPlan").append("<td>"+plist[i].plan_flow_name+"</td>");					
+						$("#myPlan").append("<td>"+plist[i].plan_date+"</td>");					
+
+						$("#myPlan").append("</tr>");
+						$("#myPlan").append("</tbody>");			
+																							
+				}
+			}	
+				
+		}			
+	});
+		
+	
+	//뭘 기준으로 잡아야하는지 모르겠어용
+		/*$.ajax({
+			
+			url : "/myPlanList",
+			success : function(plist){
+				console.log(plist);
+				console.log(plist.length);
+				for(var i=0; i<plist.length;i++){
+					for(var j=0;j<plist.length;j++){
+						if(plist[i].plan_group_num == plist[j].plan_group_num){
+							var pplan = (plist[i].plan_group_num);
+							console.log(pplan);
+							if(plist[i].plan_flow_num ==1 ){
+								//var plan = plist[i].plan_name;
+								//console.log(plan); 
+					
+								
+							}
+						}
+					}
+					}
+*/
+
+
+
+	
+	$("#myRetireBtn").click(function(){
+		
+		$.ajax({
+			url:"/retireUser",
+			success:function(user_num){													
+				alert("탈퇴하였습니다.")
+			
+				}								
+		})							
+	})
+	
+		
+		
+		
+		
+		
+		
+
+//});
+
 	</script>
-</body>
+
+
+    <body>
+        <main style="position:relative;">
+            <div id="imgBox"  class="rounded-circle" style="position: absolute; background-color: orange; width: 130px; height: 130px; top: -10vh; left: 3vw; border:3px solid gray; box-sizing: border-box; overflow: hidden; align-items: center;">
+                <img src="/" alt="userImg.jpg" id="userImg" style="width:100%; height:100%">
+            </div>
+            <!-- 메뉴, 본문 전체 컨테이너 -->
+            <div
+                id="mainContainer"
+                style="
+                    display: flex;
+                    background: #9ae17b;
+                    height: 80vh;
+                    margin-top: 20vh;
+                    align-items: center;
+                    
+                "
+            >
+                <!-- 왼쪽 메뉴 영역 -->
+                <div
+                    id="myMenuContainer"
+                    style="
+                        width: 20vw;
+                        height: 60vh;
+                        background: white;
+                        padding: 0 0.5em;
+                        border-top: 3px solid gray;
+                        border-bottom: 3px solid gray;
+                        border-right: 3px solid gray;
+                    "
+                >
+                    <div id="infoMenuBox">
+                        <div id="infoMenuTitleBox">
+                            <span id="infoMenuTitle">INFO</span>
+                            <hr />
+                        </div>
+                        <ul id="infoMenu">
+                            <li>내가 쓴 글</li>
+                            <li>내가 쓴 리뷰</li>
+                            <li>내 플랜</li>
+                            <li>내 찜 리스트</li>
+                            <li>예약 및 결제 내역</li>
+                        </ul>
+                    </div>
+
+                    <div id="accountMenuBox">
+                        <div id="accountMenuTitleBox">
+                            <span id="accountMenuTitle">ACCOUNT</span>
+                            <hr />
+                        </div>
+                        <ul id="accountMenu">
+                            <li>내 정보 수정</li>
+                            <li>강아지 목록</li>
+                            <li>회원 탈퇴</li>
+                            <li>LOG OUT</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 오른쪽 본문 영역 -->
+                <div
+                    id="myPageContainer"
+                    style="
+                        width: 80vw;
+                        height: 60vh;
+                        background: white;
+                        padding: 0 1em;
+                        overflow-y: scroll;
+                        border-top: 3px solid gray;
+                        border-bottom: 3px solid gray;
+                    "
+                >
+                    <!-- info 영역 -->
+                    <div id="infoContainer" style="padding: 0.5em 0">
+                        <!-- info title -->
+                        <div id="infoTitleBox" class="bigTitleBox">INFO</div>
+
+                        <!-- 내가 쓴 글 -->
+                        <div id="myBoardBox" class="detailBox">
+                            <div id="myBoardTitleBox">
+                                <h6 id="myBoardTitle">내가 쓴 글</h6>
+                                <hr />
+                            </div>
+                            <div id="myBoardTableBox">
+                                <table id="myBoard" class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>글번호</td>
+                                            <td>글제목</td>
+                                            <td>조회수</td>
+                                        </tr>
+                                    </thead>   
+                                    <tbody>
+                                    	<tr th:each="bp:${myPost}">
+                                    	<td th:text="${bp.post_num}"></td>
+                                    	<td><a th:href="@{/detailPost/{bp.board_num}/{bp.post_num}(bp.board_num=${bp.board_num}, bp.post_num=${bp.post_num})}"
+                                    	 th:text="${bp.post_title}"></a></td>
+                                    	<td th:text="${bp.post_hit}"></td>                                   		
+                                    	</tr>                                    	
+                                    </tbody>                
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 내가 쓴 리뷰 -->
+                        <div id="myReviewBox" class="detailBox">
+                            <div id="myReviewTitleBox">
+                                <h6 id="myReviewTitle">내가 쓴 리뷰</h6>
+                                <hr />
+                            </div>
+                            <div id="myReviewTableBox">
+                                <table id="myReview" class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>글번호</td>
+                                            <td>글제목</td>
+                                            <td>조회수</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<tr th:each="br:${myReview}">
+                                    	<td th:text="${br.post_num}"></td>
+                                    	<td><a th:href="@{/detailPost/{br.board_num}/{br.post_num}(br.board_num=${br.board_num},br.post_num=${br.post_num})}"
+                                    	 th:text="${br.post_title}"></a></td>
+                                    	<td th:text="${br.post_hit}"></td>                                   		
+                                    	</tr>                                    	
+                                    </tbody>    
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 내 플랜 -->
+                        <div id="myPlanBox" class="detailBox">
+                            <div id="myPlanTitleBox">
+                                <h6 id="myPlanTitle">내 플랜</h6>
+                                <hr />
+                            </div>
+                            <div id="myPlanTableBox">
+                                <table id="myPlan" class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>여행이름</td>
+                                            <td>제목</td>
+                                            <td>여행일자</td>
+                                        </tr>
+                                    </thead>
+                                     <tbody>
+                                    	<tr th:each="p:${myPlan}">
+                                    	<td th:text="${p.plan_name}"></td>
+                                    	<td th:text="${p.plan_flow_name}"></td>
+                                    	<td th:text="${p.plan_date}"></td>                                   		
+                                    	</tr>                                    	
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 내 찜 리스트 -->
+                        <div id="myDibBox" class="detailBox">
+                            <div id="myDibTitleBox" class="table">
+                                <h6 id="myDibTitle">내 찜 리스트</h6>
+                                <hr />
+                            </div>
+                            <div id="myDibTableBox" >
+                                <table id="myDib" class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>번호</td>
+                                            <td>이름</td>
+                                            <td>주소</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 예약 및 결제 내역 -->
+                        <div id="myReservationBox" class="detailBox">
+                            <div id="myReservationTitleBox">
+                                <h6 id="myReservationTitle">
+                                    예약 및 결제 내역
+                                </h6>
+                                <hr />
+                            </div>
+                                <table id="myReservation" class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>날짜</td>
+                                            <td>결제 내역</td>
+                                            <td>가격</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                         <!-- account 영역 -->
+                    <div id="accountContainer"  style="padding: 0.5em 0">
+                        <!-- account title -->
+                        <div id="accountTitleBox" class="bigTitleBox">ACCOUNT</div>
+
+                        <!-- 내 정보 수정 -->
+                        <div id="myModifyBox" class="detailBox" >
+                            <div id="myModifyTitleBox">
+                                <h6 id="myModifyTitle">내 정보 수정</h6>
+                                <hr />
+                            </div>
+
+                            <form action="/updateUserInfo" method="post">
+                                <!-- 이미지 파일 수정 -->
+                                <input type="file" /><br />
+
+                                <!-- 비밀번호 -->
+                                비밀번호 <input type="text" /><br />
+
+                                <!-- 비밀번호 확인 -->
+                                비밀번호 확인 <input type="text" /><br />
+
+                                <!-- 닉네임 -->
+                                닉네임 <input type="text" /><br />
+
+                                <input
+                                    type="submit"
+                                    value="수정"
+                                    id="modifyBtn"
+                                />
+                            </form>
+                        </div>
+
+                        <!-- 강아지 목록 -->
+                        <div id="myDogBox" class="detailBox">
+                            <div id="myDogTitleBox" style="display:flex; justify-content: space-between;">
+                                <h6 id="myDogTitle">강아지 목록</h6>
+                                <button id="addDogBtn">추가</button>
+                            </div>
+                            <hr />
+
+                            <div id="myDogTableBox">
+                                <table id="myDog" class="table">
+                                    <thead>
+                                        <tr>
+                                            <td>이름</td>
+                                            <td>성별</td>
+                                            <td>나이</td>
+                                            <td>무게</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            
+                        </div>
+
+                        <!-- 회원 탈퇴 -->
+                        <div id="myRetireBox" class="detailBox" style="position: relative;">
+                            <div id="myRetireTitleBox">
+                                <h6 id="myRetireTitle">회원탈퇴</h6>
+                                <hr />
+                            </div>
+                            <button id="myRetireBtn" style="position:absolute; right:0">탈퇴</button>
+                        </div>
+                    </div>
+                    </div>  <!--오른쪽 본문 영역 끝  -->
+
+                   
+                </div>
+               
+            </div>
+            <!-- 전체 컨테이너 끝 -->
+        </main>
+    </body>
 </html>
 
