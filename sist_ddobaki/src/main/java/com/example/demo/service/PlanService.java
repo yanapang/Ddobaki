@@ -35,4 +35,8 @@ public class PlanService {
 	public void save(Plan p) {
 		plan_dao.save(p);
 	}
+	
+	public List<Plan> findByUserNum(int user_num){
+		return plan_dao.findByUserNum(user_num);
+	}
 }

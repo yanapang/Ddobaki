@@ -25,6 +25,7 @@ import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Reply;
 import com.example.demo.vo.ReplyAndParent;
+import com.example.demo.vo.UserInfo;
 
 import lombok.Setter;
 
@@ -47,18 +48,21 @@ public class BoardController {
 	//리스트
 	@GetMapping("/firstListBoard")						//sort 와 direction 넣으면 오류남!
 	public void listBoard(Model model) {		
-		List<Board> list = bs.findAll();
-		model.addAttribute("list", list);
-	}
 	
-	@RequestMapping(value="/getAllList",method = RequestMethod.GET)
+		List<Board> list = bs.findAll();
+					
+		model.addAttribute("list", list);		
+	}
+
+	@RequestMapping(value="/getAllList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Board> listBoardAjax(Model model) {
+		
 		List<Board> list = bs.findAll();
-		model.addAttribute("list", bs.findAll());
+		model.addAttribute("list",list);
 		return list;
 	}
-	
+	//listBoard + paging
 	//카테고리 하나 눌렀을때 그 페이지로 //여기서 상태유지한것 /*<![CDATA[*/ 이걸로 스트립트 단에서 그냥 쓰기
 	@GetMapping("/listBoard/{board_num}")
 	public ModelAndView goCategory(@PathVariable int board_num, Model model) {
@@ -74,11 +78,13 @@ public class BoardController {
 		return mav;
 	}
 	
-	//ajax
+	
+	
+	//게시글 검색
 	@RequestMapping("/findByPostTitle")
 	@ResponseBody
 	public List<Board> findByPostTitle(@RequestParam("board_num")int board_num, @RequestParam("post_keyword")String post_keyword, Model model) {	
-		//ModelAndView mav = new ModelAndView("listReviewByTitle");
+		
 		List<Board> reviewList = bs.findByPostTitle(board_num, post_keyword);
 		model.addAttribute("findByPostTitle", bs.findByPostTitle(board_num, post_keyword));	
 		System.out.println("사용자가 검색한 제목:"+post_keyword);

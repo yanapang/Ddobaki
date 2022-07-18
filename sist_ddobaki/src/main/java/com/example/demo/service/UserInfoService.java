@@ -35,5 +35,10 @@ public class UserInfoService {
 	public int getNextUserNum() {
 		return dao.getNextUserNum();
 	}
+
+	public void deleteUser(int user_num) {
+		dao.deleteByUserNum(user_num);
+	}
+
 	
 }

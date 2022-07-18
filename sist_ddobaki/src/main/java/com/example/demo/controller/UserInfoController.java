@@ -39,5 +39,7 @@ public class UserInfoController {
 		 return userInfo;
 		 //return "redirect:/insertPlan";
 	}
+	
+	
 }
 
