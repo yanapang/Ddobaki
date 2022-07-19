@@ -44,9 +44,13 @@ public class BoardService {
 	}
 	
 	public void insertReview(Board b, int place_num) {
-		Optional<Place> findPlace=pDAO.findById(place_num);
+		Optional<Place> findPlace=Optional.ofNullable(pDAO.findById(place_num));
 		b.setPlace(findPlace.get());
 		dao.insertReview(b);
+	}
+	
+	public List<Board> findByPlaceNum(int place_num) {
+		return dao.findByPlaceNum(place_num);
 	}
 	
 	public Board findByPostNum(int post_num) {

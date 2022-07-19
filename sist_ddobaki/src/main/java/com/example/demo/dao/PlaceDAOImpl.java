@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
+import com.example.demo.dto.PlaceSearchCondition;
 import com.example.demo.vo.Place;
-import com.example.demo.vo.PlaceSearchCondition;
 import com.example.demo.vo.QPlace;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -14,18 +15,16 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class PlaceRepositoryImpl implements PlaceRepositoryCustom{
-	
-
+public class PlaceDAOImpl implements PlaceCustomDAO {
 
 	@Autowired
 	JPAQueryFactory factory;
 
 	QPlace p = QPlace.place;
-	
+
 	@Override
 	public List<Place> searchTest(PlaceSearchCondition condition) {
-	
+
 		Integer place_region_num = condition.getPlace_region_num();
 		Integer place_type_num = condition.getPlace_type_num();
 		String place_name = condition.getPlace_name();
@@ -33,7 +32,6 @@ public class PlaceRepositoryImpl implements PlaceRepositoryCustom{
 		Integer place_spa = condition.getPlace_spa();
 		Integer place_meal = condition.getPlace_spa();
 		Integer place_weight = condition.getPlace_weight();
-		
 		return factory.selectFrom(p)
 				.where(placeRegionNumEquals(place_region_num), placeTypeNumEquals(place_type_num),
 						placeNameLike(place_name), placeParkEquals(place_park), placeSpaEquals(place_spa),
@@ -50,7 +48,7 @@ public class PlaceRepositoryImpl implements PlaceRepositoryCustom{
 	}
 
 	private BooleanExpression placeNameLike(String place_name) {
-		return Objects.isNull(place_name) ? null : p.place_name.like(place_name);
+		return StringUtils.isEmpty(place_name) ? null : p.place_name.contains(place_name);
 	}
 
 	private BooleanExpression placeParkEquals(Integer place_park) {
@@ -69,6 +67,7 @@ public class PlaceRepositoryImpl implements PlaceRepositoryCustom{
 		return Objects.isNull(place_weight) ? null : p.place_weight.eq(place_weight);
 	}
 	
+
 	
 
 }
