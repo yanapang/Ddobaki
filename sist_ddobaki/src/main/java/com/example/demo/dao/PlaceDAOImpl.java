@@ -66,8 +66,11 @@ public class PlaceDAOImpl implements PlaceCustomDAO {
 	private BooleanExpression placeWeightEquals(Integer place_weight) {
 		return Objects.isNull(place_weight) ? null : p.place_weight.eq(place_weight);
 	}
-	
 
-	
+//	@Override
+//	public List<Place> searchTest(com.example.demo.dto.PlaceSearchCondition condition) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }
