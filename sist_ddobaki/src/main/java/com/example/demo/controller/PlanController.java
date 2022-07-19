@@ -56,7 +56,6 @@ public class PlanController {
 		return "/insertPlan"; //model에값들 담고 insertPlan페이지로 입력 받으러 리디렉션!
 	}
 
-	
 	@PostMapping("/savePlan") //플랜 저장 
 	public ModelAndView save(Plan p) {
 		planS.save(p); //insert & update
@@ -64,5 +63,4 @@ public class PlanController {
 		mav.setView(new RedirectView("/listPlan")); //향후 해당 user_num에 따른 listPlan만 보여주게 설정할예정!
 		return mav;
 	}
-	
 }

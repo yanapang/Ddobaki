@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(function(){
+	$("#subject").html(/*[[${b.post_title}]]*/);
+	$("#content").html(/*[[${b.post_content}]]*/);
+	
+})
+/*]]*/
+</script>
+</head>
+<body>
+<h4>제목 해결하기</h4>
+
+<hr>
+<div>
+글 제목 : <p id="subject"></p>
+<p>글 번호 <span th:text="${b.post_num}"></span></p>
+<p>게시판 번호 <span th:text="${b.board_num}"></span></p>
+<p>사용자 닉네임 <span th:text="${b.userinfo.user_nick}"></span></p>
+<hr>
+<p id="content">
+</p>
+</div>
+<button><a th:href="@{/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a></button>
+<button><a th:href="@{/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</a></button>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+ 
+<div><img src="/또바기.png"></div>
+
+<nav id ="main_category">
+  <a href="home">home</a> |
+  <a href="travel">travel</a> |
+  <a href="plan">plan</a> |
+  <a href="board">board</a> |
+  <a href="our team">our team</a>
+</nav>
+
+<div class="entry">
+ <span>Register</span>
+  <span>Login</span>
+  <span>My page</span>
+</div>
+
+<fieldset >
+ <nav id="board_category" ><!--goCategory가 동작해서 board_num=1일때 -->
+ 	
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice" style="text-decoration: none"></a></span>
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${2})}" th:text="Community" style="text-decoration: none"></a></span>
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${3})}" th:text="Review" style="text-decoration: none"></a></span>
+   <span><a th:href="@{/listBoard/{board_num}(board_num=${4})}" th:text="FAQ" style="text-decoration: none"></a></span>
+  </nav>
+  <!--  리뷰 x 자유게시판 공지 faq 번호 따로 받는 애덜 href = board_num=124일때
+  	앙크태그 걸때 효과 없게 하기 style="text-decoration: none"태그 안에 추가하기
+  <input type="search" placeholder="장소 이름을 검색하세요">
+  <select name="place_type" id="ptype">
+    <option value="0">말머리</option>
+    <option value="1">식음료</option>
+    <option value="2">숙박지</option>
+    <option value="3">관광지</option>
+  </select>
+  
+  <select name="place_region" id="rtype">
+    <option value="0">지역</option>
+    <option value="1">서울</option>
+    <option value="2">경기</option>
+    <option value="3">인천</option>
+    <option value="4">강원</option>
+    <option value="5">충북</option>
+    <option value="6">충남</option>
+    <option value="7">전북</option>
+    <option value="8">전남</option>
+    <option value="9">경북</option>
+    <option value="10">경남</option>
+    <option value="11">제주</option>
+  </select>
+  -->
+  <table id="list">   
+      <caption></caption>
+      <tr>
+        <thead>
+          <tr>
+            <th>글번호</th>
+             <th>글제목</th>
+             <th>조회수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="b:${list}">
+            <td th:text="${b.post_num}"></td>
+          	<td id="btnDetail"><a th:href="@{/detailPost/{b.board_num}/{b.post_num}(b.board_num=${b.board_num},b.post_num=${b.post_num})}" 
+          	style="text-decoration: none"><span th:text="${b.post_title}"></span></a>
+            <td th:text="${b.post_hit}"></td>
+       
+       
+          </tr>
+        </tbody>
+     </table>
+  <div class="page">
+    <span><</span>
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+      <span>></span>
+     
+  </div>
+  </fieldset>
+  
+</body>
+</html>

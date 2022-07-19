@@ -1,12 +1,12 @@
 package com.example.demo;
 
-import javax.persistence.EntityManager;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class SistDdobakiApplication {
@@ -15,9 +15,9 @@ public class SistDdobakiApplication {
 		SpringApplication.run(SistDdobakiApplication.class, args);
 	}
 	
-	@Bean    
-    public JPAQueryFactory jpaQueryFactory(EntityManager em) {
-        return new JPAQueryFactory(em);
-    }
-
+	@Bean(name = "uploadPath")
+	public String uploadPath() {
+		return "c:/day0704/sist_ddobaki/src/main/resources/static/images/";
+	}
 }
+	

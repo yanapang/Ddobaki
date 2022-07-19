@@ -14,19 +14,20 @@ import lombok.Setter;
 @Service
 @Setter
 public class PlaceService {
+
 	@Autowired
-	private PlaceDAO dao;
+	private PlaceDAO place_dao;
 	
-//	public List<Place> findAll(){
-//		return dao.findAll();
-//	}
-	
-	public List<Place> p(int place_num) {
-		return dao.p(place_num);
+	public List<Place> findAll(){
+		return place_dao.findAll();
 	}
 	
-	//장소번호 받아오기
-	public Optional<Place> getPlace(int place_num) {
-		return dao.findById(place_num);
+	public Place getPlace(int place_num) {
+		return place_dao.findById(place_num).get();
 	}
+	//지도카드1차 + 리뷰검색
+	public List<Place> placeNameList(int place_type_num, int place_region_num ){
+		return place_dao.placeNameList(place_type_num, place_region_num);
+	}
+
 }

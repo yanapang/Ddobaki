@@ -81,7 +81,6 @@ public class Reservation {
 	@OneToOne(mappedBy = "reservation", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Payment payment; 
 	
-	
 	//참조 받아야 하는 키
 	//user_num, place_num, room_num
 }
