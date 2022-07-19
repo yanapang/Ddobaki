@@ -56,9 +56,21 @@ public class ReplyService {
 		Optional<Reply> findReply=dao.findById(reply_num);
 		rp.setBoard(findBoard.get());
 		rp.setUserinfo(findUser.get());
-		rp.setReply_group(reply_num);
+		rp.setReply_group(findReply.get().getReply_group());
+		rp.setRef_reply_num(reply_num);
+		rp.setReply_step(getNextReplyStepByReplyGroup(findReply.get().getReply_group()));
 		dao.insertReReply(rp);
 	}
 	
+	public void deleteByPostNum(int post_num) {
+		dao.deleteReplyInMyPost(post_num);
+	}
 	
+	public void deleteReplyOneByOne(int reply_num) {
+		dao.deleteMyReplyOneByOne(reply_num);
+	}
+	
+	public int getUserNumByReplyNum(int reply_num) {
+		return dao.getUserNumByReplyNum(reply_num);
+	}
 }

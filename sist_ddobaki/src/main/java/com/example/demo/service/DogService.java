@@ -22,9 +22,9 @@ public class DogService {
 		return dao.getNextDogNum();
 	}
 	
-//	public void save(Dog d) {
-//		dao.save(d);
-//	}
+	public void save(Dog d) {
+		dao.save(d);
+	}
 	
 	public void deleteByUserDog(int dog_num, int user_num) {
 		dao.deleteByUserDog(dog_num, user_num);
@@ -36,6 +36,7 @@ public class DogService {
 	public List<Dog> findAll(){
 		return dao.findAll();
 	}
+	
 	
 	
 	

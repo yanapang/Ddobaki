@@ -52,6 +52,7 @@ public class Reservation {
 //	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private String reservation_checkin_date;
 	
+	
 	//@Column(name="reservation_checkout_date")
 	//@Temporal(TemporalType.DATE)
 //	@DateTimeFormat(pattern = "yyyy-MM-dd")

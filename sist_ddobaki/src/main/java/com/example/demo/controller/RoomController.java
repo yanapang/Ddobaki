@@ -70,7 +70,7 @@ public class RoomController {
 		map.put("reservation_checkin_date", reservation_checkin_date);
 		map.put("reservation_checkout_date", reservation_checkout_date);
 		//model.addAttribute("room", dao.getAvailable(map));
-		System.out.println("동작함!!!!!!!");
+		//System.out.println("동작함!!!!!!!");
 		return dao.getAvailable(map);
 	}
 

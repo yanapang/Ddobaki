@@ -4,24 +4,24 @@
 <header th:fragment="headerFragment">
 		<nav class="navbar">
 			<ul class="navbar_user">
-				<li><a href="">My Page</a></li>
-				<li><a href="">Log In</a></li>
-				<li><a href="">Register</a></li>
+				<li><a href="/myPage">My Page</a></li>
+				<li><a href="/login">Log In</a></li>
+				<li><a href="/logout">Log Out</a></li>
+				<li><a href="/signUp">Register</a></li>
 			</ul>
 			<div class="navbar_logo">
-				<a href="">logo here</a>
+				<a href="/main"><img alt="logo" src="/logo.png" style="width:100%; height:100%"></a>
 			</div>
 			<ul class="navbar_menu">
 				<li><a href="">Home</a></li>
 				<li><a href="/place">Place</a></li>
-				<li><a href="">Travel</a></li>
 				<li><a th:href="@{/insertPlan}+${'/'+user_num}">Plan</a></li>
-				<li class="board"><a href="">Board</a>
-					<ul class="navbar_menu_board dropdown-menu">
-						<li><a href="">Notice</a></li>
-						<li><a href="">Community</a></li>
-						<li><a href="">Review</a></li>
-						<li><a href="">FAQ</a></li>
+				<li class="board"><a href="/firstListBoard">Board</a>
+					<ul class="navbar_menu_board dropdown-menu" style="left:50%">
+						<li><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice"></a></li>
+						<li><a th:href="@{/listBoard/{board_num}(board_num=${2})}" th:text="Community"></a></li>
+						<li><a th:href="@{/listBoard/{board_num}(board_num=${3})}" th:text="Review"></a></li>
+						<li><a th:href="@{/listBoard/{board_num}(board_num=${4})}" th:text="FAQ"></a></li>
 					</ul>
 				</li>
 				<li><a href="">Our Team</a></li>
