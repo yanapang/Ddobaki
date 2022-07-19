@@ -24,7 +24,7 @@
 <!--<h3>PLAN</h3><hr>-->
 <section>
 <div class="container border">
-    <form action="/savePlan" method="post">
+    <form th:action="@{/savePlan}+${'/'+user_num}"w method="post">
      <div class="form-inline">
 		<!-- 여행 타이틀 (plan_group_num) -->
 		<div class="input-group grpNum">
@@ -80,7 +80,7 @@
 		<!-- 플랜 그룹 정보 -->
 		<div class="border input_box">
 			<!-- 유저 번호(user_num) -->
-			<input type="hidden" id="userNum" name="userinfo.user_num" th:value="${user}">
+			<input type="hidden" id="userNum" name="userinfo.user_num" th:value="${user_num}">
 			<!-- 여행 세부 내용 -->
 			<!--<input id="plannum" type="hidden" name="plan_num" th:value="${plannum}">	-->		
 

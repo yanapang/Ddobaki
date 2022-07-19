@@ -123,9 +123,11 @@ public class PlanController {
 			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 	        String user_id=userDetails.getUsername();
 	        int user_num=userS.findByUser_id(user_id).getUser_num();
+	        
+	        System.out.println("user_num : "+ user_num);
 			//유저번호로 유저 정보 상태유지, 로그인 구현후 session 저장값 사용예정 
 			//model.addAttribute("user", userS.getUser(user_num)); 
-	        model.addAttribute("user", user_num);
+	        model.addAttribute("user_num", user_num);
 			//DB내 모든 장소리스트 
 			model.addAttribute("place_list", placeS.findAll()); 
 			
@@ -140,7 +142,7 @@ public class PlanController {
 		}
 
 		
-		@PostMapping("/savePlan") //플랜 저장 
+		@PostMapping("/savePlan/{user_num}") //플랜 저장 
 		public ModelAndView save(PlanDTO pDTO, RouteDTO rDTO, Authentication authentication) {
 			//System.out.println(pDTO);
 			

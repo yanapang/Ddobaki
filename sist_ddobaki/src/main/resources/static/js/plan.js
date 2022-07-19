@@ -7,6 +7,8 @@ var i = 0;
 $(function() {
 	var user_num = $("#userNum").val(); // 실제 구현시 세션에 저장된 user_num 가져오기 
 
+	console.log(user_num);
+	
 	var flowNumCnt = 0;
 	var flowNameCnt = 0;
 	var placeNumCnt = 0;
