@@ -38,3 +38,4 @@ public class PlaceController {
 		return list;
 	}
 }
+

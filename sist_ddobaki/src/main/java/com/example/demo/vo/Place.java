@@ -102,4 +102,3 @@ public class Place {
 	@OneToMany(mappedBy="place", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Plan> plan;
 }
-

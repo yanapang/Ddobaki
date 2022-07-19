@@ -51,7 +51,7 @@ public class PlanController {
 		//로그인 구현 후 httpSession에 담긴 값을 활용할 예정. 
 		model.addAttribute("user", userS.getUser(user_num)); 
 		model.addAttribute("plan_list", planS.findAll());  //플랜과 플레이스 전체값 model로 유지.
-		model.addAttribute("place_list", placeS.findAll()); //플랜은 향후 해당 유저의 플랜만 입력 뷰페이지로 보내는 방식으로 수정 예정?
+//		model.addAttribute("place_list", placeS.findAll()); //플랜은 향후 해당 유저의 플랜만 입력 뷰페이지로 보내는 방식으로 수정 예정?
 		model.addAttribute("plannum", planS.getNextPlanNum());
 		return "/insertPlan"; //model에값들 담고 insertPlan페이지로 입력 받으러 리디렉션!
 	}

@@ -20,3 +20,4 @@ public interface PlaceDAO extends JpaRepository<Place, Integer> {
 //	public List<Place> findByPlaceName (String place_name);
 
 }
+

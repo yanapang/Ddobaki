@@ -35,4 +35,3 @@ public class Dog {
 	private int dog_weight;
 
 }
-

@@ -22,12 +22,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!--  
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		-->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -69,13 +69,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--  
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		-->
+	
 		<!--Multipart File Up&Download -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -105,6 +105,13 @@
 		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
 		    <version>2.7.1</version>
 		</dependency> -->
+				
+		<!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 --> 
+		<dependency>
+		    <groupId>org.springframework.security.oauth</groupId>
+		    <artifactId>spring-security-oauth2</artifactId>
+		    <version>2.3.6.RELEASE</version>
+		</dependency>
 		
 		<dependency>
 		   <groupId>org.springframework.boot</groupId>
@@ -152,6 +159,33 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		
+		<dependency>
+	        <groupId>org.thymeleaf.extras</groupId>
+	        <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+	        <version>2.1.2.RELEASE</version>
+	    </dependency>
+		
+		<!-- Querydsl 사용을 위한 dependency -->
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+		</dependency>
+		
+		<!-- 헤더 푸터 -->
+		<dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -172,3 +206,4 @@
 	</build>
 
 </project>
+
