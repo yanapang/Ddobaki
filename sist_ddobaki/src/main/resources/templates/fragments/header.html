@@ -16,10 +16,10 @@
 			</div>
 			<ul class="navbar_menu">
 				<li><a href="/main">Home</a></li>
-				<li><a href="">Place</a></li>
+				<li><a href="/place">Place</a></li>
 				<li><a href="">Travel</a></li>
-				<li><a th:href="@{/insertPlan}+${'/'+user_num}">Plan</a></li>
-				<li class="board"><a href="">Board</a>
+				<li><a th:href="@{/plan/insertPlan}">Plan</a></li>
+				<li class="board"><a href="/firstListBoard">Board</a>
 					<ul class="navbar_menu_board dropdown-menu">
 						<li><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice"></a></li>
 						<li><a th:href="@{/listBoard/{board_num}(board_num=${2})}" th:text="Community"></a></li>
