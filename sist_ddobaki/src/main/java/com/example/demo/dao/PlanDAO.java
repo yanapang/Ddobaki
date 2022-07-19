@@ -16,7 +16,6 @@ public interface PlanDAO extends JpaRepository<Plan, Integer> {
 	public int getNextPlanNum();
 	
 	
-	@Query(value="select * from Plan where user_num =:user_num order by plan_date desc",nativeQuery = true)
+	@Query(value="select * from Plan where user_num =:user_num order by plan_date",nativeQuery = true)
 	public List<Plan> findByUserNum(int user_num);
 }
-

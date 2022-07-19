@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -42,11 +42,12 @@ img.thumbnail {
 </style>
 </head>
 <body>
-	<!-- header fragment 사용 -->
-	<th:block th:replace="fragments/header :: headerFragment"></th:block>
-	<th:if="${username != null}">
+<th:if="${username != null}">
 	<p th:text="${username}"><span>님 안녕하세요</span></p>
 	</th:if>
+	<!-- header fragment 사용 -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
 	<!-- 이미지 슬라이드 -->
 	<div id="imgbox" style="height: 300px;">
 		<div id="slider-div">
@@ -127,7 +128,7 @@ img.thumbnail {
 			$.ajax({
 				
 				url: "/mainPlaceImg",
-				data: {place_region_num:1},
+				data: {place_region_num:1},
 				success:function(data){
 					console.log(data);
 					data.sort(function(a,b){
@@ -154,7 +155,7 @@ img.thumbnail {
 			$.ajax({
 				
 				url: "/mainByBoard",
-				data: {board_num:2},
+				data: {board_num:2},
 				success:function(data){
 					console.log(data);
 					data.sort(function(a,b){
@@ -192,7 +193,7 @@ img.thumbnail {
 			$.ajax({
 				
 				url: "/mainPlaceImg",
-				data: temp,
+				data: temp,
 				success:function(data){
 					console.log(data);
 					data.sort(function(a,b){
@@ -230,7 +231,7 @@ img.thumbnail {
 			$.ajax({
 				
 				url: "/mainByBoard",
-				data: temp1,
+				data: temp1,
 				success:function(data){
 					console.log(data);
 					data.sort(function(a,b){

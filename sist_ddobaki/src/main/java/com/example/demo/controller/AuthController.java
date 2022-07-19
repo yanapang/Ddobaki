@@ -15,6 +15,7 @@ import com.example.demo.vo.UserInfo;
 
 import lombok.RequiredArgsConstructor;
 @Controller
+
 @RequiredArgsConstructor
 public class AuthController {
 	

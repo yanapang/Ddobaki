@@ -163,12 +163,13 @@ border-width: thin;
 	<input type="hidden" th:name="post_num" th:value="${b.post_num}">
 	<input type="hidden" th:name="board_num" th:value="${b.board_num}">
 	<input type="hidden" name="reply_num" id="ref_reply_num" value="0">
-	사용자 : <select name="user_num">
+	<!-- 사용자 : <select name="user_num">
 		<option> 사용자선택 </option>
 		<option th:each="u : ${user_list}"
 				th:value="${u?.user_num}"
 				th:utext="${u?.user_nick}"></option>
-		</select>
+		</select> -->
+	<input type="hidden" name="user_num" th:value="${user_num}">
 	<br>
 	<textarea id="reply_content" name="reply_content" rows="2" cols="90"></textarea>
 	<button type="submit" id="submit" name="submit">등록</button>

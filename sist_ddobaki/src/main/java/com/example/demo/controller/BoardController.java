@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -92,7 +91,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/board/insertBoard/{board_num}", method = RequestMethod.GET)
-	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model) {
+	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model,Authentication authentication) {
 		ModelAndView mav=new ModelAndView("insertBoard");
 		if(board_num==3) {
 			//System.out.println("리뷰면 컨트롤러가 여기까지 오나요?");
@@ -101,7 +100,11 @@ public class BoardController {
 		System.out.println("게시판글쓰기폼컨트롤러 왔다");
 		//System.out.println(board_num);
 		model.addAttribute("board_num", board_num);
-		model.addAttribute("user_list", uis.findAll());
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String user_id=userDetails.getUsername();
+        UserInfo user=uis.findByUser_id(user_id);
+        model.addAttribute("user", user);
+		//model.addAttribute("user_list", uis.findAll());
 		return mav;
 	}
 	
@@ -122,14 +125,18 @@ public class BoardController {
 	
 	//상세보기 눌렀을때 board_num도 함께 가도록 + 조회수 증가
 	@GetMapping("/detailPost/{board_num}/{post_num}")
-	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model) {
+	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model, Authentication authentication) {
 		//System.out.println("detailPost의 board_num:"+board_num);
 		//System.out.println("detailPost의 post_num:"+post_num);
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String user_id=userDetails.getUsername();
+        int user_num=uis.findByUser_id(user_id).getUser_num();
 		ModelAndView mav = new ModelAndView("detailPost");
 		model.addAttribute("b",bs.detailPost(board_num, post_num));
 		model.addAttribute(bs.plusPostHit(post_num));
 		model.addAttribute("post_num", post_num);
-		model.addAttribute("user_list", uis.findAll());
+		model.addAttribute("user_num", user_num);
 		model.addAttribute("reply_list", rps.findByPostNum(post_num));
 		List<Reply> list=rps.findByPostNum(post_num);
 		List<ReplyAndParent> list2= new ArrayList<ReplyAndParent>();
