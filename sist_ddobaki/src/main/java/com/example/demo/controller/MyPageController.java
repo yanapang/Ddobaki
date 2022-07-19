@@ -98,9 +98,10 @@ public class MyPageController {
 	
 	@ResponseBody
 	@GetMapping("/retireUser")
-	public String retire(int user_num) {
+	public void retire(int user_num) {
+		System.out.println("탈퇴");
 		userInfoService.deleteUser(user_num);
-		return "redirect:/main";
+		//return "redirect:/main";
 	}
 	
 //	@RequestMapping(value = "/mainPlaceImg", method = RequestMethod.GET)
