@@ -23,12 +23,8 @@
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-<!-- font-awesome icon -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-<title>Insert title here</title>
-</head>
 
+<title>Insert title here</title>
 
 <!-- css -->
 <style type="text/css">
@@ -57,19 +53,23 @@
 	bottom: 0;
 	right: 0;
 	margin: 10px;
-	display: flex;
+	display:flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap:wrap;
 }
 
 #dibBox {
+
 	padding-left: 0.4em;
 }
 </style>
 
-
+<!-- font-awesome icon -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
 
 
 <body>
@@ -117,11 +117,13 @@
 							<div id="typeBox" th:case="1">
 								<span>숙소</span>
 							</div>
-							<div id="typeBox" th:case="2"><span>식음료</span></div>
-							<div id="typeBox" th:case="3"><span>관광</span></div>
+							<div id="typeBox" th:case="2" th:text="식음료"
+								style="padding-bottom: 10px"></div>
+							<div id="typeBox" th:case="3" th:text="관광"
+								style="padding-bottom: 10px"></div>
 						</th:block>
 
-						<!-- like insert를 위한 place_num, user_num 값 가져오기  -->
+						<!-- like insert를 위한 place_num, user_num 값 가져오 -->
 						<input id="place_num" th:value="${place.place_num}"
 							style="display: none"> <input id="user_num"
 							th:value="${session.user_num}" style="display: none">
@@ -196,11 +198,9 @@
 						<!-- 장소 예약, 찜 버튼  -->
 						<div id="btnBox">
 							<button id="rsBtn" class="btn btn-success"
-								th:onclick="'location.href=\''+@{'/reservation/insertReservation/'+${session.user_num}+'/'+${place.place_num}}+'\''">예약</button>
-							<div id="dibBox">
-								<i id="dib" class="fa-regular fa-heart fa-2x"
-									onclick="myLike(this)"></i>
-							</div>
+								th:onclick="'location.href=\''+@{'/insertReservation/'+${session.user_num}+'/'+${place.place_num}}+'\''">예약</button>
+							<div id="dibBox"><i id="dib" class="fa-regular fa-heart fa-2x"
+								onclick="myLike(this)"></i></div>
 						</div>
 
 					</div>
@@ -327,4 +327,3 @@
 	</script>
 </body>
 </html>
-

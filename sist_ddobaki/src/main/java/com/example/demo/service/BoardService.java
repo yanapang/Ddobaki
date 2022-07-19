@@ -4,16 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.BoardDAO;
 import com.example.demo.dao.PlaceDAO;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Place;
-import com.example.demo.vo.Reply;
-import com.example.demo.vo.UserInfo;
 
 import lombok.Setter;
 

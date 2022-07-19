@@ -39,6 +39,11 @@ h6 {
 .form-group {
 	padding: 0.4em 0;
 }
+.table{
+ width: 100%;
+  text-align: justify;
+  table-layout : fixed;
+}
 </style>
 
 <body>
@@ -215,7 +220,7 @@ h6 {
 									<td>가격</td>
 								</tr>
 							</thead>
-
+							
 							<tbody>
 								<tr th:each="r: ${reservation}">
 									<td
@@ -336,6 +341,7 @@ h6 {
 							<hr />
 						</div>
 						<button id="myRetireBtn" style="position: absolute; right: 0">탈퇴</button>
+						<input id="user_num" th:value=${session.user_num}>
 					</div>
 				</div>
 			</div>
@@ -349,6 +355,8 @@ h6 {
 	</main>
 
 	<script type="text/javascript">
+	var user={};
+	user['user_num']=parseInt(document.getElementById('user_num').value); 
 		$(".deleteDogBtn").click(function() {
 
 			var str = ""
@@ -382,6 +390,23 @@ h6 {
 			console.log(files);
 			console.log(fileVal);
 		});
+		
+		
+		$("#myRetireBtn").click(function(){
+			
+			
+			$.ajax({
+				url : "/retireUser",
+				data: user,
+				success : function(data){
+					alert("탈퇴되었습니다.")
+				}
+				
+				
+			})
+			
+		
+		})
 
 		/* 	function myBoardTitleClick(data){
 				var offset =$("#myBoardTitle").offset();
