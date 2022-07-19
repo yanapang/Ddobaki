@@ -12,8 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 import lombok.Data;
 
@@ -22,7 +29,6 @@ import lombok.Data;
 @Table(name = "reservation")
 public class Reservation {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int reservation_num;
 	
 	@Column(columnDefinition = "number default 0", nullable = false)
@@ -38,9 +44,11 @@ public class Reservation {
 	private int reservation_price;
 	
 	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date reservation_checkin_date;
 	
 	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date reservation_checkout_date;
 	
 	@Column(columnDefinition = "number default 1", nullable = false)
@@ -55,19 +63,22 @@ public class Reservation {
 	@Column(columnDefinition = "number default 0", nullable = false)
 	private int reservation_l_dog_cnt;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "user_num", insertable = true, updatable = true)
 	private UserInfo userinfo;
 	
-	@ManyToOne
+
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "place_num", insertable = true, updatable = true)
 	private Place place;
 	
-	@ManyToOne
+
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "room_num", insertable = true, updatable = true)
 	private Room room;
 	
-	@OneToOne(mappedBy = "reservation", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	@OneToOne(mappedBy = "reservation", fetch=FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Payment payment; 
 	
 	//참조 받아야 하는 키

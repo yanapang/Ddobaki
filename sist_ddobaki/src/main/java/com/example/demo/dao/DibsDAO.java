@@ -19,8 +19,8 @@ public interface DibsDAO extends JpaRepository<Dibs, Integer> {
 	@Query("select nvl(max(dib_num),0)+1 from Dibs")
 	public int getNextDibNum();
 	
-	@Query(value="select * from Dibs where user_num=:user_num",nativeQuery = true)
-	public List<Dibs> findByUserNum(int user_num);
+//	@Query(value="select * from Dibs where user_num=:user_num",nativeQuery = true)
+//	public List<Dibs> findByUserNum(int user_num);
 	
 	@Query(value="select * from Dibs where place_num=:place_num",nativeQuery = true)
 	public List<Dibs> findByPlaceNum(int place_num);
@@ -29,5 +29,9 @@ public interface DibsDAO extends JpaRepository<Dibs, Integer> {
 	@Transactional
 	@Query(value="delete from Dibs d where d.place.place_num=:place_num and d.userinfo.user_num=:user_num")
 	void deleteByUserPlace(int place_num, int user_num);
+	
+
+	@Query("SELECT d FROM Dibs d where user_num=:user_num")
+	public List<Dibs> findByUserNum(int user_num);
 	
 }

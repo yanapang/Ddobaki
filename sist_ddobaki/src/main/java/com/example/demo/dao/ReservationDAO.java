@@ -41,4 +41,6 @@ public interface ReservationDAO extends JpaRepository<Reservation, Integer> {
 	public List<Reservation> findByUserNum(@Param("user_num") int user_num);
 	
 	
+	
 }
+
