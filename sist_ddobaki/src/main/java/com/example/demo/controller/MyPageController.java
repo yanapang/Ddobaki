@@ -38,7 +38,8 @@ public class MyPageController {
 	
 	@Autowired
 	private DibsService ds;
-
+	
+	@Autowired
 	private PlanService ps;
 	/*
 	@GetMapping("/myPage")
@@ -52,7 +53,7 @@ public class MyPageController {
 	@RequestMapping(value="/myPage", method=RequestMethod.GET)
 	public ModelAndView myPageView( Model model, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int user_num = 2;
+		int user_num = 1;
 		// 세션 값 설정
 		session.setAttribute("user_num", user_num);
 		// 세션 무한 유지
