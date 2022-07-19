@@ -14,12 +14,14 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.NoArgsConstructor;
 
+
 @NoArgsConstructor
 public class PlaceDAOImpl implements PlaceCustomDAO {
 
 	@Autowired
 	JPAQueryFactory factory;
 
+	
 	QPlace p = QPlace.place;
 
 	@Override

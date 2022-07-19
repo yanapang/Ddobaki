@@ -13,8 +13,6 @@ import com.example.demo.auth.PrincipalDetails;
 import com.example.demo.dao.UserInfoDAO;
 import com.example.demo.vo.UserInfo;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 
