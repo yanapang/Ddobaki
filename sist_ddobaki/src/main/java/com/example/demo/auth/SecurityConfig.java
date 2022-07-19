@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.example.demo.auth.LoginAuthHandler;
-import com.example.demo.auth.PrincipalDetailsService;
 import com.example.demo.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -65,14 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/main")
                 .invalidateHttpSession(true);
-    }
-    
-//    @Override
-//    @Bean
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//    	auth.userDetailsService(as).passwordEncoder(new BCryptPasswordEncoder());
-//    }
-//    
+    }  
     
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {

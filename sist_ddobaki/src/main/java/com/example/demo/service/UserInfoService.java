@@ -39,6 +39,9 @@ public class UserInfoService {
 	public void deleteUser(int user_num) {
 		dao.deleteByUserNum(user_num);
 	}
-
+	
+	public UserInfo findByUser_id(String user_id) {
+		return dao.findByUser_id(user_id);
+	}
 	
 }

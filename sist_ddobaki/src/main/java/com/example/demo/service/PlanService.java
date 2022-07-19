@@ -40,3 +40,4 @@ public class PlanService {
 		return plan_dao.findByUserNum(user_num);
 	}
 }
+
