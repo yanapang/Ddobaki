@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.PlaceDAO;
+import com.example.demo.dto.PlaceSearchCondition;
 import com.example.demo.vo.Place;
-import com.example.demo.vo.PlaceSearchCondition;
 
 import lombok.Setter;
 
@@ -25,9 +25,9 @@ public class PlaceService {
 	@Autowired
 	private PlaceDAO dao;
 
-//	public List<Place> findAll(){
-//		return dao.findAll();
-//	}
+	public List<Place> findAll() {
+		return dao.findAll();
+	}
 
 	public List<Place> findByCondition(PlaceSearchCondition condition) {
 		return dao.searchTest(condition);
@@ -36,7 +36,7 @@ public class PlaceService {
 	public Place getPlace(int place_num) {
 		return dao.findById(place_num).get();
 	}
-	
+
 //	public Place getPlace(Integer place_num) {
 //		return dao.getById(place_num);
 //	}
@@ -44,8 +44,14 @@ public class PlaceService {
 	public int updateHit(int place_num) {
 		return dao.updateHit(place_num);
 	}
-	
-	public List<Place> findByRegionNum(int place_region_num){
+
+	public List<Place> findByRegionNum(int place_region_num) {
 		return dao.findByRegionNum(place_region_num);
 	}
+
+	// 지도카드1차 + 리뷰검색
+	public List<Place> placeNameList(int place_type_num, int place_region_num) {
+		return dao.placeNameList(place_type_num, place_region_num);
+	}
+
 }

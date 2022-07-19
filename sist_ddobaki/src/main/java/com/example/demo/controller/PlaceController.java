@@ -1,16 +1,16 @@
 package com.example.demo.controller;
 
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.dao.PlaceDAO;
+import com.example.demo.dto.PlaceSearchCondition;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.DibsService;
 import com.example.demo.service.PlaceImageService;
@@ -29,8 +29,6 @@ import com.example.demo.service.PlaceImageService;
 import com.example.demo.service.PlaceService;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Place;
-import com.example.demo.vo.PlaceImage;
-import com.example.demo.vo.PlaceSearchCondition;
 
 @RestController
 public class PlaceController {
@@ -102,17 +100,21 @@ public class PlaceController {
 
 	}
 
-	@GetMapping("/detailPlace/{place_num}")
-	public ModelAndView detailPlace(@PathVariable int place_num, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	@GetMapping("/place/detailPlace/{place_num}")
+	public ModelAndView detailPlace(@PathVariable int place_num, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
 		
-		int user_num = 4;
+//		int user_num = 4;
+//		
+//		
+//		// 세션 무한 유지
+//		session.setMaxInactiveInterval(-1);
 		
-		//세션 값 설정
-		session.setAttribute("user_num", user_num);
-		
-		// 세션 무한 유지
-		session.setMaxInactiveInterval(-1);
-		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String user_id=userDetails.getUsername();
+        int user_num=us.findByUser_id(user_id).getUser_num();
+//		
+        //세션 값 설정
+        session.setAttribute("user_num", user_num);
 		
 		ModelAndView mav = new ModelAndView("detailPlace");
 		placeService.updateHit(place_num);
@@ -121,6 +123,30 @@ public class PlaceController {
 		mav.addObject("piList", placeImgService.getPlaceImage(place_num));
 		return mav;
 	}
+	
+	@GetMapping("/listPlace")
+	@ResponseBody
+	public List<Place> list() {
+		return placeService.findAll();
+	}
+	
+	@GetMapping("/getPlace/{place_num}")
+	public Place getPlace(@PathVariable int place_num) {
+		return placeService.getPlace(place_num);
+	}
+	
+	@GetMapping("/listReviewPlace")
+	@ResponseBody
+	public List<Place> findByRandT(@RequestParam int place_region_num, int place_type_num){
+		//System.out.println("place컨트롤러 옴");
+		//System.out.println("매개변수로 온 region_num"+place_region_num);
+		//System.out.println("매개변수로 온 type_num"+place_type_num);
+		List<Place> list=placeService.placeNameList(place_region_num, place_type_num);
+		//model.addAttribute("place_list", list);
+		//System.out.println("출력될 리스트 길이:"+list.size());
+		return list;
+	}
+	
 	
 
 }

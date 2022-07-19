@@ -37,5 +37,11 @@ public class Reply {
 	
 	@Column(length=4000)
 	private String reply_content;
+	
+	@Column(nullable = false, columnDefinition = "number default 0")
+	private int isDeleted;
+	
+	@Column(nullable = false, columnDefinition = "number default 0")
+	private int ref_reply_num;
 
 }

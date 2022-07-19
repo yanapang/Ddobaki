@@ -21,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,21 +51,22 @@ public class Board {
 	@Column(nullable = false, columnDefinition = "number default 0")
 	private int post_hit;
 		
-	//user_num과 다대일 fk
-	@JsonIgnore
+	//user_num과 다대일 fk		//findAll 찍을때 안나와서 jsonignore 삭제
+	
 	@ManyToOne
 	@JoinColumn(name="user_num", insertable = true, updatable = true, nullable = false)
 	private UserInfo userinfo;
 	
 	//place_num과 다대일/fk/null허용 
 	@JsonIgnore
+	//@SuppressWarnings(value={"all"})
 	@ManyToOne
 	@JoinColumn(name="place_num",insertable = true, updatable = true, nullable = true)
 	private Place place;
 
 	@JsonIgnore
 	@Column(nullable = true)
-	@OneToMany(mappedBy="board", fetch=FetchType.LAZY,cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy="board", fetch=FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Reply> reply;
 
 }

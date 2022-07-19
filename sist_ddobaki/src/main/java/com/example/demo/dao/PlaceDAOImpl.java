@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 
+import com.example.demo.dto.PlaceSearchCondition;
 import com.example.demo.vo.Place;
-import com.example.demo.vo.PlaceSearchCondition;
 import com.example.demo.vo.QPlace;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;

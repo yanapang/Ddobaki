@@ -24,5 +24,9 @@ public interface PlaceDAO extends JpaRepository<Place, Integer>, PlaceCustomDAO 
 	@Query("select p from Place p where place_region_num=:place_region_num")
 	public List<Place> findByRegionNum(@Param("place_region_num") int place_region_num);
 	
+	//리뷰-지도카드 검색 1차(지역/말머리) ++ 리뷰 조건으로 검색할떄도 필요함!
+	@Query(value="select * from Place where place_region_num =:place_region_num and place_type_num=:place_type_num",nativeQuery = true)
+	public List<Place> placeNameList(int place_region_num, int place_type_num);
+	
 	
 }

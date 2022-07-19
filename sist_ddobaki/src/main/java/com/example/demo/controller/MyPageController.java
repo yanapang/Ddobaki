@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,15 +26,20 @@ import com.example.demo.service.BoardService;
 import com.example.demo.service.DibsService;
 import com.example.demo.service.DogService;
 import com.example.demo.service.PlaceService;
+import com.example.demo.service.PlanService;
 import com.example.demo.service.ReservationService;
+import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Dog;
 import com.example.demo.vo.Place;
+import com.example.demo.vo.UserInfo;
 
 @RestController
 public class MyPageController {
+	
 	@Autowired
-	private PlaceService placeService;
+	private PlanService ps;
+	
 
 	@Autowired
 	private BoardService bs;
@@ -45,26 +52,45 @@ public class MyPageController {
 	
 	@Autowired
 	private DogService dogService;
+	
+	@Autowired
+	private UserInfoService userInfoService;
 
 	@GetMapping("/myPage")
 	public ModelAndView myPageView( Model model, HttpSession session,
-			HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int user_num = 2;
-
-		// 세션 값 설정
-		session.setAttribute("user_num", user_num);
-
-		// 세션 무한 유지
-		session.setMaxInactiveInterval(-1);
+			HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+//		int user_num = 2;
+//
+//		// 세션 값 설정
+//		session.setAttribute("user_num", user_num);
+//
+//		// 세션 무한 유지
+//		session.setMaxInactiveInterval(-1);
+		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String user_id=userDetails.getUsername();
+        int user_num=userInfoService.findByUser_id(user_id).getUser_num();
+        //model.addAttribute("user", user);
 
 		ModelAndView mav = new ModelAndView("myPage");
 		mav.addObject("reservation",rs.findByUserNum(user_num));
 		mav.addObject("dib",ds.findByUserNum(user_num));
 		mav.addObject("dogs",dogService.findByDogUserNum(user_num));
+		mav.addObject("user", userInfoService.findByUser_id(user_id));
+		mav.addObject("myPost", bs.findByUserNum(user_num));
+		mav.addObject("myReview", bs.findByUserNumReview(user_num));
+		mav.addObject("myPlan", ps.findByUserNum(user_num));
+		return mav;
+	}
+	
+
+	@GetMapping("/addDog")
+	public ModelAndView saveDogView( Model model, HttpSession session,
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ModelAndView mav = new ModelAndView("addDog");
 		
 		return mav;
 	}
-
 	
 	// 결과 확인 용
 	@ResponseBody
@@ -78,6 +104,8 @@ public class MyPageController {
 	public List<Dog> getDogAll(){
 		return dogService.findAll();
 	}
+	
+	
 	
 //	@RequestMapping(value = "/mainPlaceImg", method = RequestMethod.GET)
 //	public List<Place> findByRegionNum(int place_region_num) {
