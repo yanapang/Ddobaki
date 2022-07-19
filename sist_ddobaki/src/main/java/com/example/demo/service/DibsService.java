@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.DibsDAO;
-import com.example.demo.vo.Board;
 import com.example.demo.vo.Dibs;
 
 import lombok.Setter;

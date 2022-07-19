@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,14 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,14 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.DibsService;
 import com.example.demo.service.DogService;
-import com.example.demo.service.PlaceService;
 import com.example.demo.service.PlanService;
 import com.example.demo.service.ReservationService;
 import com.example.demo.service.UserInfoService;
-import com.example.demo.vo.Board;
 import com.example.demo.vo.Dog;
-import com.example.demo.vo.Place;
-import com.example.demo.vo.UserInfo;
 
 @RestController
 public class MyPageController {
@@ -59,10 +50,10 @@ public class MyPageController {
 	@GetMapping("/myPage")
 	public ModelAndView myPageView( Model model, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-//		int user_num = 2;
+	//	int user_num = 2;
 //
 //		// 세션 값 설정
-//		session.setAttribute("user_num", user_num);
+		
 //
 //		// 세션 무한 유지
 //		session.setMaxInactiveInterval(-1);
@@ -71,7 +62,7 @@ public class MyPageController {
         String user_id=userDetails.getUsername();
         int user_num=userInfoService.findByUser_id(user_id).getUser_num();
         //model.addAttribute("user", user);
-
+        session.setAttribute("user_num", user_num);
 		ModelAndView mav = new ModelAndView("myPage");
 		mav.addObject("reservation",rs.findByUserNum(user_num));
 		mav.addObject("dib",ds.findByUserNum(user_num));
@@ -105,7 +96,12 @@ public class MyPageController {
 		return dogService.findAll();
 	}
 	
-	
+	@ResponseBody
+	@GetMapping("/retireUser")
+	public String retire(int user_num) {
+		userInfoService.deleteUser(user_num);
+		return "redirect:/main";
+	}
 	
 //	@RequestMapping(value = "/mainPlaceImg", method = RequestMethod.GET)
 //	public List<Place> findByRegionNum(int place_region_num) {
