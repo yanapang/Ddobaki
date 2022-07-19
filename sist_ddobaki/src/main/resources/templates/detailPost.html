@@ -175,6 +175,14 @@ border-width: thin;
 	<button type="submit" id="submit" name="submit">등록</button>
 </form>
 <hr>
+<th:block th:switch="${board_num}">
+    <button th:case="1"><a th:href="@{/listBoard/{board_num}(board_num=${1})}">목록</a></button>
+    <button th:case="2"><a th:href="@{/listBoard/{board_num}(board_num=${2})}">목록</a></button>
+    <button th:case="3"><a th:href="@{/listBoard/{board_num}(board_num=${3})}">목록</a></button>
+    <button th:case="4"><a th:href="@{/listBoard/{board_num}(board_num=${4})}">목록</a></button>
+   
+	</th:block>
+
 <button><a th:href="@{/board/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a></button>
 <button><a th:href="@{/board/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</a></button>
 <!-- footer fragment 사용 -->
