@@ -147,6 +147,20 @@ $(function() {
 		console.log("클릭한 placeNum"+placeNum);
 		placeLatLng(placeNum);
 	});
+	$("#dibsList > li").on("click", function(){
+		placeName = $(this).text();
+		placeNum = $(this).val();
+		$("#" + flowNameId).val(placeName);
+		$("#" + flowNameId).next().val(placeNum);
+		placeLatLng(placeNum);
+	});
+	$("#rsvList > li").on("click", function(){
+		placeName = $(this).text();
+		placeNum = $(this).val();
+		$("#" + flowNameId).val(placeName);
+		$("#" + flowNameId).next().val(placeNum);
+		placeLatLng(placeNum);
+	});
 
 	getNextPlanNum();
 
