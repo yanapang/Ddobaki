@@ -3,8 +3,11 @@
 /* main */
 /* main */
 section{
-	padding: 10px 40px 20px 40px; /* 위 오른쪽 아래 왼쪽 순서 */
+	padding: 1vh 3vw 5vh 3vw; /* 위 오른쪽 아래 왼쪽 순서 */
 	background-color: #9be17b;
+	width: 98vw;
+	margin: 0 1vw;
+	border-radius:10px;
 }
 .container{
 	width: 98vw;
@@ -27,9 +30,31 @@ section{
 	height: 60vh;
 	overflow: auto;
 	background-color:#FFFFFF;
+	border-radius: 10px;
 }
 .date, .input_box, .btnAll {
 	padding:1.5%;
+}
+#planList{
+	border-color: #307470;
+    border-radius: 5px;
+    border-width: thick;
+    color:#307470;
+}
+#planDate{
+	background-color:#FFFFFF;
+	border:none;
+	/*border-color: #307470;*/
+    border-radius: 5px;
+    /*border-width: thick;
+    margin:5px;*/
+    color:#FFFFFF;
+    background-color: transparent;
+}
+#AddPlan{
+	margin:5px;
+	width:9vw;
+	font-size:small;
 }
  #inputAppend {
 	width:100%;
