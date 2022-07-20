@@ -7,7 +7,6 @@ public class LoginDTO {
 		private String user_id;
 	    private String user_pwd;
 	  
-
 	    public UserInfo toEntity() {
 	        return UserInfo.builder()
 	                .user_id(user_id)
