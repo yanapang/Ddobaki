@@ -15,6 +15,6 @@
 	where room_num in (select room_num from room where place_num=#{place_num})) a
 	where a.room_num not in
 	(select room_num from reservation where(#{reservation_checkin_date} between to_char(reservation_checkin_date,'yyyy-mm-dd') and to_char(reservation_checkout_date, 'yyyy-mm-dd')) or
-	(#{reservation_checkout_date} between to_char(reservation_checkin_date,'yyyy-mm-dd') and to_char(reservation_checkout_date, 'yyyy-mm-dd')) and place_num=#{place_num})
+	(#{reservation_checkout_date} between to_char(reservation_checkin_date,'yyyy-mm-dd') and to_char(reservation_checkout_date, 'yyyy-mm-dd')) and place_num=#{place_num}) order by room_num
   </select>
 </mapper>
