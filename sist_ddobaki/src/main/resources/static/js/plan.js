@@ -11,9 +11,9 @@ $(function() {
 	
 	var flowNumCnt = 0;
 	var flowNameCnt = 0;
-	var placeNumCnt = 0;
+	//var placeNumCnt = 0;
 	var delBtnCnt = 0;
-	var group_num;
+	//var group_num;
 	var planNumCnt = 0;
 	var nxtPlanNum = 0;
 	var nxtFlowNum = 0;
@@ -206,6 +206,12 @@ $(function() {
 
 		i++;
 		$("#inputAppend").append(str);
+		
+		$(".flowNum").each(function(index) { // 중간 동선 삭제 시 flowNum 재 설정
+    	var idx = index + 1;	
+    	$(this).val(idx);
+    	flowNum = idx +1;
+	})
 
 	})//새로운 입력 박스 추가하는 function
 
