@@ -351,21 +351,22 @@ function selectFlowName(name) {
 }
 
 function okSubmit(event) {
-
 	if ($("#planGrpNum").val() == "") { //여행계획 선택안되면 알러트
 		alert("여행 계획을 선택해주세요.");
 		event.preventDefault();
-	} else { //여행 계획 선택 된 경우 
-		if ($("#planDate").val() == "") {//날짜가 선택 안되면 알러트 
+	} else {
+		if ($("#planDate").val() == "") {
 			alert("날짜를 선택해주세요.");
 			event.preventDefault();
-		} else { //날짜 선택된 경우 
-			//장소 임의로 입력했는지 확인 
+		} else {
 			$(".inputPlaceNum").each(function() {
 				if ($(this).val() == 0) {
 					alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
 					event.preventDefault();
+					return false;
 				}
 			});
 		}
 	}
+
+}
