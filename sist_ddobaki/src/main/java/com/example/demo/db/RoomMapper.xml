@@ -8,9 +8,9 @@
   </select>
   
   <select id="getAvailable" resultType="roomVO">
-  	select room_num, room_type_num, room_name 
+  	select room_num, room_type_num, room_name, room_price 
 	from 
-	(select room_num, room_type_num, room_name 
+	(select room_num, room_type_num, room_name, room_price
 	from room
 	where room_num in (select room_num from room where place_num=#{place_num})) a
 	where a.room_num not in
