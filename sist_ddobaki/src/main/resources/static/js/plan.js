@@ -351,11 +351,18 @@ function selectFlowName(name) {
 }
 
 function okSubmit() {
-	if($(".inputPlaceNum").val() <= 0 || $(".inputPlaceNum") > 99){
-		alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
+	
+	if($("#planGrpNum").val() == ""){ //여행계획 선택안되면 알러트
+		alert("여행 계획을 선택해주세요.");
 		return false;
-	}else{
-		return true;
+	} else { //여행 계획 선택 된 경우 
+		//장소 임의로 입력했는지 확인 
+		if($(".inputPlaceNum").val() <= 0 || $(".inputPlaceNum") > 99){
+			alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
+			return false;
+		}else{
+			return true;
+		}
 	}
 	
 }
