@@ -22,7 +22,7 @@ public class SistDdobakiApplication {
 	
 	@Bean(name = "uploadPath")
 	public String uploadPath() {
-		return "c:/day0704/sist_ddobaki/src/main/resources/static/images/";
+		return "c:/day0720/sist_ddobaki/src/main/resources/static/images/";
 	}
 
 }

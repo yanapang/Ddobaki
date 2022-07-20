@@ -15,6 +15,9 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
 
+<!-- fragment css -->
+<link rel="stylesheet" th:href="@{/styles/common.css}">
+
 <!-- jquery -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -47,6 +50,8 @@ h6 {
 </style>
 
 <body>
+	<!-- header fragment 사용 -->
+	<th:block th:replace="fragments/header2 :: headerFragment"></th:block>
 	<main style="position: relative;">
 		<div id="imgBox" class="rounded-circle"
 			style="position: absolute; background-color: black; width: 130px; height: 130px; top: -10vh; left: 50%; margin-left: -65px; border: 3px solid gray; box-sizing: border-box; overflow: hidden; align-items: center;">

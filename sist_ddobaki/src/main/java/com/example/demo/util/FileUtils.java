@@ -19,9 +19,8 @@ public class FileUtils {
 	private static final String filePath = "c:/day0720/sist_ddobaki/src/main/resources/static/userImages/"; // 파일이 저장될 위치
 	
 	public List<Map<String, Object>> parseInsertFileInfo(UserInfo user, 
-			MultipartHttpServletRequest mpRequest) throws Exception{
+		MultipartHttpServletRequest mpRequest) throws Exception{
 		
-	
 		Iterator<String> iterator = mpRequest.getFileNames();
 		
 		MultipartFile multipartFile = null;

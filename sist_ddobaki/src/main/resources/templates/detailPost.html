@@ -145,17 +145,8 @@ opacity: 0.8;
 <th:block th:replace="fragments/header :: headerFragment"></th:block>
 
 <body>
-<!-- 
-<th:block th:switch="${b.board_num}">
-    <span th:case="1">notice</span>
-    <span th:case="2">community</span>
-    <span th:case="3">review</span>
-    <span th:case="4">FAQ</span>
-</th:block>
-<hr>
- -->
- <fieldset>
- <div class="container">
+<fieldset>
+<div class="container">
 <div>
 <p id="subject"></p><hr>
 <div>
@@ -242,11 +233,11 @@ opacity: 0.8;
     <button th:case="2"><a th:href="@{/listBoard/{board_num}(board_num=${2})}">목록</a></button>
     <button th:case="3"><a th:href="@{/listBoard/{board_num}(board_num=${3})}">목록</a></button>
     <button th:case="4"><a th:href="@{/listBoard/{board_num}(board_num=${4})}">목록</a></button>
-   
-	</th:block>
+</th:block>
 
 <button><a th:href="@{/board/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a></button>
 <button><a th:href="@{/board/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</i></a></button>
+
 <!-- footer fragment 사용 -->
 <th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </div>
