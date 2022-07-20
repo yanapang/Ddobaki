@@ -8,7 +8,7 @@ $(function() {
 	var user_num = $("#userNum").val(); // 실제 구현시 세션에 저장된 user_num 가져오기 
 
 	console.log(user_num);
-	
+
 	var flowNumCnt = 0;
 	var flowNameCnt = 0;
 	//var placeNumCnt = 0;
@@ -65,12 +65,12 @@ $(function() {
 			}
 		})
 	}
-	
-	function getNextFlowNum(planGrpNum, planDate){
+
+	function getNextFlowNum(planGrpNum, planDate) {
 		$.ajax({
-			url:"/getNextFlowNum",
-			data:{plan_group_num:planGrpNum, plan_date:planDate},
-			success: function(data){
+			url: "/getNextFlowNum",
+			data: { plan_group_num: planGrpNum, plan_date: planDate },
+			success: function(data) {
 				console.log(data);
 				nxtFlowNum = data;
 			}
@@ -95,10 +95,10 @@ $(function() {
 				//title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 				image: markerImage // 마커 이미지 
 			});
-			
+
 			//markers.push(marker)
 			//console.log("markers:"+markers)
-			
+
 			marker.setMap(map);
 		}
 
@@ -147,17 +147,17 @@ $(function() {
 		placeNum = $(this).val();
 		$("#" + flowNameId).val(placeName);
 		$("#" + flowNameId).next().val(placeNum);
-		console.log("클릭한 placeNum"+placeNum);
+		console.log("클릭한 placeNum" + placeNum);
 		placeLatLng(placeNum);
 	});
-	$("#dibsList > li").on("click", function(){
+	$("#dibsList > li").on("click", function() {
 		placeName = $(this).text();
 		placeNum = $(this).val();
 		$("#" + flowNameId).val(placeName);
 		$("#" + flowNameId).next().val(placeNum);
 		placeLatLng(placeNum);
 	});
-	$("#rsvList > li").on("click", function(){
+	$("#rsvList > li").on("click", function() {
 		placeName = $(this).text();
 		placeNum = $(this).val();
 		$("#" + flowNameId).val(placeName);
@@ -181,7 +181,7 @@ $(function() {
 			class: "form-control flowNum",
 			style: "text-align:center; background:rgba(121,189,143,1);"
 		}).val(nxtFlowNum++);
-		console.log("nextFlowNum:"+nxtFlowNum);
+		console.log("nextFlowNum:" + nxtFlowNum);
 
 		var inputFlowName = $("<input name='list[" + i + "].plan_flow_name' onclick='selectFlowName(this)'>").attr({
 			id: "flowText" + flowNameCnt++,
@@ -191,8 +191,9 @@ $(function() {
 		});
 
 		var input_num = $("<input name='list[" + i + "].place_num'>").attr({
+			class: "inputPlaceNum",
 			type: "hidden"
-		});
+		}).val(0);
 
 		var delBtn = $("<button onclick='del(this)'>x</button>").attr({
 			id: "btnDel" + delBtnCnt++,
@@ -221,9 +222,9 @@ $(function() {
 		flowNum = 1;
 		plan_group_num = $("input[name=plan_group_num]").val();
 		plan_date = $("input[name=plan_date]").val();
-		
+
 		getNextFlowNum(plan_group_num, plan_date);
-		
+
 		$("#inputAppend").empty();
 
 		console.log("date_changed!");
@@ -281,7 +282,7 @@ $(function() {
 
 					i++;
 					$("#inputAppend").append(str);
-					
+
 					placeLatLng(plan.place['place_num'])
 
 				}
@@ -336,15 +337,25 @@ function del(id) {
 		})
 	}
 	$(".flowNum").each(function(index) { // 중간 동선 삭제 시 flowNum 재 설정
-    	var idx = index + 1;	
-    	$(this).val(idx);
-    	flowNum = idx +1;
+		var idx = index + 1;
+		$(this).val(idx);
+		flowNum = idx + 1;
 	})
-	
+
 	console.log($("#inputAppend > input").val())
 }
 
 function selectFlowName(name) {
 	flowNameId = name.id;
 	console.log(name.id);
+}
+
+function okSubmit() {
+	if($(".inputPlaceNum").val() <= 0 || $(".inputPlaceNum") > 99){
+		alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
+		return false;
+	}else{
+		return true;
+	}
+	
 }
