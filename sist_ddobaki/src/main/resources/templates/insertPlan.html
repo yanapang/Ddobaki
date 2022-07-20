@@ -23,8 +23,8 @@
 	
 <!--<h3>PLAN</h3><hr>-->
 <section>
-<div class="container border">
-    <form th:action="@{/savePlan}+${'/'+user_num}" method="post">
+<div class="container border border-0">
+    <form onsubmit="return okSubmit(event);" th:action="@{/savePlan}+${'/'+user_num}" method="post">
      <div class="form-inline">
 		<!-- 여행 타이틀 (plan_group_num) -->
 		<div class="input-group grpNum">
@@ -47,9 +47,9 @@
 	<!-- 여기까지 여행 타이틀 -->
 	
 	<!-- 여기부터 주요 컨텐츠 -->
-	<div class="row bottom border">
-	   		<div id="map" class="col border rounded"></div> <!-- 지도 map --> <!-- 왼쪽 -->
-	   	<div class="col right border rounded"> <!-- 오른쪽 -->
+	<div class="row bottom ">
+	   		<div id="map" class="col mapContainer border border-5 border-success" ></div> <!-- 지도 map --> <!-- 왼쪽 -->
+	   	<div class="col right border border-0 rounded"> <!-- 오른쪽 -->
 	   	
 	     	<!-- 여행 날짜(plan_date) -->
    			<div class="row justify-content-center date input-group-addon input-group-button">
@@ -78,7 +78,7 @@
    				</div><!--장소, 찜, 예약 리스트 버튼그룹 div End -->
      		</div>
 		<!-- 플랜 그룹 정보 -->
-		<div class="border input_box">
+		<div class="border border-0 input_box rounded">
 			<!-- 유저 번호(user_num) -->
 			<input type="hidden" id="userNum" name="userinfo.user_num" th:value="${user_num}">
 			<!-- 여행 세부 내용 -->

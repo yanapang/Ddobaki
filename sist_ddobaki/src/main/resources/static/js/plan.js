@@ -8,12 +8,12 @@ $(function() {
 	var user_num = $("#userNum").val(); // 실제 구현시 세션에 저장된 user_num 가져오기 
 
 	console.log(user_num);
-	
+
 	var flowNumCnt = 0;
 	var flowNameCnt = 0;
-	var placeNumCnt = 0;
+	//var placeNumCnt = 0;
 	var delBtnCnt = 0;
-	var group_num;
+	//var group_num;
 	var planNumCnt = 0;
 	var nxtPlanNum = 0;
 	var nxtFlowNum = 0;
@@ -22,7 +22,7 @@ $(function() {
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center: new kakao.maps.LatLng(37.556317, 126.922713), // 지도의 중심좌표
-			level: 3 // 지도의 확대 레벨
+			level: 6 // 지도의 확대 레벨
 		};
 
 	//지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -65,12 +65,12 @@ $(function() {
 			}
 		})
 	}
-	
-	function getNextFlowNum(planGrpNum, planDate){
+
+	function getNextFlowNum(planGrpNum, planDate) {
 		$.ajax({
-			url:"/getNextFlowNum",
-			data:{plan_group_num:planGrpNum, plan_date:planDate},
-			success: function(data){
+			url: "/getNextFlowNum",
+			data: { plan_group_num: planGrpNum, plan_date: planDate },
+			success: function(data) {
 				console.log(data);
 				nxtFlowNum = data;
 			}
@@ -95,10 +95,10 @@ $(function() {
 				//title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 				image: markerImage // 마커 이미지 
 			});
-			
+
 			//markers.push(marker)
 			//console.log("markers:"+markers)
-			
+
 			marker.setMap(map);
 		}
 
@@ -147,17 +147,17 @@ $(function() {
 		placeNum = $(this).val();
 		$("#" + flowNameId).val(placeName);
 		$("#" + flowNameId).next().val(placeNum);
-		console.log("클릭한 placeNum"+placeNum);
+		console.log("클릭한 placeNum" + placeNum);
 		placeLatLng(placeNum);
 	});
-	$("#dibsList > li").on("click", function(){
+	$("#dibsList > li").on("click", function() {
 		placeName = $(this).text();
 		placeNum = $(this).val();
 		$("#" + flowNameId).val(placeName);
 		$("#" + flowNameId).next().val(placeNum);
 		placeLatLng(placeNum);
 	});
-	$("#rsvList > li").on("click", function(){
+	$("#rsvList > li").on("click", function() {
 		placeName = $(this).text();
 		placeNum = $(this).val();
 		$("#" + flowNameId).val(placeName);
@@ -181,7 +181,7 @@ $(function() {
 			class: "form-control flowNum",
 			style: "text-align:center; background:rgba(121,189,143,1);"
 		}).val(nxtFlowNum++);
-		console.log("nextFlowNum:"+nxtFlowNum);
+		console.log("nextFlowNum:" + nxtFlowNum);
 
 		var inputFlowName = $("<input name='list[" + i + "].plan_flow_name' onclick='selectFlowName(this)'>").attr({
 			id: "flowText" + flowNameCnt++,
@@ -191,8 +191,9 @@ $(function() {
 		});
 
 		var input_num = $("<input name='list[" + i + "].place_num'>").attr({
+			class: "inputPlaceNum",
 			type: "hidden"
-		});
+		}).val(0);
 
 		var delBtn = $("<button onclick='del(this)'>x</button>").attr({
 			id: "btnDel" + delBtnCnt++,
@@ -207,6 +208,12 @@ $(function() {
 		i++;
 		$("#inputAppend").append(str);
 
+		$(".flowNum").each(function(index) { // 중간 동선 삭제 시 flowNum 재 설정
+			var idx = index + 1;
+			$(this).val(idx);
+			flowNum = idx + 1;
+		})
+
 	})//새로운 입력 박스 추가하는 function
 
 
@@ -215,9 +222,9 @@ $(function() {
 		flowNum = 1;
 		plan_group_num = $("input[name=plan_group_num]").val();
 		plan_date = $("input[name=plan_date]").val();
-		
+
 		getNextFlowNum(plan_group_num, plan_date);
-		
+
 		$("#inputAppend").empty();
 
 		console.log("date_changed!");
@@ -275,7 +282,7 @@ $(function() {
 
 					i++;
 					$("#inputAppend").append(str);
-					
+
 					placeLatLng(plan.place['place_num'])
 
 				}
@@ -330,11 +337,11 @@ function del(id) {
 		})
 	}
 	$(".flowNum").each(function(index) { // 중간 동선 삭제 시 flowNum 재 설정
-    	var idx = index + 1;	
-    	$(this).val(idx);
-    	flowNum = idx +1;
+		var idx = index + 1;
+		$(this).val(idx);
+		flowNum = idx + 1;
 	})
-	
+
 	console.log($("#inputAppend > input").val())
 }
 
@@ -342,3 +349,23 @@ function selectFlowName(name) {
 	flowNameId = name.id;
 	console.log(name.id);
 }
+
+function okSubmit(event) {
+
+	if ($("#planGrpNum").val() == "") { //여행계획 선택안되면 알러트
+		alert("여행 계획을 선택해주세요.");
+		event.preventDefault();
+	} else { //여행 계획 선택 된 경우 
+		if ($("#planDate").val() == "") {//날짜가 선택 안되면 알러트 
+			alert("날짜를 선택해주세요.");
+			event.preventDefault();
+		} else { //날짜 선택된 경우 
+			//장소 임의로 입력했는지 확인 
+			$(".inputPlaceNum").each(function() {
+				if ($(this).val() == 0) {
+					alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
+					event.preventDefault();
+				}
+			});
+		}
+	}
