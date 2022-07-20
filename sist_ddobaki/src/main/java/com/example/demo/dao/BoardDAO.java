@@ -16,6 +16,9 @@ import com.example.demo.vo.Board;
 @Repository
 @EnableJpaRepositories
 public interface BoardDAO extends JpaRepository<Board, Integer> {
+	
+	@Query(value="select * from Board order by post_num desc",nativeQuery = true)
+	public List<Board> findAll();
 
 	// 게시글 번호 자동부여
 	@Query("select nvl(max(post_num),0)+1 from Board")
@@ -28,8 +31,8 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	public int plusPostHit(int post_num);
 
 	//제목으로 게시글 찾기		
-		@Query(value="select * from Board where board_num=:board_num and post_title like '%'||:post_keyword||'%'",nativeQuery = true)
-		public List<Board> findByPostTitle(int board_num, String post_keyword);
+	@Query(value="select * from Board where board_num=:board_num and post_title like '%'||:post_keyword||'%'",nativeQuery = true)
+	public List<Board> findByPostTitle(int board_num, String post_keyword);
 
 	// 리뷰게시판출력 //말머리 컨디션 받았을떄(region_num, place_type_num 2개 placeDAO에서 먼저 받기)
 	@Query(value = "select * from Board where place_num=:place_num", nativeQuery = true)
@@ -55,7 +58,7 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	@Query(value = "select * from Board where board_num=:board_num and post_num=:post_num", nativeQuery = true)
 	public Board detailPost(int board_num, int post_num);
 
-	// 게시글 등록 //
+	// 게시글 등록 
 	@Modifying
 	@Query(value = "insert into Board b(b.board_num,b.post_num, b.user_num, b.post_title, b.post_content, b.post_regdate,"
 			+ "b.post_hit,b.place_num) values(:#{#b.board_num},:#{#b.post_num},:#{#b.userinfo.user_num},:#{#b.post_title},"

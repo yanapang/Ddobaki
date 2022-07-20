@@ -334,14 +334,14 @@ h6 {
 
 					</div>
 
-					<!-- 회원 탈퇴 -->
+				<!-- 회원 탈퇴 -->
 					<div id="myRetireBox" class="detailBox" style="position: relative;">
 						<div id="myRetireTitleBox">
 							<h6 id="myRetireTitle">회원탈퇴</h6>
 							<hr />
 						</div>
-						<button id="myRetireBtn" style="position: absolute; right: 0">탈퇴</button>
-						<input id="user_num" th:value=${session.user_num}>
+						<button id="myRetireBtn" style="position: absolute; right: 0" class="btn btn-success">탈퇴</button>
+						<input type="hidden" id="user_num" th:value=${session.user_num}>
 					</div>
 				</div>
 			</div>

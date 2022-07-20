@@ -48,15 +48,15 @@ public class Reservation {
 	 
 	//@Column(name="reservation_checkin_date")
 	//@Temporal(TemporalType.DATE)
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private String reservation_checkin_date;
 	
 	
 	//@Column(name="reservation_checkout_date")
 	//@Temporal(TemporalType.DATE)
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private String reservation_checkout_date;
 	
 	@Column(columnDefinition = "number default 1", nullable = false)
@@ -93,3 +93,4 @@ public class Reservation {
 	//참조 받아야 하는 키
 	//user_num, place_num, room_num
 }
+

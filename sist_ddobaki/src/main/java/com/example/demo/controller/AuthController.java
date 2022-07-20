@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.security.core.Authentication;
 
 import org.springframework.stereotype.Controller;
@@ -57,10 +59,11 @@ public class AuthController {
 	     * @return
 	     */
 	    @GetMapping("/")
-	    public String userAccess(Model model, Authentication authentication) {
+	    public String userAccess(Model model, Authentication authentication, HttpSession session) {
 	        //Authentication 객체를 통해 유저 정보를 가져올 수 있다.
 	        UserInfo user = (UserInfo)authentication.getPrincipal();  //userDetail 객체를 가져옴
 	        model.addAttribute("user", user);      //유저 아이디
+	        session.setAttribute("user_num", user.getUser_num());
 	    	return "user_access";
 	    }
 }

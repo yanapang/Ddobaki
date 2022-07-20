@@ -58,25 +58,25 @@ public class MyPageController {
 
 	@GetMapping("/myPage")
 	public ModelAndView myPageView( Model model, HttpSession session,
-			HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
 //		int user_num = 2;
-//
+		
 //		// 세션 값 설정
 //		session.setAttribute("user_num", user_num);
-//
+		
 //		// 세션 무한 유지
 //		session.setMaxInactiveInterval(-1);
 		
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String user_id=userDetails.getUsername();
-        int user_num=userInfoService.findByUser_id(user_id).getUser_num();
-        //model.addAttribute("user", user);
-
+//		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        String user_id=userDetails.getUsername();
+//        int user_num=userInfoService.findByUser_id(user_id).getUser_num();
+//        session.setAttribute("user_num", user_num);
+		int user_num=(int) session.getAttribute("user_num");
 		ModelAndView mav = new ModelAndView("myPage");
 		mav.addObject("reservation",rs.findByUserNum(user_num));
 		mav.addObject("dib",ds.findByUserNum(user_num));
 		mav.addObject("dogs",dogService.findByDogUserNum(user_num));
-		mav.addObject("user", userInfoService.findByUser_id(user_id));
+		mav.addObject("user", userInfoService.getOne(user_num));
 		mav.addObject("myPost", bs.findByUserNum(user_num));
 		mav.addObject("myReview", bs.findByUserNumReview(user_num));
 		mav.addObject("myPlan", ps.findByUserNum(user_num));
@@ -88,7 +88,9 @@ public class MyPageController {
 	public ModelAndView saveDogView( Model model, HttpSession session,
 			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ModelAndView mav = new ModelAndView("addDog");
-		
+//		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        String user_id=userDetails.getUsername();
+//        int user_num=userInfoService.findByUser_id(user_id).getUser_num();
 		return mav;
 	}
 	

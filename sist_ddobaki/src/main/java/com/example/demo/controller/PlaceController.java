@@ -101,7 +101,7 @@ public class PlaceController {
 	}
 
 	@GetMapping("/place/detailPlace/{place_num}")
-	public ModelAndView detailPlace(@PathVariable int place_num, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+	public ModelAndView detailPlace(@PathVariable int place_num, Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		
 //		int user_num = 4;
 //		
@@ -109,12 +109,14 @@ public class PlaceController {
 //		// 세션 무한 유지
 //		session.setMaxInactiveInterval(-1);
 		
-		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String user_id=userDetails.getUsername();
-        int user_num=us.findByUser_id(user_id).getUser_num();
+//		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//        String user_id=userDetails.getUsername();
+ //       int user_num=us.findByUser_id(user_id).getUser_num();
 //		
         //세션 값 설정
-        session.setAttribute("user_num", user_num);
+//        session.setAttribute("user_num", user_num);
+		
+//		session.getAttribute("user_num");
 		
 		ModelAndView mav = new ModelAndView("detailPlace");
 		placeService.updateHit(place_num);
