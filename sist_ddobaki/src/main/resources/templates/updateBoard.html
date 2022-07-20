@@ -1,8 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/styles/common.css}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>글쓰기</title>
+    <title>update your post!</title>
+    <!-- header fragment 사용 -->
+	<th:block th:replace="fragments/header :: headerFragment"></th:block>
 </head>
 
 <!-- include libraries(jQuery, bootstrap) -->
@@ -19,7 +23,6 @@
 
     <form id="articleForm" th:action="@{/board/updateBoardOK/{post_num}(post_num=${post_num})}" th:method="post">
         <br style="clear: both">
-        <h3 style="margin-bottom: 25px;">게시글 수정</h3>
         <input type="hidden" name="board_num" th:value="${b.board_num}">
 		<input type="hidden" name="post_num" th:value="${b.post_num}">
         <input type="hidden" name="userinfo.user_num" th:value="${b.userinfo.user_num}">
@@ -70,5 +73,7 @@
     }
     })
 </script>
+<!-- footer fragment 사용 -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </body>
 </html>

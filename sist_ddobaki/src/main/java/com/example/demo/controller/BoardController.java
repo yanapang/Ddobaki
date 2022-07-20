@@ -169,10 +169,11 @@ public class BoardController {
 	}
   
     @GetMapping("/board/updateBoard/{post_num}")
-    public String updateBoardForm(Model model, @PathVariable int post_num) {
+    public ModelAndView updateBoardForm(Model model, @PathVariable int post_num) {
+    	ModelAndView mav=new ModelAndView("updateBoard");
     	Board b = bs.findById(post_num);
     	model.addAttribute("b", b);
-    	return "board/updateBoard";
+    	return mav;
     }
 	    
     @PostMapping("/board/updateBoardOK/{post_num}")

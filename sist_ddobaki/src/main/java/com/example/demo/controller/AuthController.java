@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,8 @@ import com.example.demo.service.AuthService;
 import com.example.demo.vo.UserInfo;
 
 import lombok.RequiredArgsConstructor;
-@Controller
 
+@Controller
 @RequiredArgsConstructor
 public class AuthController {
 	
@@ -29,11 +30,11 @@ public class AuthController {
 		}
 
 		@PostMapping("/signUp")
-		public void signUpOK(SignUpDTO signupDto) {
+		public String signUpOK(SignUpDTO signupDto) {
 			System.out.println("회원가입ok폼 왔다");
 			UserInfo user =signupDto.toEntity();
 			UserInfo userEntity = as.signup(user);
-			//return "redirect:/login";
+			return "redirect:/login";
 		}
 		
 		@RequestMapping(value="/login", method=RequestMethod.GET)

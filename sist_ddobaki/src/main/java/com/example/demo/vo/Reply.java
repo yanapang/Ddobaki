@@ -22,7 +22,7 @@ public class Reply {
 	@JoinColumn(name="post_num", insertable = true, updatable = true, nullable=false)
 	private Board board;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="user_num", insertable = true, updatable = true, nullable=false)
 	private UserInfo userinfo;	
 	
