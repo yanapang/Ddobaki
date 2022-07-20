@@ -356,13 +356,20 @@ function okSubmit() {
 		alert("여행 계획을 선택해주세요.");
 		return false;
 	} else { //여행 계획 선택 된 경우 
-		//장소 임의로 입력했는지 확인 
-		if($(".inputPlaceNum").val() <= 0 || $(".inputPlaceNum") > 99){
-			alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
+		if($("#planDate").val() ==""){//날짜가 선택 안되면 알러트 
+			alert("날짜를 선택해주세요.");
 			return false;
-		}else{
-			return true;
+		} else{ //날짜 선택된 경우 
+			//장소 임의로 입력했는지 확인 
+			if($(".inputPlaceNum").val() <= 0 || $(".inputPlaceNum") > 99){
+				alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
+				return false;
+			}else{
+				return true;
+			}
 		}
+		
+		
 	}
 	
 }
