@@ -96,7 +96,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/board/insertBoard/{board_num}", method = RequestMethod.GET)
-	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model, HttpSession session) {
+	public ModelAndView insertBoardForm(@PathVariable int board_num, Model model, Authentication authentication) {
 		ModelAndView mav=new ModelAndView("insertBoard");
 		if(board_num==3) {
 			//System.out.println("리뷰면 컨트롤러가 여기까지 오나요?");
@@ -105,8 +105,11 @@ public class BoardController {
 		System.out.println("게시판글쓰기폼컨트롤러 왔다");
 		//System.out.println(board_num);
 		model.addAttribute("board_num", board_num);
-		int user_num=(int) session.getAttribute("user_num");
-        UserInfo user=uis.getOne(user_num);
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String user_id=userDetails.getUsername();
+        UserInfo user=uis.findByUser_id(user_id);
+//		int user_num=(int) session.getAttribute("user_num");
+//        UserInfo user=uis.getOne(user_num);
         model.addAttribute("user", user);
 		//model.addAttribute("user_list", uis.findAll());
 		return mav;
@@ -129,13 +132,14 @@ public class BoardController {
 	
 	//상세보기 눌렀을때 board_num도 함께 가도록 + 조회수 증가
 	@GetMapping("/detailPost/{board_num}/{post_num}")
-	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model, HttpSession session) {
+	public ModelAndView detailPost(@PathVariable int board_num,@PathVariable int post_num, Model model, Authentication authentication) {
 		//System.out.println("detailPost의 board_num:"+board_num);
 		//System.out.println("detailPost의 post_num:"+post_num);
 //		
-//		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//        String user_id=userDetails.getUsername();
-        int user_num=(int) session.getAttribute("user_num");
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String user_id=userDetails.getUsername();
+        int user_num=uis.findByUser_id(user_id).getUser_num();
+        //int user_num=(int) session.getAttribute("user_num");
 		ModelAndView mav = new ModelAndView("detailPost");
 		model.addAttribute("b",bs.detailPost(board_num, post_num));
 		model.addAttribute(bs.plusPostHit(post_num));

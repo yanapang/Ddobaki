@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -115,12 +114,12 @@ public class PlanController {
 		//------------------------- 입력 및 수정 --------------------------------
 		
 		@GetMapping("/plan/insertPlan") //플랜 입력창으로 이동
-		public String insert(Model model, HttpSession session) {
+		public String insert(Model model, Authentication authentication) {
 			
-//			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//	        String user_id=userDetails.getUsername();
-//	        int user_num=userS.findByUser_id(user_id).getUser_num();
-	        int user_num = (int) session.getAttribute("user_num");
+			UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+	        String user_id=userDetails.getUsername();
+	        int user_num=userS.findByUser_id(user_id).getUser_num();
+	        //int user_num = (int) session.getAttribute("user_num");
 	        System.out.println("user_num : "+ user_num);
 			//유저번호로 유저 정보 상태유지, 로그인 구현후 session 저장값 사용예정 
 			//model.addAttribute("user", userS.getUser(user_num)); 

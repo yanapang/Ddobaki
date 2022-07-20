@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -42,6 +42,9 @@ img.thumbnail {
 </style>
 </head>
 <body>
+<th:if="${user_nick != null}">
+	<p th:text="${user_nick}"><span>님 안녕하세요</span></p>
+	</th:if>
 	<!-- header fragment 사용 -->
 	<th:block th:replace="fragments/header :: headerFragment"></th:block>
 
@@ -107,7 +110,7 @@ img.thumbnail {
 
 		</div>
 	</div>
-
+	<span></span>
 	<!-- footer fragment 사용 -->
 	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
 
