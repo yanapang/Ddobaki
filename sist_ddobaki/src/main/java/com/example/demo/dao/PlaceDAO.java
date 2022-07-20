@@ -4,6 +4,7 @@ package com.example.demo.dao;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -28,5 +29,6 @@ public interface PlaceDAO extends JpaRepository<Place, Integer>, PlaceCustomDAO 
 	@Query(value="select * from Place where place_region_num =:place_region_num and place_type_num=:place_type_num",nativeQuery = true)
 	public List<Place> placeNameList(int place_region_num, int place_type_num);
 	
+	public Optional<Place> findById(Integer place_num);
 	
 }

@@ -82,7 +82,7 @@ $(function() {
 
 		for (var i = 0; i < positions.length; i++) {
 			//
-			var imageSrc = '/images/paws.png', // 마커이미지 주소.
+			var imageSrc = '/map/paws.png', // 마커이미지 주소.
 				imageSize = new kakao.maps.Size(24, 24); // 마커이미지의 크기.
 
 			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
@@ -96,9 +96,12 @@ $(function() {
 				image: markerImage // 마커 이미지 
 			});
 			
-			markers.push(marker)
-			console.log("markers:"+markers)
+			//markers.push(marker)
+			//console.log("markers:"+markers)
+			
+			marker.setMap(map);
 		}
+
 	}
 
 	// plan_group_num & title

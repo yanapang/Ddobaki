@@ -132,8 +132,9 @@ public class PlaceController {
 		return placeService.findAll();
 	}
 	
-	@GetMapping("/getPlace/{place_num}")
-	public Place getPlace(@PathVariable int place_num) {
+	@GetMapping("/getPlace")
+	@ResponseBody
+	public Place getPlace(@RequestParam int place_num) {
 		return placeService.getPlace(place_num);
 	}
 	
