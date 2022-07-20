@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CascadeType;
+
 import lombok.Data;
 
 @Entity
@@ -22,7 +24,7 @@ public class Reply {
 	@JoinColumn(name="post_num", insertable = true, updatable = true, nullable=false)
 	private Board board;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="user_num", insertable = true, updatable = true, nullable=false)
 	private UserInfo userinfo;	
 	

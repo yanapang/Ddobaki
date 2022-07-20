@@ -16,7 +16,11 @@ import com.example.demo.vo.Board;
 @Repository
 @EnableJpaRepositories
 public interface BoardDAO extends JpaRepository<Board, Integer> {
-		
+	
+	
+	@Query(value="select * from Board order by post_num desc",nativeQuery = true)
+	public List<Board> findAll();
+			
 	//게시글 번호 자동부여
 	@Query("select nvl(max(post_num),0)+1 from Board")
 	public int getNextPostNum();

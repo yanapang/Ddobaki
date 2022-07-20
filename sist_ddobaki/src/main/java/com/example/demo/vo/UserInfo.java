@@ -54,7 +54,7 @@ public class UserInfo{
 	private List<Board> board;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="userinfo",cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Reply> reply;
 
 	@JsonIgnore
