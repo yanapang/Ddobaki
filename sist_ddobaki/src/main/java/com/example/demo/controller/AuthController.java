@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.demo.dto.LoginDto;
-import com.example.demo.dto.SignUpDto;
+import com.example.demo.dto.LoginDTO;
+import com.example.demo.dto.SignUpDTO;
 import com.example.demo.service.AuthService;
 import com.example.demo.vo.UserInfo;
 
@@ -29,7 +29,7 @@ public class AuthController {
 		}
 
 		@PostMapping("/signUp")
-		public void signUpOK(SignUpDto signupDto) {
+		public void signUpOK(SignUpDTO signupDto) {
 			System.out.println("회원가입ok폼 왔다");
 			UserInfo user =signupDto.toEntity();
 			UserInfo userEntity = as.signup(user);
@@ -43,7 +43,7 @@ public class AuthController {
 		}
 		
 		@RequestMapping(value="/login", method=RequestMethod.POST)
-		public String loginOK(LoginDto loginDto) {
+		public String loginOK(LoginDTO loginDto) {
 			System.out.println("로그인OK");
 			return "main";
 		}

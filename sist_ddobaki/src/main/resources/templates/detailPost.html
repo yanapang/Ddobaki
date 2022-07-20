@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- icon -->
+
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <link rel="stylesheet" th:href="@{/styles/common.css}">
 <style type="text/css">
@@ -40,30 +43,79 @@
 	display:inline-block;
 	font-size: small;
 }
-
+fieldset{
+margin: auto;
+width: 80%;
+border: 2px solid #73AD21;
+}
 .profilebox {
 	height:50px;
 	float:inherit;
 	margin: auto 0;
+
+}
+#mainNick{
+font-size : 1.1em;
+}
+#replyNick{
+font-size:0.99em;
+color : grey;
+}
+
+#replyUserFile{
+	width: 40px;
+    height: 40px;
+    margin: 3px;
+    overflow: hidden;
+    border-radius: 50px;
+    border: 1pt solid #E6E6E6;
+    /*box-shadow: 1px 1px #CDCECF;*/
+}
+#replyR{
+font-size:0.88em;
+color : grey;
 }
 
 #subject{
 	font-size: xx-large;
+	margin-top: 30px
 }
 .container{
 	    height: auto;
-	    width: auto;
+	    width: auto;	    
 }
+
+#content{
+font-size : 1.2em;
+
+}
+#btnDelete, #btnInsertReReply{
+font-size : 0.8em;
+background-color: white;
+}
+
 #placecardphoto{
 	width: 45px;
     height: 45px;
     float: left;
     margin: 3px;
     overflow: hidden;
+
 }
 .placecard {
 border-width: thin;
+
 }
+
+button{
+border-radius: 10px;
+border-style: solid;
+border-color: #6bba62;
+padding: 4px;
+background-color: #73AD21;
+opacity: 0.8;
+}
+
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
@@ -91,7 +143,7 @@ border-width: thin;
 </head>
 <!-- header fragment 사용 -->
 <th:block th:replace="fragments/header :: headerFragment"></th:block>
-<hr>
+
 <body>
 <!-- 
 <th:block th:switch="${b.board_num}">
@@ -102,12 +154,14 @@ border-width: thin;
 </th:block>
 <hr>
  -->
+ <fieldset>
  <div class="container">
 <div>
 <p id="subject"></p><hr>
+<div>
 <div class="profilebox">
 <div class="profilebox--photo">
-<img th:src="@{'/images/'+${b.userinfo.user_file}}"></img>
+<img th:src="@{'/userImage/'+${b.userinfo.user_file}}"></img>
 </div>
 <p><span th:text="${b.userinfo.user_nick}"></span></p>
 <div class="miniInfo">
@@ -119,11 +173,12 @@ border-width: thin;
 <th:block th:if="${b.board_num==3}">
 <hr>
 <div class="placecard">
-<img id="placecardphoto" src="/images/paws.png">
+<img id="placecardphoto" src="/map/paws.png">
 <p><span th:text="${b.place.place_name}"></span></p>
 <p>주소 : <span th:text="${b.place.place_addr}"></span></p>
 </div>
 </th:block>
+</div>
 <hr>
 <p id="content"></p>
 <hr>
@@ -131,13 +186,20 @@ border-width: thin;
 		comment<br>
 			<tr th:each="rp:${reply_and_parent_list}">
 				<!-- <p th:text="${rp.reply_num}"></p> -->
-				<p th:text="${rp.userinfo.user_nick}"></p>
+				<img th:src="@{'/userImage/'+${rp.userinfo.user_file}}" id="replyUserFile"></img>
+				<p th:text="${rp.userinfo.user_nick}" id="mainNick"></p>
 				<p class="replyParent">
+				
+				
+				<div>			
 				<th:block th:if="${rp.reply_level==1}">
-				<span>ㄴ@</span>
-				<span th:text="${rp.parent_nick}"></span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>ㄴ@</span>
+				<span th:text="${rp.parent_nick}" id="replyNick" ></span>
 				</th:block>
+				</div>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				<th:block th:unless="${rp.reply_level==1}">
 				<span></span>
 				</th:block>
@@ -145,7 +207,7 @@ border-width: thin;
 				<p th:text="${rp.reply_content}"></p>
 				<th:block th:if="${rp.isDeleted==0}">
 					<p>
-						<button><a th:href="@{/board/deleteReply/{reply_num}(reply_num=${rp.reply_num})}">삭제</a></button>
+						<button id="btnDelete"><a th:href="@{/board/deleteReply/{reply_num}(reply_num=${rp.reply_num})}">삭제</a></button>
 					</p>
 					<p>
 						<button id="btnInsertReReply" type="button" th:myReplyNum="${rp.reply_num}" th:onclick="getParentReplyInfo(this.getAttribute('myReplyNum'))">답글쓰기</button>
@@ -175,10 +237,19 @@ border-width: thin;
 	<button type="submit" id="submit" name="submit">등록</button>
 </form>
 <hr>
+<th:block th:switch="${board_num}">
+    <button th:case="1"><a th:href="@{/listBoard/{board_num}(board_num=${1})}">목록</a></button>
+    <button th:case="2"><a th:href="@{/listBoard/{board_num}(board_num=${2})}">목록</a></button>
+    <button th:case="3"><a th:href="@{/listBoard/{board_num}(board_num=${3})}">목록</a></button>
+    <button th:case="4"><a th:href="@{/listBoard/{board_num}(board_num=${4})}">목록</a></button>
+   
+	</th:block>
+
 <button><a th:href="@{/board/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a></button>
-<button><a th:href="@{/board/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</a></button>
+<button><a th:href="@{/board/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</i></a></button>
 <!-- footer fragment 사용 -->
 <th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </div>
+</fieldset>
 </body>
 </html>

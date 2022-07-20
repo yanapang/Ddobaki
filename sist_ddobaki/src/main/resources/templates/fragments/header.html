@@ -1,6 +1,6 @@
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org">
 
-<!--headerFragment ì„ ì–¸-->
+<!--headerFragment ¼±¾ð-->
 <header th:fragment="headerFragment">
 		<nav class="navbar">
 			<ul class="navbar_user">
@@ -15,7 +15,7 @@
 			<ul class="navbar_menu">
 				<li><a href="">Home</a></li>
 				<li><a href="/place">Place</a></li>
-				<li><a th:href="@{/insertPlan}+${'/'+user_num}">Plan</a></li>
+				<li><a th:href="@{/plan/insertPlan}">Plan</a></li>
 				<li class="board"><a href="/firstListBoard">Board</a>
 					<ul class="navbar_menu_board dropdown-menu" style="left:50%">
 						<li><a th:href="@{/listBoard/{board_num}(board_num=${1})}" th:text="Notice"></a></li>
@@ -28,4 +28,7 @@
 			</ul>
 		</nav>
 	</header>
+</html>
+				
+
 </html>

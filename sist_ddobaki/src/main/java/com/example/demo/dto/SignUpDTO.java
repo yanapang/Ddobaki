@@ -5,7 +5,7 @@ import com.example.demo.vo.UserInfo;
 import lombok.Data;
 
 @Data
-public class SignUpDto {
+public class SignUpDTO {
 	private String user_id;
     private String user_pwd;
     private String user_nick;

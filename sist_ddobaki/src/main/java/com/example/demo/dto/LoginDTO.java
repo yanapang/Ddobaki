@@ -2,7 +2,7 @@ package com.example.demo.dto;
 
 import com.example.demo.vo.UserInfo;
 
-public class LoginDto {
+public class LoginDTO {
 
 		private String user_id;
 	    private String user_pwd;
