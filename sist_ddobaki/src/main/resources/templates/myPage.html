@@ -165,22 +165,7 @@ h6 {
 							<hr />
 						</div>
 						<div id="myPlanTableBox">
-							<table id="myPlan" class="table">
-								<thead>
-									<tr>
-										<td>여행이름</td>
-										<td>제목</td>
-										<td>여행일자</td>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="p:${myPlan}">
-										<td th:text="${p.plan_name}"></td>
-										<td th:text="${p.plan_flow_name}"></td>
-										<td th:text="${p.plan_date}"></td>
-									</tr>
-								</tbody>
-							</table>
+							<button class="btn btn-success"><a href="/plan/insertPlan">내 플랜 보러가기 !</a></button>
 						</div>
 					</div>
 
@@ -202,7 +187,7 @@ h6 {
 								<tbody>
 									<tr th:each="ds, i: ${dib}">
 										<td th:text="${i.index+1}"></td>
-										<td><a th:href="@{'/detailPlace/'+${ds.place.place_num}}"
+										<td><a th:href="@{'/place/detailPlace/'+${ds.place.place_num}}"
 											th:text="${ds.place.place_name}"></a></td>
 										<td th:text="${ds.place.place_addr}"></td>
 									</tr>
