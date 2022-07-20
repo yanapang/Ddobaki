@@ -18,8 +18,6 @@
 <!-- jquery 이미지 슬라이드  -->
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script type="text/javascript"
-	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
@@ -39,6 +37,24 @@ img.thumbnail {
 	padding: 0.2em;
 	border-radius: 0.5em;
 }
+#img{
+	padding : 40px;
+	width:100%;
+  height:300px;
+ margin: 0 auto;
+  display:inline-block;
+  background:white;
+  border-radius: 5px;
+  opacity: 0.8;
+}
+#btn{
+border: none;
+background-color: white; 
+color: #307470;
+font-weight: bold;
+cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -50,22 +66,26 @@ img.thumbnail {
 
 	<!-- 이미지 슬라이드 -->
 	<div id="imgbox" style="height: 300px;">
+       <button class="left" id="btn"><</button>
+        <button class="right" id="btn">></button>
+        
 		<div id="slider-div">
-			<div>
+    
+			<div id="img">
 				<img src="/mainImage/mainImage1.jpeg" alt="mainImage1"
-					style="margin: 0 auto">
+					style="margin: 0 auto; padding-top:40px;">
 			</div>
-			<div>
+			<div id="img">
 				<img src="/mainImage/mainImage2.jpeg" alt="mainImage2"
-					style="margin: 0 auto">
+					style="margin: 0 auto;padding-top:40px;">
 			</div>
-			<div>
+			<div id="img">
 				<img src="/mainImage/mainImage3.jpeg" alt="mainImage3"
-					style="margin: 0 auto">
+					style="margin: 0 auto;padding-top:40px;">
 			</div>
-
+		
 		</div>
-
+			  
 	</div>
 
 	<div id="mainContainer" style="height: 30vh; display: flex;">
@@ -113,16 +133,36 @@ img.thumbnail {
 	<span></span>
 	<!-- footer fragment 사용 -->
 	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
-
-
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script type="text/javascript">
+	
 		$(document).ready(function() {
 			//이미지 슬라이드 
+			/*좀 촐싹맞음 버튼 안없애면 깨짐
 			$('#slider-div').slick({
+				  slidesToShow: 1,
+				  slidesToScroll: 1,
+				  autoplay: true,
+				  autoplaySpeed: 2000,
+				  infinite: true,
 
-				arrows : false,
-				dots : true,
+			}); 
+		*/
+		
+		$('#slider-div').slick({
+			  dots: true,
+			  infinite: true,
+			  speed: 500,
+			  fade: true,
+			  cssEase: 'linear',
+			  nextArrow:$('.right'),
+			  prevArrow:$('.left'),
 			});
+		
+			
 			
 			//place 타입별 조회수 Top 3 
 			$.ajax({
