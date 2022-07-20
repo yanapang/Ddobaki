@@ -207,12 +207,12 @@ $(function() {
 
 		i++;
 		$("#inputAppend").append(str);
-		
+
 		$(".flowNum").each(function(index) { // 중간 동선 삭제 시 flowNum 재 설정
-    	var idx = index + 1;	
-    	$(this).val(idx);
-    	flowNum = idx +1;
-	})
+			var idx = index + 1;
+			$(this).val(idx);
+			flowNum = idx + 1;
+		})
 
 	})//새로운 입력 박스 추가하는 function
 
@@ -350,26 +350,22 @@ function selectFlowName(name) {
 	console.log(name.id);
 }
 
-function okSubmit() {
-	
-	if($("#planGrpNum").val() == ""){ //여행계획 선택안되면 알러트
+function okSubmit(event) {
+
+	if ($("#planGrpNum").val() == "") { //여행계획 선택안되면 알러트
 		alert("여행 계획을 선택해주세요.");
-		return false;
+		event.preventDefault();
 	} else { //여행 계획 선택 된 경우 
-		if($("#planDate").val() ==""){//날짜가 선택 안되면 알러트 
+		if ($("#planDate").val() == "") {//날짜가 선택 안되면 알러트 
 			alert("날짜를 선택해주세요.");
-			return false;
-		} else{ //날짜 선택된 경우 
+			event.preventDefault();
+		} else { //날짜 선택된 경우 
 			//장소 임의로 입력했는지 확인 
-			if($(".inputPlaceNum").val() <= 0 || $(".inputPlaceNum") > 99){
-				alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
-				return false;
-			}else{
-				return true;
-			}
+			$(".inputPlaceNum").each(function() {
+				if ($(this).val() == 0) {
+					alert("동선명은 장소, 찜, 예약 리스트에서 선택해주세요.");
+					event.preventDefault();
+				}
+			});
 		}
-		
-		
 	}
-	
-}
