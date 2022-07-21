@@ -23,10 +23,20 @@
 
 <style type="text/css">
 img.thumbnail {
-	padding-bottom: 10px;
+	width: 100%;
+	height:100%;
+	
 }
 
-#placeImgBox {
+#placeImgBox{
+	width: 130px;
+	height:130px;
+	overflow: hidden;
+	margin-bottom: 2px;
+	background: black;
+}
+
+#placeImgTitleBox {
 	margin: 0 2em;
 }
 
@@ -38,8 +48,8 @@ img.thumbnail {
 	border-radius: 0.5em;
 }
 #img{
-	padding : 40px;
-	width:100%;
+
+	width:100vw;
   height:300px;
  margin: 0 auto;
   display:inline-block;
@@ -47,6 +57,8 @@ img.thumbnail {
   border-radius: 5px;
   opacity: 0.8;
 }
+
+
 #btn{
 border: none;
 background-color: white; 
@@ -65,32 +77,33 @@ cursor: pointer;
 	<th:block th:replace="fragments/header :: headerFragment"></th:block>
 
 	<!-- 이미지 슬라이드 -->
-	<div id="imgbox" style="height: 300px;">
-       <button class="left" id="btn"><</button>
-        <button class="right" id="btn">></button>
+	<div id="imgbox" style="margin-top:10px">
         
 		<div id="slider-div">
     
 			<div id="img">
-				<img src="/mainImage/mainImage1.jpeg" alt="mainImage1"
-					style="margin: 0 auto; padding-top:40px;">
+				<img src="/mainImage/mainImage3.png" alt="mainImage1"
+					style="width: 100%;
+	height: 100%;">
 			</div>
 			<div id="img">
-				<img src="/mainImage/mainImage2.jpeg" alt="mainImage2"
-					style="margin: 0 auto;padding-top:40px;">
+				<img src="/mainImage/mainImage2.png" alt="mainImage2"
+					style="width: 100%;
+	height: 100%;">
 			</div>
 			<div id="img">
-				<img src="/mainImage/mainImage3.jpeg" alt="mainImage3"
-					style="margin: 0 auto;padding-top:40px;">
+				<img src="/mainImage/mainImage1.png" alt="mainImage3"
+					style="width: 100%;
+	height: 100%;">
 			</div>
 		
 		</div>
 			  
 	</div>
 
-	<div id="mainContainer" style="height: 30vh; display: flex;">
+	<div id="mainContainer" style="height: 35vh; display: flex;">
 		<div id="placeBox"
-			style="width: 50%; height: 100%; background-color: #79BD8F">
+			style="width: 50%; height: 100%; background-color: #79BD8F; ">
 			<div id="placeSelect" style="display: flex; margin: 1em">
 				<!-- 지역 선택 박스 -->
 				<select id="place_region_num" style="height: min-content;"
@@ -107,11 +120,11 @@ cursor: pointer;
 		<div id="boardBox"
 			style="width: 50%; height: 100%; background-color: #BEEB9F">
 			
-			<div id="boardTitleBox" style="display:flex">
+			<div id="boardTitleBox" style="display:flex; margin: 10px">
 
 				<h5 style="padding-left: 0.3em; color: white">오늘의 HOT 게시물</h5>
 				<!-- 게시판 선택 박스 -->
-				<select id="board_num" style="height: min-content;"
+				<select id="board_num" style="height: min-content; margin-left:10px;"
 					onchange=changeValue1()>
 					<option value="2">Community</option>
 					<option value="3">Review</option>
@@ -120,7 +133,7 @@ cursor: pointer;
 			
 			<div id="boardTableBox">
 
-				<table id="boardTable" class="table table-hover" style="background:white">
+				<table id="boardTable" class="table table-hover" style="background:white; width:90%; margin: 0 auto;">
 					<!-- <tr th:each="b, i : ${board}">
 					<td th:text= ${i.index+1}></td>
 					<td th:text ="${b.post_name}"></td>
@@ -140,27 +153,12 @@ cursor: pointer;
 	<script type="text/javascript">
 	
 		$(document).ready(function() {
-			//이미지 슬라이드 
-			/*좀 촐싹맞음 버튼 안없애면 깨짐
-			$('#slider-div').slick({
-				  slidesToShow: 1,
-				  slidesToScroll: 1,
-				  autoplay: true,
-				  autoplaySpeed: 2000,
-				  infinite: true,
-
-			}); 
-		*/
 		
 		$('#slider-div').slick({
-			  dots: true,
-			  infinite: true,
-			  speed: 500,
-			  fade: true,
-			  cssEase: 'linear',
-			  nextArrow:$('.right'),
-			  prevArrow:$('.left'),
-			});
+
+			arrows : false,
+			dots : true,
+		});
 		
 			
 			
@@ -176,8 +174,8 @@ cursor: pointer;
 					})
 			        var str = '';
 		            $.each(data , function(i){
-		            	str += '<div id="placeImgBox">';
-		            	str += '<img alt = "'+ data[i].place_thumbnail+'" src="/webapp/place_thumbnail/' + data[i].place_thumbnail + '" class = "thumbnail"/><div id="place_name">'+data[i].place_name+'</div>';
+		            	str += '<div id="placeImgTitleBox">';
+		            	str += '<a href="place/detailPlace/'+data[i].place_num+'"><div id="placeImgBox"><img alt = "'+ data[i].place_thumbnail+'" src="/place_thumbnail/' + data[i].place_thumbnail + '" class = "thumbnail"/></div></a><div id="place_name">'+data[i].place_name+'</div>';
 		                str += '</div>';
 		                if ( i == 2 ) {
 		                    return false;
@@ -241,8 +239,8 @@ cursor: pointer;
 					})
 						var str= '';
 		            $.each(data , function(i){
-		            	str+= '<div id="placeImgBox">';
-		            	str += '<img alt = "'+ data[i].place_thumbnail+'" src="/webapp/place_thumbnail/' + data[i].place_thumbnail + '" class = "thumbnail"/><div id="place_name">'+data[i].place_name+'</div>';
+		            	str+= '<div id="placeImgTitleBox">';
+		            	str += '<a href="place/detailPlace/'+data[i].place_num+'"><div id="placeImgBox"><img alt = "'+ data[i].place_thumbnail+'" src="/place_thumbnail/' + data[i].place_thumbnail + '" class = "thumbnail"/></div></a><div id="place_name">'+data[i].place_name+'</div>';
 		                str += '</div>';
 		                if ( i == 2 ) {
 		                    return false;

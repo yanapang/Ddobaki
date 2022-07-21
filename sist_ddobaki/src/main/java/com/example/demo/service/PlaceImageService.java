@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.PlaceDAO;
 import com.example.demo.dao.PlaceImageDAO;
-import com.example.demo.dto.PlaceSearchCondition;
+import com.example.demo.dto.PlaceDTO;
 import com.example.demo.vo.Board;
 import com.example.demo.vo.Place;
 import com.example.demo.vo.PlaceImage;

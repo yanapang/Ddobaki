@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-public class PlaceSearchCondition {
+public class PlaceDTO {
 	private Integer place_region_num;
 
 	private Integer place_type_num;

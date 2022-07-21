@@ -32,6 +32,12 @@ public class MainController {
 
 		return mav;
 	}
+	@GetMapping("/ourTeam")
+	public ModelAndView outTeamPageView() throws IOException {
+		ModelAndView mav = new ModelAndView("ourTeam");
+		
+		return mav;
+	}
 	
 	@RequestMapping(value = "/mainPlaceImg", method = RequestMethod.GET)
 	public List<Place> findByRegionNum(int place_region_num) {
@@ -50,10 +56,5 @@ public class MainController {
 		return blist;
 		
 	}
-	@GetMapping("/ourTeam")
-    public ModelAndView outTeamPageView() throws IOException {
-        ModelAndView mav = new ModelAndView("ourTeam");
-
-        return mav;
-    }
+	
 }

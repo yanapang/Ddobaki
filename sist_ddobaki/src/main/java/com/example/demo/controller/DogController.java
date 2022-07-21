@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.dto.DogForm;
+import com.example.demo.dto.DogDTO;
 import com.example.demo.service.DogService;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.Dog;
@@ -41,7 +41,7 @@ public class DogController {
 
 	// 강아지 추가
 	@PostMapping("/saveDog")
-	public String insert(DogForm dog) {
+	public String insert(DogDTO dog) {
 		Dog d = new Dog();
 		d.setUserinfo(userInfoService.getUser(dog.getUser_num()));
 		d.setDog_age(dog.getDog_age());
