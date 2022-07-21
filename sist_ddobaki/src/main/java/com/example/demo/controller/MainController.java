@@ -56,10 +56,5 @@ public class MainController {
 		return blist;
 		
 	}
-	@GetMapping("/ourTeam")
-    public ModelAndView outTeamPageView() throws IOException {
-        ModelAndView mav = new ModelAndView("ourTeam");
-
-        return mav;
-    }
+	
 }
