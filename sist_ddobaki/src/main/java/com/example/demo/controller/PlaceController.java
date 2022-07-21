@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.dto.PlaceSearchCondition;
+import com.example.demo.dto.PlaceDTO;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.DibsService;
 import com.example.demo.service.PlaceImageService;
@@ -91,7 +91,7 @@ public class PlaceController {
 
 	// 검색 조건에 따른 place list 반환
 	@RequestMapping(value = "/placeMain", method = RequestMethod.GET)
-	public List<Place> listBycondition(PlaceSearchCondition condition) {
+	public List<Place> listBycondition(PlaceDTO condition) {
 		System.out.println(condition);
 
 		List<Place> plist = placeService.findByCondition(condition);

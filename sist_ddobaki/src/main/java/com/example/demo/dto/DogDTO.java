@@ -5,7 +5,7 @@ package com.example.demo.dto;
 import lombok.Data;
 
 @Data
-public class DogForm {
+public class DogDTO {
 
 	private int user_num;
 	

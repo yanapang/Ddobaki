@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 
-import com.example.demo.dto.PlaceSearchCondition;
+import com.example.demo.dto.PlaceDTO;
 import com.example.demo.vo.Place;
 import com.example.demo.vo.QPlace;
 import com.querydsl.core.types.Order;
@@ -27,7 +27,7 @@ public class PlaceDAOImpl implements PlaceCustomDAO {
 	QPlace p = QPlace.place;
 
 	@Override
-	public List<Place> searchTest(PlaceSearchCondition condition) {
+	public List<Place> searchTest(PlaceDTO condition) {
 
 		Integer place_region_num = condition.getPlace_region_num();
 		Integer place_type_num = condition.getPlace_type_num();

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.PlaceDAO;
-import com.example.demo.dto.PlaceSearchCondition;
+import com.example.demo.dto.PlaceDTO;
 import com.example.demo.vo.Place;
 
 import lombok.Setter;
@@ -29,7 +29,7 @@ public class PlaceService {
 		return dao.findAll();
 	}
 
-	public List<Place> findByCondition(PlaceSearchCondition condition) {
+	public List<Place> findByCondition(PlaceDTO condition) {
 		return dao.searchTest(condition);
 	}
 
