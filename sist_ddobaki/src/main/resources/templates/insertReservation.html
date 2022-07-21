@@ -3,33 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>예약페이지</title>
+<!-- header fragment 사용 -->
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
 <link rel="stylesheet"
 	href="../jquery-ui-1.13.1.custom/jquery-ui.min.css">
 <link rel="stylesheet" href="../jquery.jqGrid-4.4.3/css/ui.jqgrid.css">
 <link rel="stylesheet" th:href="@{/styles/common.css}">
 
 <style type="text/css">
-legend {
-	background-color: black;
-	color: #fff;
+#title {
+	font-weight: bold;
+ 	font-size: 2.0em;
+	color: #198753;
 	padding: 3px 6px;
 	text-align: center;
-	border-radius: 10px 10px 0px 0px;
-	
 	
 }
 
 form {
 	text-align: center;
-	
-}
-
-fieldset {
-	width: 50%;
-	heigth: 50%;
 	margin: auto;
-	background-color: #f9f9f9;
-	border-radius: 10px;
+	width: 100%;
+	border: 3px solid #6bba62;
+	border-radius: 10px 10px 10px 10px;
+	border-width: thick;
 }
 
 .reservation_all {
@@ -39,23 +36,58 @@ fieldset {
 
 #checkindate, #checkoutdate, #inwon, #s_dog, #m_dog, #l_dog, #breakfast {
 	
-	width:130px;
+	width:200px;
 	height: 30px;
 	border: 3px solid black;
-	border-radius: 5px;
 	text-align:center;
+	border-color: #6bba62;
+    border-radius: 5px;
+     
 	
 }
 
 #btnReservation {
-text-align: center;
+	text-align: center;
 	margin: auto;
 }
 
 .dog_weight_big {
-	text-align: center
+	text-align: center;
 }
 
+
+
+#room {
+    border-radius: 5px;
+    border-radius: 5px;
+    border: 3px solid black;
+    border-color: #6bba62;
+    
+}
+
+ #hr {
+	border: 0;
+    height: 4px;
+    background: #6BBA6B;
+} 
+.op {
+	
+  	flex-direction: row-reverse;
+}
+
+.in, .out {
+	text-align: center;
+}
+
+
+::placeholder {
+	font-style: italic;
+	font-size: small;
+}
+
+input.value {
+	visibility : hidden;
+} 
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -65,6 +97,7 @@ text-align: center;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.7.js"></script>
+
 <script type="text/javascript">
 
 	/* 숙박요금 계산 */
@@ -256,19 +289,21 @@ text-align: center;
 	
 	
 </script>
-<!-- header fragment 사용 -->
-<th:block th:replace="fragments/header :: headerFragment"></th:block>
+
 
 </head>
 <body>
+<section>
+<div class="container border border-0">
 	<form  id="f"  action="/saveReservation" method="post"> 
 		<fieldset class="reservation_all">
-			<legend>예약하기</legend>
+			<legend id="title">예약하기</legend>
+			<hr id="hr">
 
 			예약번호: 
 				<input type="hidden" id="reservationNum" name="reservation_num" th:value="${reservation_num}" th:text="${reservation_num}"><br><br>  
 			사용자 닉네임:
-				<input type="hidden" id="userNum" name="user_num" th:value="${us.user_num}" th:text="${us.user_id}"><br> 
+				<input type="hidden" id="userNum" name="user_num" th:value="${us.user_num}" th:text="${us.user_nick}"><br> 
 				<input type="hidden" id="userId" name="user_id" th:value="${us.user_id}">
 				<input type="hidden" id="userPhone" name="user_phone" th:value="${us.user_phone}">
 				<input type="hidden" id="userNick" name="user_nick" th:value="${us.user_nick}"><br> 
@@ -278,45 +313,52 @@ text-align: center;
 			
 			
 			<div class="check_date_big">
-				체크인 <span id="checkin">
-				<input type="date" id="checkindate"th:name="reservation_checkin_date">
+				<span id="in">체크인</span><span id="out" style="padding-left:170px;">체크아웃</span> <br>
+				<span id="checkin">
+				<input type="date" id="checkindate" th:name="reservation_checkin_date">
 				</span> 
 				<!-- <span><img alt="" src="reservation_h.svg" id="img_1"></span>  -->
 
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-double-right" viewBox="0 0 16 16">
   					<path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
   					<path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
 				</svg>
 
+
+
 				<span id="checkout"> 
 				<input type="date" id="checkoutdate" th:name="reservation_checkout_date">
-				체크아웃
+
 				</span>
 			</div>
 
 			<br>
 
 			<div class="inwon_big">
-				인원: <input type="number" id="inwon" th:name="reservation_people_cnt">
+				인원 <br>
+				<input type="number" id="inwon" th:name="reservation_people_cnt" placeholder="인원을 입력하세요">
 			</div>
 
 			<br>
 
 			<div class="dog_weight_big">
-				소(1-5kg): <input type="number" id="s_dog" th:name="reservation_s_dog_cnt"><br> 
-				중(6-15kg): <input type="number" id="m_dog" th:name="reservation_m_dog_cnt"><br>
-				대(15kg이상): <input type="number" id="l_dog" th:name="reservation_l_dog_cnt"><br>
+				소형견(1-5kg) <br>
+				<input type="number" id="s_dog" th:name="reservation_s_dog_cnt" placeholder="소형견 마리 수를 입력하세요"><br> 
+				중형견(6-15kg) <br>
+				<input type="number" id="m_dog" th:name="reservation_m_dog_cnt" placeholder="중형견 마리 수를 입력하세요"><br>
+				대형견(15kg이상) <br>
+				<input type="number" id="l_dog" th:name="reservation_l_dog_cnt" placeholder="대형견 마리 수를 입력하세요"><br>
 			</div>
 
 			<br>
 
 			<div class="room_big" >
-				룸: 
+				룸 <br>
 				<select id="room" th:name="room_num">
 				</select>
 
-			</div>
 
+			</div>
 			<br>
 			
 			<div class="options">
@@ -342,8 +384,8 @@ text-align: center;
 			<br>
 
 			<div class="breakfast_big" th:value="${ps.place_meal}" th:style="${ps.place_meal} == '0' ? 'display:none' ">
-				조식인원: 
-				<input type="number" id="breakfast" th:name="reservation_meal_cnt" value=0 onchange="getMeal()">
+				조식인원 <br>
+				<input type="number" id="breakfast" th:name="reservation_meal_cnt" onchange="getMeal()" placeholder="조식 인원 수를 입력하세요">
 				<input type="hidden" id="meal_ok" value="3000">
 			</div>
 			</div>
@@ -356,11 +398,13 @@ text-align: center;
 		
 		
  	</form> 
+ 	
+ 	<br>
 		<div id="btnReservation">
-			<input type="button" id="btnReservation" value="예약하기" class="btn btn-dark">
+			<input type="button" id="btnReservation" value="예약하기" class="btn btn-success">
 		</div>
-	
-	
+</div>
+</section>
 	
 	
 <!-- footer fragment 사용 -->
