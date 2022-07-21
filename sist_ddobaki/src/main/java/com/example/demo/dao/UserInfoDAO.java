@@ -33,6 +33,11 @@ public interface UserInfoDAO extends JpaRepository<UserInfo, Integer> {
 	@Transactional
 	@Query(value="delete UserInfo where user_num=:user_num",nativeQuery=true)
 	public void deleteByUserNum(int user_num);
+	
+//	@Transactional
+//	@Query(value="update UserInfo u set u.user_file=:#{#u.user_file}, u.user_nick=:#{#u.user_nick}, u.user_phone=:#{#u.user_phone}", nativeQuery=true)
+//	@Modifying
+//	public void update(@Param("user_file") String user_file, @Param("user_nick") String user_nick, @Param("user_phone") String user_phone);
 
 
 }
