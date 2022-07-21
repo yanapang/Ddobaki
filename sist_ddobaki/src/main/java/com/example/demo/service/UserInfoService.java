@@ -78,13 +78,7 @@ public class UserInfoService {
 //        FileCopyUtils.copy(file.getBytes(), new File(filename));
     }
 	
-//
-//	    public void deleteProfile(String user_id) {
-//	        UserInfo user = dao.findByUser_id(user_id).orElseThrow(NotFoundUserException::new);
-//	        deleteUserProfile(user);
-//	        user.setUser_file(null);
-//	        dao.save(user);
-//	    }
+
 
 	    private void deleteUserProfile(UserInfo user) {
 	        if (user.getUser_file() != null) {
@@ -94,14 +88,5 @@ public class UserInfoService {
 	            }
 	        }
 	    }
-//
-//	    public InputStream getUserProfile(String user_id) throws FileNotFoundException {
-//	        UserInfo user = dao.findByUser_id(user_id).orElseThrow(NotFoundUserException::new);
-//	        if (user.getUser_file() == null) {
-//	            throw new NotFoundProfilePathException();
-//	        }
-//	        return new FileInputStream(user.getUser_file());
-//	    }
-//
-//	
+
 }
