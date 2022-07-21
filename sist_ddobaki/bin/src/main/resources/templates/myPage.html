@@ -55,7 +55,11 @@ h6 {
 	<main style="position: relative;">
 		<div id="imgBox" class="rounded-circle"
 			style="position: absolute; background-color: black; width: 130px; height: 130px; top: -10vh; left: 50%; margin-left: -65px; border: 3px solid gray; box-sizing: border-box; overflow: hidden; align-items: center;">
-			<img th:src="@{'/userImage/'+${user.user_file}}" alt="userImg.jpg"
+			<!-- <img th:src="@{'/userImage/'+${user.user_file}}" alt="userImg.jpg"
+				id="userImg" style="width: 100%; height: 100%"> -->
+				
+				
+				<img th:src="@{|/userImage/${user.user_file}|}" alt="userImg.jpg"
 				id="userImg" style="width: 100%; height: 100%">
 		</div>
 		<!-- 메뉴, 본문 전체 컨테이너 -->

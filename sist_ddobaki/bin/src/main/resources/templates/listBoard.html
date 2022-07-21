@@ -317,11 +317,17 @@ $(function(){
 <div id="paging"></div>
 
 <div id="posting">
-<button id="btnPost"><a th:href="@{/board/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+
+<th:block th:switch="${board_num}">
+    <button id="btnPost" th:case="1" th:if="${#authentication.name=='jinjoo'}"><a th:href="@{/board/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+    <button id="btnPost" th:case="2"><a th:href="@{/board/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+    <button id="btnPost" th:case="3"><a th:href="@{/board/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+    <button id="btnPost" th:case="4" th:if="${#authentication.name=='jinjoo'}"><a th:href="@{/board/insertBoard/{board_num}(board_num=${board_num})}">글쓰기</a></button>
+	</th:block>
 </div>
 </fieldset>
 
-</body>
 <!-- footer fragment 사용 -->
 <th:block th:replace="fragments/footer :: footerFragment"></th:block>
+</body>
 </html>

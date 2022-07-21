@@ -152,7 +152,7 @@ opacity: 0.8;
 <div>
 <div class="profilebox">
 <div class="profilebox--photo">
-<img th:src="@{'/userImage/'+${b.userinfo.user_file}}"></img>
+<img th:src="@{|/userImage/${b.userinfo.user_file}|}"></img>
 </div>
 <p><span th:text="${b.userinfo.user_nick}"></span></p>
 <div class="miniInfo">
@@ -177,7 +177,7 @@ opacity: 0.8;
 		comment<br>
 			<tr th:each="rp:${reply_and_parent_list}">
 				<!-- <p th:text="${rp.reply_num}"></p> -->
-				<img th:src="@{'/userImage/'+${rp.userinfo.user_file}}" id="replyUserFile"></img>
+				<img th:src="@{|/userImage/${rp.userinfo.user_file}|}" id="replyUserFile"></img>
 				<p th:text="${rp.userinfo.user_nick}" id="mainNick"></p>
 				<p class="replyParent">
 				
@@ -198,7 +198,7 @@ opacity: 0.8;
 				<p th:text="${rp.reply_content}"></p>
 				<th:block th:if="${rp.isDeleted==0}">
 					<p>
-						<button id="btnDelete"><a th:href="@{/board/deleteReply/{reply_num}(reply_num=${rp.reply_num})}">삭제</a></button>
+						<button th:if="${#authentication.name==rp.userinfo.user_id}" id="btnDelete"><a th:href="@{/board/deleteReply/{reply_num}(reply_num=${rp.reply_num})}">삭제</a></button>
 					</p>
 					<p>
 						<button id="btnInsertReReply" type="button" th:myReplyNum="${rp.reply_num}" th:onclick="getParentReplyInfo(this.getAttribute('myReplyNum'))">답글쓰기</button>
@@ -235,12 +235,11 @@ opacity: 0.8;
     <button th:case="4"><a th:href="@{/listBoard/{board_num}(board_num=${4})}">목록</a></button>
 </th:block>
 
-<button><a th:href="@{/board/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a></button>
-<button><a th:href="@{/board/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</i></a></button>
-
-<!-- footer fragment 사용 -->
-<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+<button th:if="${#authentication.name==b.userinfo.user_id}"><a th:href="@{/board/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a></button>
+<button th:if="${#authentication.name==b.userinfo.user_id}"><a th:href="@{/board/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</i></a></button>
 </div>
 </fieldset>
+<!-- footer fragment 사용 -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </body>
 </html>

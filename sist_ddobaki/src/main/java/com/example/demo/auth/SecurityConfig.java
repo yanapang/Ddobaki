@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 //.antMatchers("/user/myinfo","/reservation/**","/payment/**","/board/**","/plan/**","/myPage/**","/place/detailPlace/**").authenticated()
-                .antMatchers("/user/myinfo","/reservation/**","/payment/**","/board/**","/plan/**","/myPage/**").authenticated()
+                .antMatchers("/user/myinfo","/reservation/**","/payment/**","/board/**","/plan/**","/myPage/**","/detailPost/**","/place/detailPlace/**").authenticated()
                 .antMatchers("/**").permitAll()
             .and() // 로그인 설정
                 .formLogin()

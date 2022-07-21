@@ -1,13 +1,15 @@
-<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://thymeleaf.org/extras/spring-security">
 
 <!--headerFragment ����-->
 <header th:fragment="headerFragment">
 		<nav class="navbar">
 			<ul class="navbar_user">
-				<li><a href="/myPage">My Page</a></li>
-				<li><a href="/login">Log In</a></li>
-				<li><a href="/logout">Log Out</a></li>
-				<li><a href="/signUp">Register</a></li>
+					<li><a href="/signUp"  sec:authorize="isAnonymous()">Register</a></li>
+					<li><a href="/login"  sec:authorize="isAnonymous()">Log In</a></li>
+					<li><a href="/logout" sec:authorize="isAuthenticated()">Log Out</a></li>
+					<li><a href="/myPage" sec:authorize="isAuthenticated()">My Page</a></li>
+				
 			</ul>
 			<div class="navbar_logo">
 				<a href="/main"><img alt="logo" src="/logo.png" style="width:100%; height:100%"></a>

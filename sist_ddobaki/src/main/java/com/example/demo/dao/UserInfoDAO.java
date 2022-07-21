@@ -39,6 +39,11 @@ public interface UserInfoDAO extends JpaRepository<UserInfo, Integer> {
 //	@Modifying
 //	public void update(@Param("user_file") String user_file, @Param("user_nick") String user_nick, @Param("user_phone") String user_phone);
 
+	
+	@Modifying
+	@Transactional
+	@Query(value = "update UserInfo u set u.user_file=?1 where u.user_num=?2", nativeQuery = true)
+	public void update(String user_file, int user_num);
 
 }
 

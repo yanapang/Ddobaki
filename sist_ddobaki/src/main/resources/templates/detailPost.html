@@ -165,7 +165,7 @@ opacity: 0.8;
 <hr>
 <div class="placecard">
 <img id="placecardphoto" src="/map/paws.png">
-<p><span th:text="${b.place.place_name}"></span></p>
+<p><a th:text="${b.place.place_name}" th:href="@{'/place/detailPlace/'+${b.place.place_num}}"></a></p>
 <p>주소 : <span th:text="${b.place.place_addr}"></span></p>
 </div>
 </th:block>
