@@ -7,14 +7,15 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.dto.SignUpDTO;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.UserInfo;
 
@@ -40,32 +41,33 @@ public class UserInfoController {
         return userInfo;
     }
 	
-//	@PostMapping("/updateUser")
-//	public String insert(UserInfo u) {
-//		us.save(u);
-//		return "redirect:/myPage";
-//	}
-	
 	@PostMapping("/updateUserInfo")
-	public String insert(SignUpDTO signupDto) throws IOException {
-		UserInfo user=signupDto.toEntity();
-		if(signupDto.getUserFile() != null) {
-			try {
-				MultipartFile uploadFile = signupDto.getUserFile();
-				String fname=uploadFile.getOriginalFilename();
-				UUID uuid = UUID.randomUUID();
-				String fileName = uuid+fname.substring(fname.lastIndexOf("."));
-                File converFile = new File("/Users/feelj/userImage", fileName);
-                uploadFile.transferTo(converFile);  //--- 저장할 경로를 설정 해당 경로는 각자 원하는 위치로 설정하면 됩니다. 다만, 해당 경
-				user.setUser_file(fileName);
-				
-			}catch(Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}else {
-			user.setUser_file("");
+	public String insert(@RequestParam("uploadFile") MultipartFile uploadFile,Authentication auth) throws IOException {
+
+		
+		UserInfo user=us.findByUser_id(auth.getName());
+		int user_num=user.getUser_num();
+		
+		if(uploadFile!=null) {
+
+		String uploadFileName=uploadFile.getOriginalFilename();
+		
+		UUID uuid = UUID.randomUUID();
+		String fileName = uuid+uploadFileName.substring(uploadFileName.lastIndexOf("."));
+		System.out.println("변환된 파일명:"+fileName);
+		
+		//파일 다운로드
+        File converFile = new File("/Users/feelj/userImage", fileName);
+		try {
+			uploadFile.transferTo(converFile); 
+		}catch(Exception e) {
+			System.out.println("에러:"+e.getMessage());
 		}
-		us.save(user);
+		
+			us.update(fileName, user_num);	
+		}else {
+			System.out.println("이미지 수정 안함");
+		}
 		return "redirect:/myPage";
 	}
 }

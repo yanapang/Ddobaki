@@ -59,8 +59,8 @@ public class UserInfoService {
 	}
 	
 
-//	public void update(UserInfo user) {
-//		dao.update(user.getUser_file(), user.getUser_nick(), user.getUser_phone());
-//	}
+	public void update(String user_file, int user_num) {
+		dao.update(user_file, user_num);
+	}
 
 }

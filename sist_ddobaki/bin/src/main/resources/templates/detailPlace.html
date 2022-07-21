@@ -196,7 +196,7 @@
 						<!-- 장소 예약, 찜 버튼  -->
 						<div id="btnBox">
 							<button id="rsBtn" class="btn btn-success"
-								th:onclick="'location.href=\''+@{'/reservation/insertReservation/'+${session.user_num}+'/'+${place.place_num}}+'\''">예약</button>
+								th:onclick="'location.href=\''+@{'/reservation/insertReservation/'+${place.place_num}}+'\''">예약</button>
 							<div id="dibBox">
 								<i id="dib" class="fa-regular fa-heart fa-2x"
 									onclick="myLike(this)"></i>
