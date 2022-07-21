@@ -31,11 +31,11 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	public int plusPostHit(int post_num);
 
 	//제목으로 게시글 찾기		
-	@Query(value="select * from Board where board_num=:board_num and post_title like '%'||:post_keyword||'%'",nativeQuery = true)
+	@Query(value="select * from Board where board_num=:board_num and post_title like '%'||:post_keyword||'%' order by post_num desc" ,nativeQuery = true)
 	public List<Board> findByPostTitle(int board_num, String post_keyword);
 
 	// 리뷰게시판출력 //말머리 컨디션 받았을떄(region_num, place_type_num 2개 placeDAO에서 먼저 받기)
-	@Query(value = "select * from Board where place_num=:place_num", nativeQuery = true)
+	@Query(value = "select * from Board where place_num=:place_num order by post_num desc", nativeQuery = true)
 	public List<Board> findByPlaceNum(int place_num);
 
 	// 유저 번호로 쓴 글 출력(내가 쓴 글 출력)
@@ -51,7 +51,7 @@ public interface BoardDAO extends JpaRepository<Board, Integer> {
 	public Board findByPostNum(int post_num);
 
 	// 게시판 카테고리 딱 눌렀을떄 이동
-	@Query(value = "select * from Board where board_num=:board_num", nativeQuery = true)
+	@Query(value = "select * from Board where board_num=:board_num order by post_num desc", nativeQuery = true)
 	public List<Board> goCategory(int board_num);
 
 	// 게시판+게시물 경로 //게시물 제목 눌러서 상세보기(상세보기할때는 view_BoardDAO에서 먼저)
