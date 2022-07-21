@@ -58,35 +58,9 @@ public class UserInfoService {
 		return dao.findByUser_id(user_id);
 	}
 	
-	public void saveProfile(String user_id, MultipartFile file) throws IOException {
-//        Date curDate = new Date();
-//        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyyMMddHHmmss_");
-//        String dateString = simpleFormat.format(curDate);
-//
-//        // UUID 사용
-//        String uuid = UUID.randomUUID().toString();
-//        // 파일의 확장자 알아오기
-//        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-//        // 파일명 생성하고 디비에 저장
-//        String filename = "c:/day0721/sist_ddobaki/src/main/resources/static/userImage/" + dateString + uuid + "." + extension;
-//
-//        UserInfo user = dao.findByUser_id(user_id).orElseThrow(NotFoundUserException::new);
-//        deleteUserProfile(user);
-//        user.setUser_file(filename);
-//        dao.save(user);
-//        // 파일 저장
-//        FileCopyUtils.copy(file.getBytes(), new File(filename));
-    }
-	
 
-
-	    private void deleteUserProfile(UserInfo user) {
-	        if (user.getUser_file() != null) {
-	            File savedFile = new File(user.getUser_file());
-	            if (savedFile.exists()) {
-	                savedFile.delete();
-	            }
-	        }
-	    }
+//	public void update(UserInfo user) {
+//		dao.update(user.getUser_file(), user.getUser_nick(), user.getUser_phone());
+//	}
 
 }
