@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 import org.springframework.security.core.Authentication;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.demo.dto.LoginDTO;
 import com.example.demo.dto.SignUpDTO;
 import com.example.demo.service.AuthService;
+import com.example.demo.service.UserInfoService;
 import com.example.demo.vo.UserInfo;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 	
 	private final AuthService as;
+	private final UserInfoService uis;
 	
 	//회원가입 폼
 		@RequestMapping(value="/signUp", method=RequestMethod.GET)
