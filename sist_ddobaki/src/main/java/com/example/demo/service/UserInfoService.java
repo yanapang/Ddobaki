@@ -1,18 +1,23 @@
 package com.example.demo.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
-import javax.transaction.Transactional;
-
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dao.UserInfoDAO;
-import com.example.demo.vo.Dog;
+import com.example.demo.dto.SignUpDTO;
 import com.example.demo.vo.UserInfo;
 
 import lombok.RequiredArgsConstructor;
@@ -53,6 +58,35 @@ public class UserInfoService {
 		return dao.findByUser_id(user_id);
 	}
 	
-
+	public void saveProfile(String user_id, MultipartFile file) throws IOException {
+//        Date curDate = new Date();
+//        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyyMMddHHmmss_");
+//        String dateString = simpleFormat.format(curDate);
+//
+//        // UUID 사용
+//        String uuid = UUID.randomUUID().toString();
+//        // 파일의 확장자 알아오기
+//        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+//        // 파일명 생성하고 디비에 저장
+//        String filename = "c:/day0721/sist_ddobaki/src/main/resources/static/userImage/" + dateString + uuid + "." + extension;
+//
+//        UserInfo user = dao.findByUser_id(user_id).orElseThrow(NotFoundUserException::new);
+//        deleteUserProfile(user);
+//        user.setUser_file(filename);
+//        dao.save(user);
+//        // 파일 저장
+//        FileCopyUtils.copy(file.getBytes(), new File(filename));
+    }
 	
+
+
+	    private void deleteUserProfile(UserInfo user) {
+	        if (user.getUser_file() != null) {
+	            File savedFile = new File(user.getUser_file());
+	            if (savedFile.exists()) {
+	                savedFile.delete();
+	            }
+	        }
+	    }
+
 }

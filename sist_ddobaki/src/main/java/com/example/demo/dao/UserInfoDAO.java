@@ -3,9 +3,6 @@ package com.example.demo.dao;
 
 import java.util.Optional;
 
-import java.util.List;
-
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.vo.Reply;
 import com.example.demo.vo.UserInfo;
 
 @Repository
@@ -31,7 +27,7 @@ public interface UserInfoDAO extends JpaRepository<UserInfo, Integer> {
 //	@Query(value="insert into UserInfo u(u.user_num, u.user_id, u.user_file, u.user_nick, u.user_pwd, u.user_phone, u.user_role) values(:#{#u.user_num}, :#{#u.user_id}, :#{#u.user_file}, :#{#u.user_nick}, :#{#u.user_pwd},"
 //			+ " :#{#u.user_phone}, :#{#u.user_role})", nativeQuery=true)
 //	@Modifying
-//	public void insertUser(@Param("user") UserInfo user);
+//	public Optional<UserInfo> insertUser(@Param("user") UserInfo user);
 
 	@Modifying
 	@Transactional

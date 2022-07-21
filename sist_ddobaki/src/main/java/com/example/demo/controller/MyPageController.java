@@ -80,6 +80,7 @@ public class MyPageController {
 		mav.addObject("myPost", bs.findByUserNum(user_num));
 		mav.addObject("myReview", bs.findByUserNumReview(user_num));
 		mav.addObject("myPlan", ps.findByUserNum(user_num));
+		System.out.println("내이미지:"+userInfoService.getOne(user_num).getUser_file());
 		return mav;
 	}
 	

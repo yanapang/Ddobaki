@@ -8,9 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.example.demo.dto.SignUpDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -74,12 +74,18 @@ public class UserInfo{
 	@OneToMany(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
 	private List<Payment> payment;
 	
-//	@JsonIgnore
-//	@OneToOne(mappedBy="userinfo", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)
-//	private UserImg userimg;
-	
 	/* Service 사용시 주석 풀어서 사용!
 	@OneToMany(mappedBy="userinfo", fetch=FetchType.EAGER)
 	private List<Service> service;
 	*/
+	
+	 public static UserInfo toSaveUser(SignUpDTO signUpDTO){
+	        UserInfo userinfo= new UserInfo();
+	        userinfo.setUser_id(signUpDTO.getUser_id());
+	        userinfo.setUser_pwd(signUpDTO.getUser_pwd());
+	        userinfo.setUser_nick(signUpDTO.getUser_nick());
+	        userinfo.setUser_phone(signUpDTO.getUser_phone());
+	        userinfo.setUser_file(signUpDTO.getUser_file());
+	        return userinfo;
+	    }
 }
