@@ -24,7 +24,7 @@
 <!--<h3>PLAN</h3><hr>-->
 <section>
 <div class="container border border-0">
-    <form onsubmit="return okSubmit(event);" th:action="@{/savePlan}+${'/'+user_num}" method="post">
+    <form onsubmit="return okSubmit(event)" th:action="@{/savePlan}+${'/'+user_num}" method="post">
      <div class="form-inline">
 		<!-- 여행 타이틀 (plan_group_num) -->
 		<div class="input-group grpNum">
@@ -100,8 +100,7 @@
 	</form>
 </div> <!-- 전체 컨테이너 끝-->
 </section>
+</body>
 <!-- footer fragment 사용 -->
 <th:block th:replace="fragments/footer :: footerFragment"></th:block>
-
-</body>
 </html>

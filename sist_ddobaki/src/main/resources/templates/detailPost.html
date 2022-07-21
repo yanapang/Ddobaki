@@ -237,10 +237,9 @@ opacity: 0.8;
 
 <button><a th:href="@{/board/updateBoard/{post_num}(post_num=${b.post_num})}">수정</a></button>
 <button><a th:href="@{/board/deleteBoard/{post_num}(post_num=${b.post_num})}">삭제</i></a></button>
-
-<!-- footer fragment 사용 -->
-<th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </div>
 </fieldset>
+<!-- footer fragment 사용 -->
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
 </body>
 </html>

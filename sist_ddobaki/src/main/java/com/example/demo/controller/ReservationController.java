@@ -1,17 +1,16 @@
 package com.example.demo.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.dto.PaymentDTO;
 import com.example.demo.dto.ReservationDTO;
@@ -60,8 +59,11 @@ public class ReservationController {
 	}
 
 	// 예약 insert할 때 user_num, place_num 받아오기
-	@GetMapping("reservation/insertReservation/{user_num}/{place_num}")
-	public String insert(Model model, @PathVariable int user_num, @PathVariable Integer place_num) {
+	@GetMapping("reservation/insertReservation/{place_num}")
+	public String insert(Model model, @PathVariable Integer place_num, Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String user_id=userDetails.getUsername();
+        int user_num=us.findByUser_id(user_id).getUser_num();
 		model.addAttribute("us", us.getUser(user_num));
 		model.addAttribute("ps", ps.getPlace(place_num));
 		model.addAttribute("roomS", roomS.findByPlaceNum(place_num));
