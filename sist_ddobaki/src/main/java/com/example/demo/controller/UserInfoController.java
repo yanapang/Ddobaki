@@ -57,7 +57,7 @@ public class UserInfoController {
 		System.out.println("변환된 파일명:"+fileName);
 		
 		//파일 다운로드
-        File converFile = new File("/Users/ccora/userImage", fileName);
+        File converFile = new File("/Users/feelj/userImage", fileName);
 		try {
 			uploadFile.transferTo(converFile); 
 		}catch(Exception e) {

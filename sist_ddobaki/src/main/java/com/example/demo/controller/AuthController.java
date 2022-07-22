@@ -82,7 +82,7 @@ public class AuthController {
 					String fname=uploadFile.getOriginalFilename();
 					UUID uuid = UUID.randomUUID();
 					String fileName = uuid+fname.substring(fname.lastIndexOf("."));
-	                File converFile = new File("/Users/ccora/userImage", fileName);
+	                File converFile = new File("/Users/feelj/userImage", fileName);
 	                uploadFile.transferTo(converFile);  //--- 저장할 경로를 설정 해당 경로는 각자 원하는 위치로 설정하면 됩니다. 다만, 해당 경
 					user.setUser_file(fileName);
 	                

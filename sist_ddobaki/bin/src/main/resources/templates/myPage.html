@@ -241,7 +241,7 @@ h6 {
 						<div id="userFormBox"
 							style="display: flex; justify-content: center;">
 							<form action="/updateUserInfo" method="post"
-								style="position: relative">
+								style="position: relative" enctype="multipart/form-data">
 								<!-- 안보이지만 전달되는 값 -->
 								<input name="user_num" type="text"
 									th:value="${session.user_num}" style="display: none"> <input
@@ -254,7 +254,7 @@ h6 {
 								<!-- 이미지 파일 수정 -->
 								<div class="form-group" style="padding-bottom: 1em">
 									<label for="formFile" class="form-label">사용자 사진 </label> <input
-										name="user_file" type="file" id="uploadPic"
+										name="uploadFile" type="file" id="uploadPic" 
 										class="form-control" />
 								</div>
 

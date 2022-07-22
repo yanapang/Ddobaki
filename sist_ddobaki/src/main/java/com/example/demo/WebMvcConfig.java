@@ -35,7 +35,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/userImage/**")
-                .addResourceLocations("file:///Users/ccora/userImage/");
+                .addResourceLocations("file:///Users/feelj/userImage/");
     }
 	
 	@Bean
